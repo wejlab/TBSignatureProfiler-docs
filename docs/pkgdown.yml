@@ -2,6 +2,8 @@ pandoc: '2.6'
 pkgdown: 1.5.0
 pkgdown_sha: ~
 articles:
-  TBSig_Vignette: TBSig_Vignette.html
-last_built: 2020-04-05T16:56Z
+  TBSig_Vignette: rmd/TBSig_Vignette.html
+  temp: rmd/temp.html
+  tbspVignette: tbspVignette.html
+last_built: 2020-04-10T04:25Z
 

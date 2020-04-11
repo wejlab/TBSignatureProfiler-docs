@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.21</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
       The Section of Computational Biomedicine, Boston University School of Medicine, Boston, MA<br><a class="author_email" href="mailto:#"></a><a href="mailto:wej@bu.edu" class="email">wej@bu.edu</a>
       </address>
                   
-            <h4 class="date">April 9, 2020</h4>
+            <h4 class="date">April 10, 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/compbiomed/TBSignatureProfiler/blob/master/vignettes/tbspVignette.Rmd"><code>vignettes/tbspVignette.Rmd</code></a></small>
       <div class="hidden name"><code>tbspVignette.Rmd</code></div>
@@ -156,19 +156,32 @@ hivtb_data </pre></body></html></div>
 <p>The TBSignatureProfiler enables comparison of multiple Tuberculosis gene signatures. The package currently contains information on 34 signatures for comparison. The default signature list object for most functions here is <code>TBsignatures</code>, although a list with publication-given signature names is also available as <code>TBcommon</code>. Data frames of annotation information for these signatures, including information on associated disease and tissue type, can be accessed as <code>sigAnnotData</code> and <code>common_sigAnnotData</code> respectively.</p>
 <p>With the <code>runTBSigProfiler</code> function, we are able to score these signatures with a selection of algorithms, including <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">gene set variation analysis</a> (GSVA) (Hänzelmann et al, 2013), <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">single-sample GSEA</a> (ssGSEA) (Barbie et al, 2009), and the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">ASSIGN</a> pathway profiling toolkit (Shen et al, 2015). For a complete list of included scoring methods, run <code><a href="../reference/runTBsigProfiler.html">?runTBsigProfiler</a></code> in the terminal.</p>
 <p>Here, we evaluate all signatures included in the package with ssGSEA. Paraphrasing from the <a href="http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/ssGSEAProjection/4">ssGSEA documentation</a>, for each pairing of one of the 31 samples and its gene set, ssGSEA calculates a separate enrichment score independent of the phenotypic labeling (in this case, whether a sample has HIV/TB, or HIV only). The single sample’s gene expression profile is then transformed to a gene set enrichment profile. A score from the set profile represents the activity level of the biological process in which the gene set’s members are coordinately up- or down-regulated.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r">## List all 34 signatures in the profiler
+<div class="sourceCode" id="cb11"><html><body><pre class="r">## List all signatures in the profiler
 data("TBsignatures")
-names(TBsignatures)
-
-## We can use all of these signatures for further analysis
-siglist_hivtb </pre></body></html></div>
+names(TBsignatures)</pre></body></html></div>
+<pre><code>##  [1] "Anderson_42"       "Anderson_OD_51"    "Berry_393"        
+##  [4] "Berry_OD_86"       "Blankley_5"        "Blankley_380"     
+##  [7] "Bloom_OD_144"      "Esmail_82"         "Esmail_203"       
+## [10] "Esmail_OD_893"     "Gliddon_OD_3"      "Gliddon_OD_4"     
+## [13] "Jacobsen_3"        "Kaforou_27"        "Kaforou_OD_44"    
+## [16] "Kaforou_OD_53"     "Lee_4"             "Maertzdorf_4"     
+## [19] "Maertzdorf_OD_100" "Rajan_HIV_5"       "Roe_3"            
+## [22] "Roe_OD_4"          "Sambarey_HIV_10"   "Singhania_OD_20"  
+## [25] "Sloot_HIV_2"       "Suliman_RISK_4"    "Sweeney_OD_3"     
+## [28] "Thompson_9"        "Thompson_FAIL_13"  "Thompson_RES_5"   
+## [31] "Walter_51"         "Walter_PNA_47"     "Walter_PNA_119"   
+## [34] "Zak_RISK_16"</code></pre>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co">## We can use all of these signatures for further analysis</span>
+<span class="no">siglist_hivtb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r">## Run the TBSignatureProfiler to score the signatures in the data
+ssgsea_result </pre></body></html></div>
 <p>When a <code>SummarizedExperiment</code> is the format of the input data for <code>runTBsigprofiler</code>, the returned object is also of the <code>SummarizedExperiment</code>. The scores will be returned as a part of the colData.</p>
 <p>Below, we subset the data to compare the enrichment scores for the Anderson_42, Anderson_OD_51, and Berry_393 signatures.</p>
 <p>Signature Scores</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r">## New colData entries from the Profiler
+<div class="sourceCode" id="cb15"><html><body><pre class="r">## New colData entries from the Profiler
 sigs </pre></body></html></div>
-<div id="htmlwidget-c89659eecd0cc1e622bf" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c89659eecd0cc1e622bf">{"x":{"filter":"none","data":[["R01_1","R01_10","R01_11","R01_12","R01_13","R01_14","R01_15","R01_16","R01_2","R01_3","R01_4","R01_5","R01_6","R01_7","R01_8","R01_9","R02_17","R02_18","R02_19","R02_20","R02_21","R02_22","R02_23","R02_24","R02_25","R02_26","R02_27","R02_28","R02_29","R02_30","R02_31"],["tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only"],[0.2273,0.2073,0.1862,0.2076,0.1945,0.2011,0.2286,0.2228,0.2204,0.1932,0.1773,0.2054,0.2092,0.2038,0.1937,0.2138,0.2139,0.2259,0.2258,0.2166,0.2428,0.1993,0.2233,0.2239,0.2094,0.2293,0.205,0.2063,0.2152,0.2081,0.1898],[0.2326,0.2866,0.2509,0.2522,0.267,0.2837,0.2913,0.2397,0.2674,0.2827,0.2695,0.2467,0.2506,0.2428,0.2556,0.2648,0.251,0.2065,0.2368,0.2419,0.2429,0.2626,0.2508,0.2496,0.2464,0.2419,0.2321,0.2635,0.2755,0.2548,0.2472],[0.382,0.4057,0.3886,0.4038,0.3929,0.4025,0.4036,0.3473,0.3853,0.3985,0.3902,0.3845,0.3897,0.3956,0.4007,0.4021,0.3728,0.3539,0.3656,0.3702,0.3483,0.3906,0.3546,0.3761,0.356,0.3607,0.3677,0.3993,0.3976,0.3914,0.3758]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Disease<\/th>\n      <th>Anderson_42<\/th>\n      <th>Anderson_OD_51<\/th>\n      <th>Berry_393<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-802feca3a6c2b8a5d2c1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-802feca3a6c2b8a5d2c1">{"x":{"filter":"none","data":[["R01_1","R01_10","R01_11","R01_12","R01_13","R01_14","R01_15","R01_16","R01_2","R01_3","R01_4","R01_5","R01_6","R01_7","R01_8","R01_9","R02_17","R02_18","R02_19","R02_20","R02_21","R02_22","R02_23","R02_24","R02_25","R02_26","R02_27","R02_28","R02_29","R02_30","R02_31"],["tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only"],[0.2273,0.2073,0.1862,0.2076,0.1945,0.2011,0.2286,0.2228,0.2204,0.1932,0.1773,0.2054,0.2092,0.2038,0.1937,0.2138,0.2139,0.2259,0.2258,0.2166,0.2428,0.1993,0.2233,0.2239,0.2094,0.2293,0.205,0.2063,0.2152,0.2081,0.1898],[0.2326,0.2866,0.2509,0.2522,0.267,0.2837,0.2913,0.2397,0.2674,0.2827,0.2695,0.2467,0.2506,0.2428,0.2556,0.2648,0.251,0.2065,0.2368,0.2419,0.2429,0.2626,0.2508,0.2496,0.2464,0.2419,0.2321,0.2635,0.2755,0.2548,0.2472],[0.382,0.4057,0.3886,0.4038,0.3929,0.4025,0.4036,0.3473,0.3853,0.3985,0.3902,0.3845,0.3897,0.3956,0.4007,0.4021,0.3728,0.3539,0.3656,0.3702,0.3483,0.3906,0.3546,0.3761,0.356,0.3607,0.3677,0.3993,0.3976,0.3914,0.3758]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Disease<\/th>\n      <th>Anderson_42<\/th>\n      <th>Anderson_OD_51<\/th>\n      <th>Berry_393<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="visualization-with-tbsignatureprofiler-plots" class="section level2 tabset">
 <h2 class="hasAnchor">
@@ -178,7 +191,7 @@ sigs </pre></body></html></div>
 <a href="#heatmap-with-all-signatures" class="anchor"></a>Heatmap with all Signatures</h3>
 <p>Commonly, enrichment scores are compared across signatures by means of a heatmap combined with clustering methods to group samples and/or scores. The <code>signatureHeatmap</code> function uses the information from the score data to visualize changes in gene expression across samples and signatures (or genes, if only one signature is selected).</p>
 <p>Here, the columns of the heatmap represent samples, and rows represent signatures. Rows are split according to annotation data with associated signature disease type. As we move across the columns, we see different patterns of gene expression as indicated by the varying color and intensity of individual rectangles. In the top bar, the solid red represents a sample is HIV infected only, and solid blue indicates that the sample is both HIV and TB infected. In the gradient area of the heatmap, the scaled scores are associated with either up-regulated or down-regulated genes. A cluster of samples near the bottom of the heatmap reveals that some signatures are inversely associated with TB/HIV identification, as their phenotypic mapping for lower/higher scores is nearly the opposite of most of the other signatures.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"># Colors for gradient
+<div class="sourceCode" id="cb16"><html><body><pre class="r"># Colors for gradient
 colors </pre></body></html></div>
 <p><img src="tbspVignette_files/figure-html/all%20sigs%20heatmap-1.png" width="700"></p>
 </div>
@@ -186,7 +199,7 @@ colors </pre></body></html></div>
 <h3 class="hasAnchor">
 <a href="#boxplots-of-scores-all-signatures" class="anchor"></a>Boxplots of Scores, All Signatures</h3>
 <p>Another method of visualization for scores is that of boxplots. When multiple signatures in the input data are to be compared, the <code>signatureBoxplot</code> function takes the scores for each signature and produces an individual boxplot, with jittered points representing individual sample scores. For this specific example, it is clear that some signatures do a better job at differentiating the TB/HIV and HIV only samples than others, as seen by overlapping or separate spreads of the adjacent boxplots.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r">signatureBoxplot(inputData = ssgsea_result, 
+<div class="sourceCode" id="cb17"><html><body><pre class="r">signatureBoxplot(inputData = ssgsea_result, 
                  name = "Boxplots of Signatures, ssGSEA", 
                  signatureColNames = names(TBsignatures),
                  annotationColName = "Disease", rotateLabels = FALSE)</pre></body></html></div>
@@ -197,7 +210,7 @@ colors </pre></body></html></div>
 <a href="#compare-scoring-methods-for-a-single-signature" class="anchor"></a>Compare scoring methods for a single signature</h3>
 <p>The <code>compareAlgs</code> function allows multiple scoring methods to be compared via a heatmap or boxplot with samples on the columns and methods on the rows. Here, we compare scoring methods for the “Anderson_42” signature. It seems that singscore may be the best method here, as its sample scores most closely align with the information provided by the annotation data.</p>
 <p>An examination of the boxplot and heatmap together determine that PLAGE and the comparing Z-score methods are least helpful in correctly identifying TB from LTBI subjects - AUC scores are little more than 0.5 and subjects in different groups are falsely assigned similar scores. According to the boxplot, we see that ssGSEA has the highest predictive AUC.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"># Heatmap
+<div class="sourceCode" id="cb18"><html><body><pre class="r"># Heatmap
 compareAlgs(hivtb_data, annotationColName = "Disease",
             scale = TRUE,
             algorithm = c("GSVA", "ssGSEA",
@@ -207,7 +220,7 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
             choose_color = col.me, show.pb = FALSE,
             parallel.sz = 1)</pre></body></html></div>
 <p><img src="tbspVignette_files/figure-html/compareAlgs%20ex-1.png" width="700"></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"># Boxplot
+<div class="sourceCode" id="cb19"><html><body><pre class="r"># Boxplot
 compareAlgs(hivtb_data, annotationColName = "Disease",
             scale = TRUE,
             algorithm = c("GSVA", "ssGSEA",
@@ -228,7 +241,7 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session Info</h1>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
 <pre><code>## R version 3.6.3 (2020-02-29)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 18362)

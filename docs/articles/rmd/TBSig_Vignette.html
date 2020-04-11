@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.21</span>
       </span>
     </div>
 
@@ -148,19 +148,32 @@ hivtb_data </pre></body></html></div>
 <p>The TBSignatureProfiler enables comparison of multiple Tuberculosis gene signatures. The package currently contains information on 34 signatures for comparison. The default signature list object for most functions here is <code>TBsignatures</code>, although a list with publication-given signature names is also available as <code>TBcommon</code>. Data frames of annotation information for these signatures, including information on associated disease and tissue type, can be accessed as <code>sigAnnotData</code> and <code>common_sigAnnotData</code> respectively.</p>
 <p>With the <code>runTBSigProfiler</code> function, we are able to score these signatures with a selection of algorithms, including <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">gene set variation analysis</a> (GSVA) (Hänzelmann et al, 2013), <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">single-sample GSEA</a> (ssGSEA) (Barbie et al, 2009), and the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">ASSIGN</a> pathway profiling toolkit (Shen et al, 2015). For a complete list of included scoring methods, run <code><a href="../../reference/runTBsigProfiler.html">?runTBsigProfiler</a></code> in the terminal.</p>
 <p>Here, we evaluate all signatures included in the package with ssGSEA. Paraphrasing from the <a href="http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/ssGSEAProjection/4">ssGSEA documentation</a>, for each pairing of one of the 31 samples and its gene set, ssGSEA calculates a separate enrichment score independent of the phenotypic labeling (in this case, whether a sample has HIV/TB, or HIV only). The single sample’s gene expression profile is then transformed to a gene set enrichment profile. A score from the set profile represents the activity level of the biological process in which the gene set’s members are coordinately up- or down-regulated.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r">## List all 34 signatures in the profiler
+<div class="sourceCode" id="cb10"><html><body><pre class="r">## List all signatures in the profiler
 data("TBsignatures")
-names(TBsignatures)
-
-## We can use all of these signatures for further analysis
-siglist_hivtb </pre></body></html></div>
+names(TBsignatures)</pre></body></html></div>
+<pre><code>##  [1] "Anderson_42"       "Anderson_OD_51"    "Berry_393"        
+##  [4] "Berry_OD_86"       "Blankley_5"        "Blankley_380"     
+##  [7] "Bloom_OD_144"      "Esmail_82"         "Esmail_203"       
+## [10] "Esmail_OD_893"     "Gliddon_OD_3"      "Gliddon_OD_4"     
+## [13] "Jacobsen_3"        "Kaforou_27"        "Kaforou_OD_44"    
+## [16] "Kaforou_OD_53"     "Lee_4"             "Maertzdorf_4"     
+## [19] "Maertzdorf_OD_100" "Rajan_HIV_5"       "Roe_3"            
+## [22] "Roe_OD_4"          "Sambarey_HIV_10"   "Singhania_OD_20"  
+## [25] "Sloot_HIV_2"       "Suliman_RISK_4"    "Sweeney_OD_3"     
+## [28] "Thompson_9"        "Thompson_FAIL_13"  "Thompson_RES_5"   
+## [31] "Walter_51"         "Walter_PNA_47"     "Walter_PNA_119"   
+## [34] "Zak_RISK_16"</code></pre>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co">## We can use all of these signatures for further analysis</span>
+<span class="no">siglist_hivtb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r">## Run the TBSignatureProfiler to score the signatures in the data
+ssgsea_result </pre></body></html></div>
 <p>When a <code>SummarizedExperiment</code> is the format of the input data for <code>runTBsigprofiler</code>, the returned object is also of the <code>SummarizedExperiment</code>. The scores will be returned as a part of the colData.</p>
 <p>Below, we subset the data to compare the enrichment scores for the Anderson_42, Anderson_OD_51, and Berry_393 signatures.</p>
 <p>Signature Scores</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r">## New colData entries from the Profiler
+<div class="sourceCode" id="cb14"><html><body><pre class="r">## New colData entries from the Profiler
 sigs </pre></body></html></div>
-<div id="htmlwidget-a97d0f1ab2db9e59ce4f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a97d0f1ab2db9e59ce4f">{"x":{"filter":"none","data":[["R01_1","R01_10","R01_11","R01_12","R01_13","R01_14","R01_15","R01_16","R01_2","R01_3","R01_4","R01_5","R01_6","R01_7","R01_8","R01_9","R02_17","R02_18","R02_19","R02_20","R02_21","R02_22","R02_23","R02_24","R02_25","R02_26","R02_27","R02_28","R02_29","R02_30","R02_31"],["tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only"],[0.2273,0.2073,0.1862,0.2076,0.1945,0.2011,0.2286,0.2228,0.2204,0.1932,0.1773,0.2054,0.2092,0.2038,0.1937,0.2138,0.2139,0.2259,0.2258,0.2166,0.2428,0.1993,0.2233,0.2239,0.2094,0.2293,0.205,0.2063,0.2152,0.2081,0.1898],[0.2326,0.2866,0.2509,0.2522,0.267,0.2837,0.2913,0.2397,0.2674,0.2827,0.2695,0.2467,0.2506,0.2428,0.2556,0.2648,0.251,0.2065,0.2368,0.2419,0.2429,0.2626,0.2508,0.2496,0.2464,0.2419,0.2321,0.2635,0.2755,0.2548,0.2472],[0.382,0.4057,0.3886,0.4038,0.3929,0.4025,0.4036,0.3473,0.3853,0.3985,0.3902,0.3845,0.3897,0.3956,0.4007,0.4021,0.3728,0.3539,0.3656,0.3702,0.3483,0.3906,0.3546,0.3761,0.356,0.3607,0.3677,0.3993,0.3976,0.3914,0.3758]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Disease<\/th>\n      <th>Anderson_42<\/th>\n      <th>Anderson_OD_51<\/th>\n      <th>Berry_393<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e74fad20f16968fbbe9d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e74fad20f16968fbbe9d">{"x":{"filter":"none","data":[["R01_1","R01_10","R01_11","R01_12","R01_13","R01_14","R01_15","R01_16","R01_2","R01_3","R01_4","R01_5","R01_6","R01_7","R01_8","R01_9","R02_17","R02_18","R02_19","R02_20","R02_21","R02_22","R02_23","R02_24","R02_25","R02_26","R02_27","R02_28","R02_29","R02_30","R02_31"],["tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only"],[0.2273,0.2073,0.1862,0.2076,0.1945,0.2011,0.2286,0.2228,0.2204,0.1932,0.1773,0.2054,0.2092,0.2038,0.1937,0.2138,0.2139,0.2259,0.2258,0.2166,0.2428,0.1993,0.2233,0.2239,0.2094,0.2293,0.205,0.2063,0.2152,0.2081,0.1898],[0.2326,0.2866,0.2509,0.2522,0.267,0.2837,0.2913,0.2397,0.2674,0.2827,0.2695,0.2467,0.2506,0.2428,0.2556,0.2648,0.251,0.2065,0.2368,0.2419,0.2429,0.2626,0.2508,0.2496,0.2464,0.2419,0.2321,0.2635,0.2755,0.2548,0.2472],[0.382,0.4057,0.3886,0.4038,0.3929,0.4025,0.4036,0.3473,0.3853,0.3985,0.3902,0.3845,0.3897,0.3956,0.4007,0.4021,0.3728,0.3539,0.3656,0.3702,0.3483,0.3906,0.3546,0.3761,0.356,0.3607,0.3677,0.3993,0.3976,0.3914,0.3758]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Disease<\/th>\n      <th>Anderson_42<\/th>\n      <th>Anderson_OD_51<\/th>\n      <th>Berry_393<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="visualization-with-tbsignatureprofiler-plots" class="section level2 tabset">
 <h2 class="hasAnchor">
@@ -170,7 +183,7 @@ sigs </pre></body></html></div>
 <a href="#heatmap-with-all-signatures" class="anchor"></a>Heatmap with all Signatures</h3>
 <p>Commonly, enrichment scores are compared across signatures by means of a heatmap combined with clustering methods to group samples and/or scores. The <code>signatureHeatmap</code> function uses the information from the score data to visualize changes in gene expression across samples and signatures (or genes, if only one signature is selected).</p>
 <p>Here, the columns of the heatmap represent samples, and rows represent signatures. Rows are split according to annotation data with associated signature disease type. As we move across the columns, we see different patterns of gene expression as indicated by the varying color and intensity of individual rectangles. In the top bar, the solid red represents a sample is HIV infected only, and solid blue indicates that the sample is both HIV and TB infected. In the gradient area of the heatmap, the scaled scores are associated with either up-regulated or down-regulated genes. A cluster of samples near the bottom of the heatmap reveals that some signatures are inversely associated with TB/HIV identification, as their phenotypic mapping for lower/higher scores is nearly the opposite of most of the other signatures.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"># Colors for gradient
+<div class="sourceCode" id="cb15"><html><body><pre class="r"># Colors for gradient
 colors </pre></body></html></div>
 <p><img src="TBSig_Vignette_files/figure-html/all%20sigs%20heatmap-1.png" width="700"></p>
 </div>
@@ -178,7 +191,7 @@ colors </pre></body></html></div>
 <h3 class="hasAnchor">
 <a href="#boxplots-of-scores-all-signatures" class="anchor"></a>Boxplots of Scores, All Signatures</h3>
 <p>Another method of visualization for scores is that of boxplots. When multiple signatures in the input data are to be compared, the <code>signatureBoxplot</code> function takes the scores for each signature and produces an individual boxplot, with jittered points representing individual sample scores. For this specific example, it is clear that some signatures do a better job at differentiating the TB/HIV and HIV only samples than others, as seen by overlapping or separate spreads of the adjacent boxplots.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r">signatureBoxplot(inputData = ssgsea_result, 
+<div class="sourceCode" id="cb16"><html><body><pre class="r">signatureBoxplot(inputData = ssgsea_result, 
                  name = "Boxplots of Signatures, ssGSEA", 
                  signatureColNames = names(TBsignatures),
                  annotationColName = "Disease", rotateLabels = FALSE)</pre></body></html></div>
@@ -188,7 +201,7 @@ colors </pre></body></html></div>
 <h3 class="hasAnchor">
 <a href="#boxplots-of-scores-individual-signatures" class="anchor"></a>Boxplots of Scores, Individual Signatures</h3>
 <p>If only one boxplot of a signature is desired, then that signature alone should be specified in <code>signatureColNames</code>. Otherwise, an array of plots for all signatures will be produced. Here we use the signatures Anderson_42, Anderson_OD_51, and Berry_393.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r">for (i in sigs){
+<div class="sourceCode" id="cb17"><html><body><pre class="r">for (i in sigs){
 
   cat("####", i, "\n")
 
@@ -217,7 +230,7 @@ colors </pre></body></html></div>
 <h3 class="hasAnchor">
 <a href="#heatmaps-for-individual-signatures" class="anchor"></a>Heatmaps for Individual Signatures</h3>
 <p>The <code>signatureGeneHeatmap</code> function produces heatmaps that highlight a single selected signature. The resulting plots feature samples on the columns, and the genes in the signature on the rows. The annotation rows at the top are related to both the disease phenotype and to the signature score itself. The gradient of the heatmap is created using the gene expression values in the assay specified by the <code>useAssay</code> parameter. Here, we observe how the log(CPM) values for specific genes relate to the signature score for each sample using the signatures Anderson_42, Anderson_OD_51, and Berry_393.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r">for (i in sigs){
+<div class="sourceCode" id="cb18"><html><body><pre class="r">for (i in sigs){
 
   cat("####", i, "\n")
 
@@ -251,7 +264,7 @@ colors </pre></body></html></div>
 <a href="#compare-scoring-methods-for-a-single-signature" class="anchor"></a>Compare scoring methods for a single signature</h3>
 <p>The <code>compareAlgs</code> function allows multiple scoring methods to be compared via a heatmap or boxplot with samples on the columns and methods on the rows. Here, we compare scoring methods for the “Anderson_42” signature. It seems that singscore may be the best method here, as its sample scores most closely align with the information provided by the annotation data.</p>
 <p>An examination of the boxplot and heatmap together determine that PLAGE and the comparing Z-score methods are least helpful in correctly identifying TB from LTBI subjects - AUC scores are little more than 0.5 and subjects in different groups are falsely assigned similar scores. According to the boxplot, we see that ssGSEA has the highest predictive AUC.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"># Heatmap
+<div class="sourceCode" id="cb19"><html><body><pre class="r"># Heatmap
 compareAlgs(hivtb_data, annotationColName = "Disease",
             scale = TRUE,
             algorithm = c("GSVA", "ssGSEA",
@@ -261,7 +274,7 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
             choose_color = col.me, show.pb = FALSE,
             parallel.sz = 1)</pre></body></html></div>
 <p><img src="TBSig_Vignette_files/figure-html/compareAlgs%20ex-1.png" width="700"></p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"># Boxplot
+<div class="sourceCode" id="cb20"><html><body><pre class="r"># Boxplot
 compareAlgs(hivtb_data, annotationColName = "Disease",
             scale = TRUE,
             algorithm = c("GSVA", "ssGSEA",
@@ -281,19 +294,19 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
 <a href="#table-with-t-tests-auc" class="anchor"></a>Table with T-tests &amp; AUC</h3>
 <p>The <code>TableAUC</code> function creates a table of useful information regarding the scored signatures. First, a 2-sample t-test is conducted on the scores with the TB/HIV status as the response variable. This is intended to give one metric of whether the signature is a valuable identifier of the disease phenotype. The log-scaled p-values are provided for easier means of comparison.</p>
 <p>The table also gives the AUC values for the signature scores, along with confidence intervals derived from bootstrapping. Most AUC estimates are fairly high.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r">tableAUC(ssgsea_result, 
+<div class="sourceCode" id="cb21"><html><body><pre class="r">tableAUC(ssgsea_result, 
          annotationColName = "Disease", 
          signatureColNames = names(TBsignatures),
          num.boot = 100, 
          pb.show = FALSE)</pre></body></html></div>
-<div id="htmlwidget-8d152f706e3cc82f9ae7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8d152f706e3cc82f9ae7">{"x":{"filter":"none","data":[["Thompson_9","Blankley_5","Blankley_380","Bloom_OD_144","Kaforou_27","Sweeney_OD_3","Rajan_HIV_5","Walter_51","Zak_RISK_16","Gliddon_OD_4","Roe_3","Berry_393","Esmail_OD_893","Suliman_RISK_4","Sambarey_HIV_10","Kaforou_OD_53","Gliddon_OD_3","Esmail_203","Roe_OD_4","Maertzdorf_OD_100","Thompson_FAIL_13","Walter_PNA_47","Kaforou_OD_44","Anderson_OD_51","Jacobsen_3","Walter_PNA_119","Esmail_82","Anderson_42","Thompson_RES_5","Sloot_HIV_2","Maertzdorf_4","Berry_OD_86","Singhania_OD_20","Lee_4"],[0,0,0,0,0,0,0,0,0,0.0003,0,0,0.0002,0.0001,0.0001,0.0012,0.0001,0.0029,0.0005,0.0017,0.0009,0.0028,0.0106,0.0096,0.0072,0.0054,0.0207,0.0278,0.0571,0.0796,0.136,0.2392,0.1568,0.5818],[148.0662,142.9362,120.0574,117.3455,119.7161,101.7419,115.8811,112.2158,114.8476,81.48,101.7238,102.3001,87.9775,90.7221,91.1867,67.051,92.9589,58.5309,75.6901,63.5168,70.177,58.9577,45.4278,46.4517,49.288,52.2314,38.7825,35.8293,28.6366,25.3075,19.9503,14.3044,18.5306,5.416],[0.8861,0.8739,0.8269,0.8362,0.7813,0.8065,0.7844,0.7916,0.7636,0.7872,0.7807,0.7821,0.7681,0.7618,0.75,0.714,0.6751,0.6679,0.6491,0.7266,0.6707,0.6342,0.6485,0.613,0.6528,0.5585,0.598,0.5456,0.522,0.5711,0.5219,0.5206,0.5297,0.504],[0.95,0.9375,0.9208,0.9208,0.9083,0.9083,0.9,0.9,0.9,0.8875,0.8875,0.8792,0.8708,0.8708,0.8667,0.8417,0.825,0.8208,0.8167,0.8125,0.8083,0.7875,0.7833,0.775,0.775,0.75,0.7458,0.725,0.7083,0.7083,0.6625,0.65,0.6417,0.5042],[0.9915,0.9917,0.9921,0.9835,0.975,0.9839,1,0.9682,0.9831,0.9829,0.9711,0.9622,0.9787,0.9623,0.9591,0.9462,0.9341,0.923,0.9191,0.9067,0.9172,0.9087,0.9128,0.9044,0.912,0.8876,0.8904,0.8443,0.8737,0.8418,0.8163,0.8236,0.8304,0.6955]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Signature<\/th>\n      <th>P.value<\/th>\n      <th>neg10xLog.P.value.<\/th>\n      <th>LowerAUC<\/th>\n      <th>AUC<\/th>\n      <th>UpperAUC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a5b93dc7980183a3e7ad" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a5b93dc7980183a3e7ad">{"x":{"filter":"none","data":[["Thompson_9","Blankley_5","Blankley_380","Bloom_OD_144","Kaforou_27","Sweeney_OD_3","Rajan_HIV_5","Walter_51","Zak_RISK_16","Gliddon_OD_4","Roe_3","Berry_393","Esmail_OD_893","Suliman_RISK_4","Sambarey_HIV_10","Kaforou_OD_53","Gliddon_OD_3","Esmail_203","Roe_OD_4","Maertzdorf_OD_100","Thompson_FAIL_13","Walter_PNA_47","Kaforou_OD_44","Anderson_OD_51","Jacobsen_3","Walter_PNA_119","Esmail_82","Anderson_42","Thompson_RES_5","Sloot_HIV_2","Maertzdorf_4","Berry_OD_86","Singhania_OD_20","Lee_4"],[0,0,0,0,0,0,0,0,0,0.0003,0,0,0.0002,0.0001,0.0001,0.0012,0.0001,0.0029,0.0005,0.0017,0.0009,0.0028,0.0106,0.0096,0.0072,0.0054,0.0207,0.0278,0.0571,0.0796,0.136,0.2392,0.1568,0.5818],[148.0662,142.9362,120.0574,117.3455,119.7161,101.7419,115.8811,112.2158,114.8476,81.48,101.7238,102.3001,87.9775,90.7221,91.1867,67.051,92.9589,58.5309,75.6901,63.5168,70.177,58.9577,45.4278,46.4517,49.288,52.2314,38.7825,35.8293,28.6366,25.3075,19.9503,14.3044,18.5306,5.416],[0.8564,0.865,0.8192,0.8417,0.8399,0.8125,0.8039,0.7762,0.7899,0.7725,0.7474,0.7477,0.7691,0.7519,0.7517,0.7226,0.7179,0.6888,0.6904,0.693,0.6929,0.5882,0.6369,0.6464,0.6007,0.5871,0.6331,0.5413,0.5672,0.5663,0.5383,0.5166,0.5171,0.5085],[0.95,0.9375,0.9208,0.9208,0.9083,0.9083,0.9,0.9,0.9,0.8875,0.8875,0.8792,0.8708,0.8708,0.8667,0.8417,0.825,0.8208,0.8167,0.8125,0.8083,0.7875,0.7833,0.775,0.775,0.75,0.7458,0.725,0.7083,0.7083,0.6625,0.65,0.6417,0.5042],[0.9958,0.996,0.9869,0.9819,0.9789,0.9792,1,0.9708,0.996,0.9869,1,0.9748,0.9829,0.9599,0.9582,0.9418,0.936,0.9432,0.9421,0.9244,0.9286,0.9165,0.9084,0.9083,0.9061,0.883,0.8816,0.8633,0.872,0.8731,0.8232,0.8043,0.8154,0.6959]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Signature<\/th>\n      <th>P.value<\/th>\n      <th>neg10xLog.P.value.<\/th>\n      <th>LowerAUC<\/th>\n      <th>AUC<\/th>\n      <th>UpperAUC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="boxplots-for-the-bootstrapped-aucs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#boxplots-for-the-bootstrapped-aucs" class="anchor"></a>Boxplots for the bootstrapped AUCs</h3>
 <p>We can visualize the bootstrapped AUCs for the scored signatures by creating a collection of boxplots.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r">compareBoxplots(ssgsea_result, annotationColName = "Disease",
+<div class="sourceCode" id="cb22"><html><body><pre class="r">compareBoxplots(ssgsea_result, annotationColName = "Disease",
                 signatureColNames = names(TBsignatures),
                 pb.show = FALSE, rotateLabels = TRUE)</pre></body></html></div>
 <p><img src="TBSig_Vignette_files/figure-html/BS%20Boxplots-1.png" width="700"></p>
@@ -303,7 +316,7 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
 <a href="#roc-plots-for-all-signatures-with-95-ci-bands" class="anchor"></a>ROC plots for all signatures with 95% CI bands</h3>
 <p>The <code>signatureROCplot_CI</code> function plots the ROC curves for signature scores in separate plots, along with CI bands for the specified level of confidence. The <code>signatureROCplot</code> function is similar, but does not include confidence interval bands.</p>
 <p>Note that, in some cases, signatures will be positive identifiers of TB whereas others are negative identifiers, hence some ROC curves will be below the chance line.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r">signatureROCplot_CI(inputData = ssgsea_result,
+<div class="sourceCode" id="cb23"><html><body><pre class="r">signatureROCplot_CI(inputData = ssgsea_result,
                    signatureColNames = names(TBsignatures),
                    annotationColName = "Disease", pb.show = FALSE)</pre></body></html></div>
 <p><img src="TBSig_Vignette_files/figure-html/ROC%20all-1.png" width="1152"></p>
@@ -311,7 +324,7 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
 <div id="separate-roc-plots-95-ci-bands" class="section level3 tabset">
 <h3 class="hasAnchor">
 <a href="#separate-roc-plots-95-ci-bands" class="anchor"></a>Separate ROC plots, 95% CI bands</h3>
-<div class="sourceCode" id="cb21"><html><body><pre class="r">for (i in sigs){
+<div class="sourceCode" id="cb24"><html><body><pre class="r">for (i in sigs){
   
   cat("####", i, "\n")
   
@@ -344,10 +357,10 @@ compareAlgs(hivtb_data, annotationColName = "Disease",
 <a href="#signature-evaluation-with-logistic-regression" class="anchor"></a>Signature Evaluation with Logistic Regression</h2>
 <p>Another method of signature evaluation featured in the TBSignatureProfiler package is available with the <code>SignatureQuantitative</code> function.</p>
 <p>During the training process, we bootstrap the samples, cross-validate the logistic regression prediction of the TB HIV status of each sample, and calculate the validation set AUCs from each cross-validation iteration. In theory, if a signature is a useful predictor of status, it should have a higher average AUC from these logistic regression bootstraps.</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r">### Make an additional binary indicator for signature evaluation
+<div class="sourceCode" id="cb25"><html><body><pre class="r">### Make an additional binary indicator for signature evaluation
 hivtb_data$BinaryTB </pre></body></html></div>
 <p>We also create a boxplot of AUC for each signature, which provides a clear comparison between the signatures.</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r">plotQuantitative(hivtb_norm, targetVec.num = colData(hivtb_data)$BinaryTB,
+<div class="sourceCode" id="cb26"><html><body><pre class="r">plotQuantitative(hivtb_norm, targetVec.num = colData(hivtb_data)$BinaryTB,
                        signature.list = TBsignatures,
                        signature.name.vec = names(TBsignatures),
                        num.boot = 3, pb.show = FALSE, rotateLabels = TRUE)</pre></body></html></div>
@@ -355,29 +368,29 @@ hivtb_data$BinaryTB </pre></body></html></div>
 <div id="table-of-auc-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#table-of-auc-results" class="anchor"></a>Table of AUC Results</h3>
-<div class="sourceCode" id="cb24"><html><body><pre class="r">DT::datatable(round(quantitative.result$df.auc.ci, 4),
+<div class="sourceCode" id="cb27"><html><body><pre class="r">DT::datatable(round(quantitative.result$df.auc.ci, 4),
               options = list(scrollX = TRUE, pageLength = 10), 
               rownames = FALSE)</pre></body></html></div>
-<div id="htmlwidget-ddf4182074ac2cfeb7ca" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ddf4182074ac2cfeb7ca">{"x":{"filter":"none","data":[[0.7625,0.8458,0.8458,0.9917,0.7958,0.95,0.7917,0.875,0.8208,0.9833,0.8708,0.7458,0.825,0.7125,0.8917,0.9042,0.8708,0.8542,0.7792,0.7125,0.775,0.7583,0.8833,0.7292,0.6,0.8167,0.8,0.675,0.9667,0.95,0.8458,0.7083,0.8583,0.9042],[0.9841,0.8904,0.905,0.9655,0.7705,0.9203,0.8942,0.9424,0.9269,0.8925,0.8097,0.5861,0.86,0.8501,0.955,0.8891,0.8102,0.8287,0.9266,0.7338,0.8603,0.7842,0.9437,0.8148,0.3125,0.8641,0.6878,0.8335,0.9518,0.9714,0.9556,0.9066,0.885,0.8357],[0.9992,1,0.9725,0.9958,0.9747,0.986,0.9211,0.9758,0.9913,0.99,0.8744,0.9346,0.9875,0.9889,1,0.99,0.9842,0.9452,0.985,0.8489,0.9927,0.9816,0.95,0.9079,0.885,0.9916,0.888,0.9569,0.9952,0.9977,0.9828,0.9785,0.9927,0.9953],[-0,-0,0,0,-0,-0,0,0,0,0,0,0,-0,0,0,0,-0,-0,0,0,0,-0,-0,-0,0,-0,-0,0,0,-0,-0,0,0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fbb282fb948bbbfea637" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fbb282fb948bbbfea637">{"x":{"filter":"none","data":[[0.7625,0.8458,0.8458,0.9917,0.7958,0.95,0.7917,0.875,0.8208,0.9833,0.8708,0.7458,0.825,0.7125,0.8917,0.9042,0.8708,0.8542,0.7792,0.7125,0.775,0.7583,0.8833,0.7292,0.6,0.8167,0.8,0.675,0.9667,0.95,0.8458,0.7083,0.8583,0.9042],[0.8773,0.959,0.9211,0.9834,0.8394,0.9711,0.9957,0.9797,0.9595,0.9874,0.7987,0.7487,0.8577,0.9184,0.9345,0.9296,0.8445,0.8334,0.8923,0.7821,0.794,0.8092,0.909,0.9054,0.0455,0.7411,0.8172,0.7116,0.9718,0.942,0.8685,0.9554,0.9359,0.8946],[0.9747,1,0.9829,0.9987,0.9983,0.9987,1,0.9873,0.994,0.9948,0.9544,0.7959,0.9623,0.9575,0.9982,0.9561,0.9937,0.9885,0.9874,0.9825,0.8159,0.8487,0.9558,0.9795,0.5191,0.8602,0.9799,0.9385,0.9987,0.9799,0.9987,0.9966,0.9975,0.9921],[0,0,-0,0,0,0,0,-0,-0,-0,0,0,0,0,0,0,0,0,-0,0,0,0,-0,-0,-0,-0,0,-0,0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="table-of-sensitivity-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#table-of-sensitivity-results" class="anchor"></a>Table of Sensitivity Results</h3>
-<div class="sourceCode" id="cb25"><html><body><pre class="r">DT::datatable(round(quantitative.result$df.sensitivity.ci, 4),
+<div class="sourceCode" id="cb28"><html><body><pre class="r">DT::datatable(round(quantitative.result$df.sensitivity.ci, 4),
               options = list(scrollX = TRUE, pageLength = 10), 
               rownames = FALSE)</pre></body></html></div>
-<div id="htmlwidget-6adcb7476ca127579f91" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6adcb7476ca127579f91">{"x":{"filter":"none","data":[[0.625,0.875,0.875,0.9375,0.875,0.9375,0.6875,0.875,0.8125,1,0.875,0.8125,0.875,0.6875,0.8125,0.875,0.9375,0.875,0.6875,0.8125,0.8125,0.75,0.875,0.75,0.625,0.8125,0.8125,0.8125,0.8125,0.75,0.8125,0.625,0.8125,0.875],[0.8141,0.8714,0.8733,0.9526,0.8941,0.8565,0.712,0.9382,0.7954,0.8733,0.6317,0.7962,0.9338,0.7938,0.9438,0.9132,0.8757,0.7297,0.8741,0.8589,0.8362,0.6889,0.94,0.7198,0.6183,0.828,0.8146,0.8429,0.945,0.9182,0.85,0.8,0.7175,0.8565],[0.9941,1,0.9933,1,1,0.995,0.9889,0.9944,0.9282,0.9371,0.9417,0.9165,0.9938,0.9938,1,0.995,0.9882,0.9494,0.9941,0.9875,0.995,0.9889,1,0.9341,0.9889,0.9274,0.9333,0.9329,0.995,1,1,0.9429,0.9944,0.995],[0,0,0,0,-0,-0,0,0,-0,0,0,-0,-0,0,0,0,0,0,0,0,0,-0,0,0,0,0,0,0,0,-0,0,-0,0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Sensitivity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6259af186cc8d446f176" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6259af186cc8d446f176">{"x":{"filter":"none","data":[[0.625,0.875,0.875,0.9375,0.875,0.9375,0.6875,0.875,0.8125,1,0.875,0.8125,0.875,0.6875,0.8125,0.875,0.9375,0.875,0.6875,0.8125,0.8125,0.75,0.875,0.75,0.625,0.8125,0.8125,0.8125,0.8125,0.75,0.8125,0.625,0.8125,0.875],[0.8879,0.955,0.8553,0.95,0.8473,0.9471,1,0.8664,0.9382,0.8648,0.8046,0.7089,0.8123,0.9236,0.9347,0.8382,0.8938,0.8301,0.8841,0.9115,0.7318,0.7645,0.8473,0.8473,0.05,0.7433,0.834,0.7786,0.9415,0.7739,0.9412,0.8875,0.8482,0.8875],[0.9438,1,0.9375,1,0.9857,1,1,0.995,0.9471,0.946,0.9396,0.8664,0.9231,0.9429,0.9947,0.9239,0.9528,0.9889,0.9208,0.9933,0.8871,0.8947,0.9165,0.9857,0.545,0.9333,0.9329,0.9786,0.9944,0.9857,0.9467,1,0.9867,1],[-0,0,0,-0,-0,0,0,-0,0,0,-0,0,-0,0,-0,0,-0,0,0,0,0,0,0,-0,-0,0,-0,-0,0,-0,0,-0,0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Sensitivity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="table-of-specificity-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#table-of-specificity-results" class="anchor"></a>Table of Specificity Results</h3>
-<div class="sourceCode" id="cb26"><html><body><pre class="r">DT::datatable(round(quantitative.result$df.specificity.ci, 4),
+<div class="sourceCode" id="cb29"><html><body><pre class="r">DT::datatable(round(quantitative.result$df.specificity.ci, 4),
               options = list(scrollX = TRUE, pageLength = 10), 
               rownames = FALSE)</pre></body></html></div>
-<div id="htmlwidget-2462d7b4289ebcecb26f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2462d7b4289ebcecb26f">{"x":{"filter":"none","data":[[0.8,0.8,0.7333,0.9333,0.8,0.8667,0.8,0.8,0.6,0.9333,0.7333,0.6667,0.7333,0.6667,0.8,0.8667,0.8,0.7333,0.8,0.8,0.8,0.6667,0.8,0.7333,0.8,0.8,0.7333,0.7333,0.9333,0.8667,0.7333,0.5333,0.8,0.8667],[0.8643,0.9471,0.8188,0.9179,0.6632,0.8909,0.8346,0.8709,0.8804,0.8808,0.7645,0.4515,0.8675,0.8123,0.94,0.8909,0.7457,0.7247,0.7357,0.8012,0.7403,0.7401,0.8375,0.7133,0.0923,0.9047,0.5569,0.8236,0.8197,0.88,0.7857,0.7805,0.8046,0.7469],[0.9929,1,0.9346,0.9366,0.856,0.9309,0.9346,0.9217,0.9399,0.9371,0.9202,0.9265,0.9057,0.9923,1,0.9459,0.9857,0.8434,0.9929,0.8224,0.9857,0.9769,0.8975,0.8775,0.928,0.9947,0.8385,0.9923,0.9833,1,0.9786,0.9353,0.9346,0.9423],[-0,0,0,-0,0,0,0,-0,0,0,-0,-0,0,0,0,0,0,0,0,0,-0,0,0,-0,0,0,0,0,0,-0,0,-0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Specificity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
+<div id="htmlwidget-6b9d51811099ea47961c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6b9d51811099ea47961c">{"x":{"filter":"none","data":[[0.8,0.8,0.7333,0.9333,0.8,0.8667,0.8,0.8,0.6,0.9333,0.7333,0.6667,0.7333,0.6667,0.8,0.8667,0.8,0.7333,0.8,0.8,0.8,0.6667,0.8,0.7333,0.8,0.8,0.7333,0.7333,0.9333,0.8667,0.7333,0.5333,0.8,0.8667],[0.8581,0.8292,0.8667,0.9379,0.8356,0.8609,0.91,0.9123,0.8717,0.8816,0.7318,0.6117,0.8375,0.8382,0.8808,0.9471,0.8482,0.7275,0.7474,0.76,0.5596,0.8333,0.8944,0.9023,0.1713,0.5596,0.7304,0.7276,0.9236,0.8804,0.7607,0.8,0.8375,0.8033],[0.9174,0.9286,0.8867,0.9941,0.9944,0.9365,1,0.9412,0.9224,0.9941,0.8961,0.901,0.8875,0.919,0.9933,1,0.8867,0.9846,0.9429,0.985,0.975,0.8412,0.9944,0.9423,0.9395,0.7673,0.9346,0.9394,0.9929,0.9399,0.9857,0.9329,0.9875,0.9271],[0,0,-0,-0,-0,-0,0,0,0,0,0,0,0,0,0,0,0,0,0,-0,0,0,0,0,0,0,0,-0,-0,0,-0,0,0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Specificity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
 <pre><code>## R version 3.6.3 (2020-02-29)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 18362)

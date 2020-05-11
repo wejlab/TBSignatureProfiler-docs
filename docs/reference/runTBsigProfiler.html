@@ -76,7 +76,7 @@ provided in the TBSignatureProfiler package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -162,7 +162,7 @@ used will be <code>"counts"</code>. The default is <code>NULL.</code></p></td>
 This list should be in the same format as <code>TBsignatures</code>, included in
 the TBSignatureProfiler package. If <code>signatures = NULL</code>, the default set
 of signatures <code>TBsignatures</code> list is used. For details, run
-<code><a href='TBsignatures.html'>?TBsignatures</a></code>. The default is <code>NULL</code>.</p></td>
+<code>?TBsignatures</code>. The default is <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>algorithm</th>
@@ -270,17 +270,16 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
                         <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span>),
                         <span class='kw'>combineSigAndAlgorithm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                         <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
-#&gt; Computing observed enrichment scores
 #&gt; Estimating ECDFs with Gaussian kernels
-#&gt; Using parallel with 1 cores
-#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 1 gene sets.
-#&gt;   |                                                                              |                                                                      |   0%Using parallel with 1 cores
-#&gt;   |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>res</span>, <span class='no'>res</span>$<span class='no'>pathway</span> <span class='kw'>==</span> <span class='st'>"Zak_RISK_16"</span>)</div><div class='output co'>#&gt;       pathway algorithm            sample1             sample2
+#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+#&gt; </div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 1 gene sets.
+#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>res</span>, <span class='no'>res</span>$<span class='no'>pathway</span> <span class='kw'>==</span> <span class='st'>"Zak_RISK_16"</span>)</div><div class='output co'>#&gt;       pathway algorithm            sample1             sample2
 #&gt; 1 Zak_RISK_16      GSVA  -0.65044642857143  -0.667768595041323
-#&gt; 2 Zak_RISK_16    ssGSEA 0.0423645852048043 -0.0493191377024658
+#&gt; 2 Zak_RISK_16    ssGSEA 0.0423645852048042 -0.0493191377024657
 #&gt;              sample3           sample4           sample5           sample6
 #&gt; 1 -0.460281690140846 -0.52076023391813 -0.47972972972973 0.677938144329897
-#&gt; 2 0.0743028189003279 0.163651346109162 0.140792583387962 0.950680862297534
+#&gt; 2  0.074302818900328 0.163651346109162 0.140792583387962 0.950680862297534
 #&gt;             sample7           sample8           sample9          sample10
 #&gt; 1 0.486230366492146 0.559082969432314   0.5673474801061 0.522020202020202
 #&gt; 2 0.949532718784631 0.950680862297534 0.950680862297534 0.950680862297534</div><div class='input'>
@@ -292,10 +291,9 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
                              <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA"</span>),
                              <span class='kw'>combineSigAndAlgorithm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                              <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
-#&gt; Computing observed enrichment scores
 #&gt; Estimating ECDFs with Gaussian kernels
-#&gt; Using parallel with 1 cores
-#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='input'><span class='no'>GSVA_res</span>$<span class='no'>Zak_RISK_16</span></div><div class='output co'>#&gt;  [1]  0.6255317  0.6709665  0.4502341  0.7240338  0.5423896  0.5076658
+#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+#&gt; </div><div class='input'><span class='no'>GSVA_res</span>$<span class='no'>Zak_RISK_16</span></div><div class='output co'>#&gt;  [1]  0.6255317  0.6709665  0.4502341  0.7240338  0.5423896  0.5076658
 #&gt;  [7]  0.6268138 -0.3785315  0.5837650  0.3315927  0.5688302  0.5667150
 #&gt; [13]  0.6943893 -0.6998614  0.3244909  0.6782273 -0.6715210 -0.6758541
 #&gt; [19] -0.5738776 -0.7008174 -0.5409373 -0.5289045 -0.5812383 -0.6514118
@@ -318,7 +316,7 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile RNA-Seq Data Using TB Pathway Signatures • TBSignatureProfiler</title>
+<title>Profile RA-Seq Data Using TB Pathway Signatures • TBSignatureProfiler</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Profile RNA-Seq Data Using TB Pathway Signatures">
+<script src="pkgdown.js"></script><meta property="og:title" content="Profile RA-Seq Data Using TB Pathway Signatures">
 <meta property="og:description" content="Signatures of TB progression, TB disease, and other TB disease
     states have been created. This package makes it easy to profile RNA-Seq data
     using these signatures and common signature profiling tools including
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -73,12 +73,8 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="tbsignatureprofiler-" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tbsignatureprofiler-" class="anchor"></a>TBSignatureProfiler <img src="https://github.com/compbiomed/TBSignatureProfiler-docs/blob/master/lungs1.png?raw=true" align="right" width="170">
-</h2>
-
-</div>
+<p><img src="https://github.com/compbiomed/TBSignatureProfiler-docs/blob/master/lungs1.png?raw=true" align="right" width="170"></p>
+<p><a href="http://www.bioconductor.org/packages/release/bioc/html/TBSignatureProfiler.html"><img src="https://img.shields.io/badge/bioconductor-3.11-3a6378.svg"></a> <a href="https://codecov.io/gh/compbiomed/TBSignatureProfiler"><img src="https://codecov.io/gh/compbiomed/TBSignatureProfiler/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue" alt="lifecycle"></a> <a href="http://bioconductor.org/checkResults/release/bioc-LATEST/TBSignatureProfiler/"><img src="http://www.bioconductor.org/shields/build/release/bioc/TBSignatureProfiler.svg" alt="build"></a></p>
 <div id="what-is-the-tbsignatureprofiler" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-the-tbsignatureprofiler" class="anchor"></a>What is the TBSignatureProfiler?</h2>
@@ -89,16 +85,25 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>TBSignatureProfiler is under development. You can install the devel version via GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")
-</span>
+<p>The TBSignatureProfiler requires R 4.0 and Bioconductor 3.10.</p>
+<ul>
+<li>Install the development version of the package from Github</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, <span class="kw">quietly</span><span class="kw">=</span><span class="fl">TRUE</span>))
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"compbiomed/TBSignatureProfiler"</span>)</pre></div>
+<ul>
+<li>Install the release version of the package from Bioconductor</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="kw">quietly</span><span class="kw">=</span><span class="fl">TRUE</span>))
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)
+<span class="kw pkg">BiocManager</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"TBSignatureProfiler"</span>)</pre></div>
 </div>
 <div id="run-tbsignatureprofiler-shiny-app" class="section level2">
 <h2 class="hasAnchor">
 <a href="#run-tbsignatureprofiler-shiny-app" class="anchor"></a>Run TBSignatureProfiler shiny app</h2>
-<div class="sourceCode" id="cb2"><pre class="r">library(TBSignatureProfiler)
-TBSPapp()</pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TBSignatureProfiler</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/TBSPapp.html">TBSPapp</a></span>()</pre></div>
 </div>
 
   </div>
@@ -107,6 +112,8 @@ TBSPapp()</pre></div>
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from BIOC at <br><a href="https://www.bioconductor.org/packages/TBSignatureProfiler">https://​www.bioconductor.org/​packages/​TBSignatureProfiler</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/compbiomed/TBSignatureProfiler/">https://​github.com/​compbiomed/​TBSignatureProfiler/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/compbiomed/TBSignatureProfiler/issues">https://​github.com/​compbiomed/​TBSignatureProfiler/​issues</a>
@@ -137,15 +144,7 @@ TBSPapp()</pre></div>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.org/compbiomed/TBSignatureProfiler"><img src="https://travis-ci.org/compbiomed/TBSignatureProfiler.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/gh/compbiomed/TBSignatureProfiler"><img src="https://codecov.io/gh/compbiomed/TBSignatureProfiler/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
-</ul>
-</div>
-</div>
+  </div>
 </div>
 
 
@@ -154,7 +153,7 @@ TBSPapp()</pre></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

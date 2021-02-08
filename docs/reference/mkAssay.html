@@ -74,7 +74,7 @@ to be used in further analysis." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -87,7 +87,10 @@ to be used in further analysis." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -96,7 +99,7 @@ to be used in further analysis." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -124,14 +127,14 @@ function creates additional assays for a gene expression count dataset
 to be used in further analysis.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mkAssay</span>(
-  <span class='no'>SE_obj</span>,
-  <span class='kw'>input_name</span> <span class='kw'>=</span> <span class='st'>"counts"</span>,
-  <span class='kw'>output_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>counts_to_CPM</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>prior_counts</span> <span class='kw'>=</span> <span class='fl'>3</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mkAssay</span><span class='op'>(</span>
+  <span class='va'>SE_obj</span>,
+  input_name <span class='op'>=</span> <span class='st'>"counts"</span>,
+  output_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  log <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  counts_to_CPM <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  prior_counts <span class='op'>=</span> <span class='fl'>3</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,12 +186,16 @@ to 3 additional assay types attached to the original inputted object.</p>
 <dt>log_&lt;output_name&gt;</dt><dd><p>Log of original inputted assay.
 <code>&lt;output_name&gt;</code> will be replaced by inputted parameter.</p></dd>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Aubrey Odom</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Create a log assay of the original assay input</span>
 <span class='co'># TB_hiv dataset already has counts data</span>
-<span class='no'>log_only</span> <span class='kw'>&lt;-</span> <span class='fu'>mkAssay</span>(<span class='no'>TB_hiv</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>counts_to_CPM</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>log_only</span></div><div class='output co'>#&gt; class: SummarizedExperiment 
+<span class='va'>log_only</span> <span class='op'>&lt;-</span> <span class='fu'>mkAssay</span><span class='op'>(</span><span class='va'>TB_hiv</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, counts_to_CPM <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>log_only</span>
+</div><div class='output co'>#&gt; class: SummarizedExperiment 
 #&gt; dim: 25369 31 
 #&gt; metadata(0):
 #&gt; assays(2): counts log_counts
@@ -197,8 +204,9 @@ to 3 additional assay types attached to the original inputted object.</p>
 #&gt; colnames(31): R01_1 R01_10 ... R02_30 R02_31
 #&gt; colData names(2): Sample Disease</div><div class='input'>
 <span class='co'># Create a CPM assay</span>
-<span class='no'>CPM_only</span> <span class='kw'>&lt;-</span> <span class='fu'>mkAssay</span>(<span class='no'>TB_hiv</span>)
-<span class='no'>CPM_only</span></div><div class='output co'>#&gt; class: SummarizedExperiment 
+<span class='va'>CPM_only</span> <span class='op'>&lt;-</span> <span class='fu'>mkAssay</span><span class='op'>(</span><span class='va'>TB_hiv</span><span class='op'>)</span>
+<span class='va'>CPM_only</span>
+</div><div class='output co'>#&gt; class: SummarizedExperiment 
 #&gt; dim: 25369 31 
 #&gt; metadata(0):
 #&gt; assays(2): counts cpm
@@ -207,8 +215,9 @@ to 3 additional assay types attached to the original inputted object.</p>
 #&gt; colnames(31): R01_1 R01_10 ... R02_30 R02_31
 #&gt; colData names(2): Sample Disease</div><div class='input'>
 <span class='co'># Create a logCPM, logcounts, and CPM assay</span>
-<span class='no'>all_assays</span> <span class='kw'>&lt;-</span> <span class='fu'>mkAssay</span>(<span class='no'>TB_hiv</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>all_assays</span></div><div class='output co'>#&gt; class: SummarizedExperiment 
+<span class='va'>all_assays</span> <span class='op'>&lt;-</span> <span class='fu'>mkAssay</span><span class='op'>(</span><span class='va'>TB_hiv</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>all_assays</span>
+</div><div class='output co'>#&gt; class: SummarizedExperiment 
 #&gt; dim: 25369 31 
 #&gt; metadata(0):
 #&gt; assays(4): counts cpm log_counts log_cpm
@@ -228,11 +237,11 @@ to 3 additional assay types attached to the original inputted object.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

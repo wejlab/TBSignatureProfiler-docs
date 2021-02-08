@@ -1,9 +1,10 @@
-pandoc: '2.6'
-pkgdown: 1.5.1
+pandoc: 2.11.2
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  TBSig_Vignette: rmd/TBSig_Vignette.html
-  temp: rmd/temp.html
+  rmd/shinytutorial: shinytutorial.html
+  rmd/SignatureAddition: SignatureAddition.html
+  rmd/TBSig_Vignette: TBSig_Vignette.html
   tbspVignette: tbspVignette.html
-last_built: 2020-05-11T02:46Z
+last_built: 2021-02-08T03:51Z
 

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -85,7 +85,10 @@
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -94,7 +97,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -120,19 +123,19 @@
     <p>Create an array of ROC plots with confidence interval bands to compare signatures.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>signatureROCplot_CI</span>(
-  <span class='no'>inputData</span>,
-  <span class='no'>annotationData</span>,
-  <span class='no'>signatureColNames</span>,
-  <span class='no'>annotationColName</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>choose_colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cornflowerblue"</span>, <span class='st'>"gray50"</span>, <span class='st'>"gray79"</span>),
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ci.lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>pb.show</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>signatureROCplot_CI</span><span class='op'>(</span>
+  <span class='va'>inputData</span>,
+  <span class='va'>annotationData</span>,
+  <span class='va'>signatureColNames</span>,
+  <span class='va'>annotationColName</span>,
+  scale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  choose_colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cornflowerblue"</span>, <span class='st'>"gray50"</span>, <span class='st'>"gray79"</span><span class='op'>)</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  nrow <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ci.lev <span class='op'>=</span> <span class='fl'>0.95</span>,
+  pb.show <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,7 +180,7 @@ in the ROC plots. The default is <code><a href='https://rdrr.io/r/base/c.html'>c
     </tr>
     <tr>
       <th>name</th>
-      <td><p>a character string giving the title of the boxplot. If
+      <td><p>a character string giving the title of the ROC plot. If
 <code>NULL</code>, the plot title will be
 <code>"ROC Plots for Gene Signatures, &lt;ci.lev&gt;% Confidence"</code>.
 The default is <code>NULL</code>.</p></td>
@@ -209,16 +212,18 @@ The default is <code>TRUE</code>.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Run signature profiling</span>
 
- <span class='no'>choose_sigs</span> <span class='kw'>&lt;-</span> <span class='no'>TBsignatures</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)]
- <span class='no'>prof_indian</span> <span class='kw'>&lt;-</span> <span class='fu'>runTBsigProfiler</span>(<span class='no'>TB_indian</span>, <span class='kw'>useAssay</span> <span class='kw'>=</span> <span class='st'>"logcounts"</span>,
-                                 <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='st'>"Zscore"</span>,
-                                 <span class='kw'>signatures</span> <span class='kw'>=</span> <span class='no'>choose_sigs</span>,
-                                 <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>Running Z-score profiling</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; Estimating combined z-scores for 2 gene sets.
+ <span class='va'>choose_sigs</span> <span class='op'>&lt;-</span> <span class='va'>TBsignatures</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span>
+ <span class='va'>prof_indian</span> <span class='op'>&lt;-</span> <span class='fu'><a href='runTBsigProfiler.html'>runTBsigProfiler</a></span><span class='op'>(</span><span class='va'>TB_indian</span>, useAssay <span class='op'>=</span> <span class='st'>"logcounts"</span>,
+                                 algorithm <span class='op'>=</span> <span class='st'>"Zscore"</span>,
+                                 signatures <span class='op'>=</span> <span class='va'>choose_sigs</span>,
+                                 parallel.sz <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Running Z-score profiling</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; Estimating combined z-scores for 2 gene sets.
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==                                                                    |   2%  |                                                                              |===                                                                   |   5%  |                                                                              |=====                                                                 |   7%  |                                                                              |======                                                                |   9%  |                                                                              |========                                                              |  11%  |                                                                              |==========                                                            |  14%  |                                                                              |===========                                                           |  16%  |                                                                              |=============                                                         |  18%  |                                                                              |==============                                                        |  20%  |                                                                              |================                                                      |  23%  |                                                                              |==================                                                    |  25%  |                                                                              |===================                                                   |  27%  |                                                                              |=====================                                                 |  30%  |                                                                              |======================                                                |  32%  |                                                                              |========================                                              |  34%  |                                                                              |=========================                                             |  36%  |                                                                              |===========================                                           |  39%  |                                                                              |=============================                                         |  41%  |                                                                              |==============================                                        |  43%  |                                                                              |================================                                      |  45%  |                                                                              |=================================                                     |  48%  |                                                                              |===================================                                   |  50%  |                                                                              |=====================================                                 |  52%  |                                                                              |======================================                                |  55%  |                                                                              |========================================                              |  57%  |                                                                              |=========================================                             |  59%  |                                                                              |===========================================                           |  61%  |                                                                              |=============================================                         |  64%  |                                                                              |==============================================                        |  66%  |                                                                              |================================================                      |  68%  |                                                                              |=================================================                     |  70%  |                                                                              |===================================================                   |  73%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================                |  77%  |                                                                              |========================================================              |  80%  |                                                                              |=========================================================             |  82%  |                                                                              |===========================================================           |  84%  |                                                                              |============================================================          |  86%  |                                                                              |==============================================================        |  89%  |                                                                              |================================================================      |  91%  |                                                                              |=================================================================     |  93%  |                                                                              |===================================================================   |  95%  |                                                                              |====================================================================  |  98%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='input'>
 <span class='co'># Create ROC plots with confidence intervals</span>
-<span class='fu'>signatureROCplot_CI</span>(<span class='no'>prof_indian</span>, <span class='kw'>signatureColNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>choose_sigs</span>),
-                    <span class='kw'>annotationColName</span> <span class='kw'>=</span> <span class='st'>"label"</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='img'><img src='signatureROCplot_CI-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>signatureROCplot_CI</span><span class='op'>(</span><span class='va'>prof_indian</span>, signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>choose_sigs</span><span class='op'>)</span>,
+                    annotationColName <span class='op'>=</span> <span class='st'>"label"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='img'><img src='signatureROCplot_CI-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -231,11 +236,11 @@ The default is <code>TRUE</code>.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

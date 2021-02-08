@@ -77,7 +77,7 @@ for each signature." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -90,7 +90,10 @@ for each signature." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -99,7 +102,7 @@ for each signature." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -130,24 +133,25 @@ profiling on each signature desired, and outputting a heatmap or boxplot
 for each signature.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compareAlgs</span>(
-  <span class='no'>input</span>,
-  <span class='kw'>signatures</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>annotationColName</span>,
-  <span class='kw'>useAssay</span> <span class='kw'>=</span> <span class='st'>"counts"</span>,
-  <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span>, <span class='st'>"ASSIGN"</span>, <span class='st'>"PLAGE"</span>, <span class='st'>"Zscore"</span>, <span class='st'>"singscore"</span>),
-  <span class='kw'>showColumnNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showRowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>colorSets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Set1"</span>, <span class='st'>"Set2"</span>, <span class='st'>"Set3"</span>, <span class='st'>"Pastel1"</span>, <span class='st'>"Pastel2"</span>, <span class='st'>"Accent"</span>, <span class='st'>"Dark2"</span>,
-    <span class='st'>"Paired"</span>),
-  <span class='kw'>choose_color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"blue"</span>, <span class='st'>"gray95"</span>, <span class='st'>"red"</span>),
-  <span class='kw'>colList</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>show.pb</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"heatmap"</span>,
-  <span class='kw'>num.boot</span> <span class='kw'>=</span> <span class='fl'>100</span>
-)</pre>
+    <pre class="usage"><span class='fu'>compareAlgs</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  signatures <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>annotationColName</span>,
+  useAssay <span class='op'>=</span> <span class='st'>"counts"</span>,
+  algorithm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span>, <span class='st'>"ASSIGN"</span>, <span class='st'>"PLAGE"</span>, <span class='st'>"Zscore"</span>, <span class='st'>"singscore"</span><span class='op'>)</span>,
+  showColumnNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showRowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  scale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  colorSets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Set1"</span>, <span class='st'>"Set2"</span>, <span class='st'>"Set3"</span>, <span class='st'>"Pastel1"</span>, <span class='st'>"Pastel2"</span>, <span class='st'>"Accent"</span>, <span class='st'>"Dark2"</span>,
+    <span class='st'>"Paired"</span><span class='op'>)</span>,
+  choose_color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"gray95"</span>, <span class='st'>"red"</span><span class='op'>)</span>,
+  colList <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  show.pb <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  parallel.sz <span class='op'>=</span> <span class='fl'>0</span>,
+  output <span class='op'>=</span> <span class='st'>"heatmap"</span>,
+  num.boot <span class='op'>=</span> <span class='fl'>100</span>,
+  column_order <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +167,7 @@ Required.</p></td>
 This list should be in the same format as <code>TBsignatures</code>, included in
 the TBSignatureProfiler package. If <code>signatures = NULL</code>, the default set
 of signatures <code>TBsignatures</code> list is used. For details, run
-<code>?TBsignatures</code>. The default is <code>NULL</code>.</p></td>
+<code><a href='TBsignatures.html'>?TBsignatures</a></code>. The default is <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>annotationColName</th>
@@ -252,6 +256,12 @@ should be a <code>"heatmap"</code> or <code>"boxplot"</code>. The default is
       <td><p>an integer indicating the number of times to bootstrap the
 data.</p></td>
     </tr>
+    <tr>
+      <th>column_order</th>
+      <td><p>a vector of character strings indicating the order in
+which to manually arrange the heatmap columns. Default is <code>NULL</code>,
+such that column order is automatically determined via clustering.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -262,11 +272,12 @@ the enumerated algorithms.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Example using the TB_hiv data set, two signatures, and 3 algorithms</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"TB_hiv"</span>)
-<span class='fu'>compareAlgs</span>(<span class='no'>TB_hiv</span>, <span class='kw'>signatures</span> <span class='kw'>=</span> <span class='no'>TBsignatures</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)],
-            <span class='kw'>annotationColName</span> <span class='kw'>=</span> <span class='st'>"Disease"</span>,
-            <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span>, <span class='st'>"PLAGE"</span>),
-            <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"heatmap"</span>)</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 2204 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 2204 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='message'>Running PLAGE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 2204 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='img'><img src='compareAlgs-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"TB_hiv"</span><span class='op'>)</span>
+<span class='fu'>compareAlgs</span><span class='op'>(</span><span class='va'>TB_hiv</span>, signatures <span class='op'>=</span> <span class='va'>TBsignatures</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span>,
+            annotationColName <span class='op'>=</span> <span class='st'>"Disease"</span>,
+            algorithm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span>, <span class='st'>"PLAGE"</span><span class='op'>)</span>,
+            scale <span class='op'>=</span> <span class='cn'>TRUE</span>, parallel.sz <span class='op'>=</span> <span class='fl'>1</span>, output <span class='op'>=</span> <span class='st'>"heatmap"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 2204 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 2204 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='message'>Running PLAGE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 2204 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='img'><img src='compareAlgs-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -279,11 +290,11 @@ the enumerated algorithms.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

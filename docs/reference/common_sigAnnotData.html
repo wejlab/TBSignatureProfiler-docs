@@ -77,7 +77,7 @@ tissue type." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -90,7 +90,10 @@ tissue type." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -99,7 +102,7 @@ tissue type." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -130,7 +133,7 @@ Currently, this table includes two variables, <code>disease</code> and
 <code>tissue type</code>.</p>
     </div>
 
-    <pre class="usage"><span class='no'>common_sigAnnotData</span></pre>
+    <pre class="usage"><span class='va'>common_sigAnnotData</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -138,46 +141,7 @@ Currently, this table includes two variables, <code>disease</code> and
     <p>data.frame</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    
-<ul>
-<li><p><strong>Anderson_42</strong>: Anderson, Suzanne T., Myrsini Kaforou, Andrew J. Brent, Victoria J. Wright, Claire M. Banwell, George Chagaluka, Amelia C. Crampin, et al. 2014. "Diagnosis of Childhood Tuberculosis and Host RNA Expression in Africa." The New England Journal of Medicine 370 (18): 1712-23. <a href='http://dx.doi.org/10.1056/NEJMoa1303657'>10.1056/NEJMoa1303657</a></p></li>
-<li><p><strong>Anderson_OD_51</strong>: Anderson, Suzanne T., Myrsini Kaforou, Andrew J. Brent, Victoria J. Wright, Claire M. Banwell, George Chagaluka, Amelia C. Crampin, et al. 2014. "Diagnosis of Childhood Tuberculosis and Host RNA Expression in Africa." The New England Journal of Medicine 370 (18): 1712-23. <a href='http://dx.doi.org/10.1056/NEJMoa1303657'>10.1056/NEJMoa1303657</a></p></li>
-<li><p><strong>Berry_393</strong>: Berry, Matthew P. R., Christine M. Graham, Finlay W. McNab, Zhaohui Xu, Susannah A. A. Bloch, Tolu Oni, Katalin A. Wilkinson, et al. 2010. "An Interferon-Inducible Neutrophil-Driven Blood Transcriptional Signature in Human Tuberculosis." Nature 466 (7309): 973-77. <a href='http://dx.doi.org/10.1038/nature09247'>10.1038/nature09247</a></p></li>
-<li><p><strong>Berry_OD_86</strong>: Berry, Matthew P. R., Christine M. Graham, Finlay W. McNab, Zhaohui Xu, Susannah A. A. Bloch, Tolu Oni, Katalin A. Wilkinson, et al. 2010. "An Interferon-Inducible Neutrophil-Driven Blood Transcriptional Signature in Human Tuberculosis." Nature 466 (7309): 973-77. <a href='http://dx.doi.org/10.1038/nature09247'>10.1038/nature09247</a></p></li>
-<li><p><strong>Blankley_5</strong>: Blankley, Simon, Christine M. Graham, Joe Levin, Jacob Turner, Matthew P. R. Berry, Chloe I. Bloom, Zhaohui Xu, et al. 2016. "A 380-Gene Meta-Signature of Active Tuberculosis Compared with Healthy Controls." The European Respiratory Journal: Official Journal of the European Society for Clinical Respiratory Physiology 47 (6): 1873-76. <a href='http://dx.doi.org/10.1183/13993003.02121-2015'>10.1183/13993003.02121-2015</a></p></li>
-<li><p><strong>Blankley_380</strong>: Blankley, Simon, Christine M. Graham, Joe Levin, Jacob Turner, Matthew P. R. Berry, Chloe I. Bloom, Zhaohui Xu, et al. 2016. "A 380-Gene Meta-Signature of Active Tuberculosis Compared with Healthy Controls." The European Respiratory Journal: Official Journal of the European Society for Clinical Respiratory Physiology 47 (6): 1873-76. <a href='http://dx.doi.org/10.1183/13993003.02121-2015'>10.1183/13993003.02121-2015</a></p></li>
-<li><p><strong>Bloom_OD_144</strong>: Bloom, Chloe I., Christine M. Graham, Matthew P. R. Berry, Fotini Rozakeas, Paul S. Redford, Yuanyuan Wang, Zhaohui Xu, et al. 2013. "Transcriptional Blood Signatures Distinguish Pulmonary Tuberculosis, Pulmonary Sarcoidosis, Pneumonias and Lung Cancers." PloS One 8 (8): e70630. <a href='http://dx.doi.org/10.1371/journal.pone.0070630'>10.1371/journal.pone.0070630</a></p></li>
-<li><p><strong>Esmail_82</strong>: Esmail, Hanif, Rachel P. Lai, Maia Lesosky, Katalin A. Wilkinson, Christine M. Graham, Stuart Horswell, Anna K. Coussens, Clifton E. Barry 3rd, Anne O'Garra, and Robert J. Wilkinson. 2018. "Complement Pathway Gene Activation and Rising Circulating Immune Complexes Characterize Early Disease in HIV-Associated Tuberculosis." Proceedings of the National Academy of Sciences of the United States of America 115 (5): E964-73. <a href='http://dx.doi.org/10.1073/pnas.1711853115'>10.1073/pnas.1711853115</a></p></li>
-<li><p><strong>Esmail_203</strong>: Esmail, Hanif, Rachel P. Lai, Maia Lesosky, Katalin A. Wilkinson, Christine M. Graham, Stuart Horswell, Anna K. Coussens, Clifton E. Barry 3rd, Anne O'Garra, and Robert J. Wilkinson. 2018. "Complement Pathway Gene Activation and Rising Circulating Immune Complexes Characterize Early Disease in HIV-Associated Tuberculosis." Proceedings of the National Academy of Sciences of the United States of America 115 (5): E964-73. <a href='http://dx.doi.org/10.1073/pnas.1711853115'>10.1073/pnas.1711853115</a></p></li>
-<li><p><strong>Esmail_893</strong>: Esmail, Hanif, Rachel P. Lai, Maia Lesosky, Katalin A. Wilkinson, Christine M. Graham, Stuart Horswell, Anna K. Coussens, Clifton E. Barry 3rd, Anne O'Garra, and Robert J. Wilkinson. 2018. "Complement Pathway Gene Activation and Rising Circulating Immune Complexes Characterize Early Disease in HIV-Associated Tuberculosis." Proceedings of the National Academy of Sciences of the United States of America 115 (5): E964-73. <a href='http://dx.doi.org/10.1073/pnas.1711853115'>10.1073/pnas.1711853115</a></p></li>
-<li><p><strong>Gliddon_OD_3</strong>: Gliddon, Harriet D., Kaforou, Myrsini, Alikian, Mary, Habgood-Coote, Dominic, Zhou, Chenxi, Oni, Tolu, Anderson, Suzanne T., Brent, Andrew J., Crampin, Amelia C., Eley, Brian, Kern, Florian, Langford, Paul R., Ottenhoff, Tom H. M., Hibberd, Martin L., French, Neil, Wright, Victoria J., Dockrell, Hazel M., Coin, Lachlan J., Wilkinson, Robert J., Levin, Michael. 2019 "Identification of reduced host transcriptomic signatures for tuberculosis and digital PCR-based validation and quantification" biorxiv.org: . <a href='http://dx.doi.org/10.1101/583674'>10.1101/583674</a></p></li>
-<li><p><strong>Gliddon_OD_4</strong>: Gliddon, Harriet D., Kaforou, Myrsini, Alikian, Mary, Habgood-Coote, Dominic, Zhou, Chenxi, Oni, Tolu, Anderson, Suzanne T., Brent, Andrew J., Crampin, Amelia C., Eley, Brian, Kern, Florian, Langford, Paul R., Ottenhoff, Tom H. M., Hibberd, Martin L., French, Neil, Wright, Victoria J., Dockrell, Hazel M., Coin, Lachlan J., Wilkinson, Robert J., Levin, Michael. 2019 "Identification of reduced host transcriptomic signatures for tuberculosis and digital PCR-based validation and quantification" biorxiv.org: . <a href='http://dx.doi.org/10.1101/583674'>10.1101/583674</a></p></li>
-<li><p><strong>Jacobsen_3</strong>: Jacobsen, Marc, Dirk Repsilber, Andrea Gutschmidt, Albert Neher, Knut Feldmann, Hans J. Mollenkopf, Andreas Ziegler, and Stefan H. E. Kaufmann. 2007. "Candidate Biomarkers for Discrimination between Infection and Disease Caused by Mycobacterium Tuberculosis." Journal of Molecular Medicine  85 (6): 613-21. <a href='http://dx.doi.org/10.1007/s00109-007-0157-6'>10.1007/s00109-007-0157-6</a></p></li>
-<li><p><strong>Kaforou_27</strong>: Kaforou, Myrsini, Victoria J. Wright, Tolu Oni, Neil French, Suzanne T. Anderson, Nonzwakazi Bangani, Claire M. Banwell, et al. 2013. "Detection of Tuberculosis in HIV-Infected and -Uninfected African Adults Using Whole Blood RNA Expression Signatures: A Case-Control Study." PLoS Medicine 10 (10): e1001538. <a href='http://dx.doi.org/10.1371/journal.pmed.1001538'>10.1371/journal.pmed.1001538</a></p></li>
-<li><p><strong>Kaforou_OD_44</strong>: Kaforou, Myrsini, Victoria J. Wright, Tolu Oni, Neil French, Suzanne T. Anderson, Nonzwakazi Bangani, Claire M. Banwell, et al. 2013. "Detection of Tuberculosis in HIV-Infected and -Uninfected African Adults Using Whole Blood RNA Expression Signatures: A Case-Control Study." PLoS Medicine 10 (10): e1001538. <a href='http://dx.doi.org/10.1371/journal.pmed.1001538'>10.1371/journal.pmed.1001538</a></p></li>
-<li><p><strong>Kaforou_OD_53</strong>: Kaforou, Myrsini, Victoria J. Wright, Tolu Oni, Neil French, Suzanne T. Anderson, Nonzwakazi Bangani, Claire M. Banwell, et al. 2013. "Detection of Tuberculosis in HIV-Infected and -Uninfected African Adults Using Whole Blood RNA Expression Signatures: A Case-Control Study." PLoS Medicine 10 (10): e1001538. <a href='http://dx.doi.org/10.1371/journal.pmed.1001538'>10.1371/journal.pmed.1001538</a></p></li>
-<li><p><strong>Lee_4</strong>: Lee, Shih-Wei, Lawrence Shih-Hsin Wu, Guan-Mau Huang, Kai-Yao Huang, Tzong-Yi Lee, and Julia Tzu-Ya Weng. 2016. "Gene Expression Profiling Identifies Candidate Biomarkers for Active and Latent Tuberculosis." BMC Bioinformatics 17 Suppl 1 (January): 3. <a href='http://dx.doi.org/10.1186/s12859-015-0848-x'>10.1186/s12859-015-0848-x</a></p></li>
-<li><p><strong>PREDICT29</strong>: Leong, S., Zhao, Y., Ribeiro-Rodrigues, R., Jones-López, E. C., Acuña-Villaorduña, C., Rodrigues, P. M., Palaci, M., Alland, D., Dietze, R., Ellner, J. J., Johnson, W. E., Salgame, P., Cross-validation of existing signatures and derivation of a novel 29-gene transcriptomic signature predictive of progression to TB in a Brazilian cohort of household contacts of pulmonary TB. Tuberculosis (Edinb). 2020 Jan;120:101898. <a href='http://dx.doi.org/10.1016/j.tube.2020.101898'>10.1016/j.tube.2020.101898</a></p></li>
-<li><p><strong>DIAG4</strong>: Maertzdorf, Jeroen, Gayle McEwen, January Weiner 3rd, Song Tian, Eric Lader, Ulrich Schriek, Harriet Mayanja-Kizza, Martin Ota, John Kenneth, and Stefan He Kaufmann. 2016. "Concise Gene Signature for Point-of-Care Classification of Tuberculosis." EMBO Molecular Medicine 8 (2): 86-95. <a href='http://dx.doi.org/10.15252/emmm.201505790'>10.15252/emmm.201505790</a></p></li>
-<li><p><strong>Maertzdorf_OD_100</strong>: Maertzdorf, Jeroen, January Weiner 3rd, Hans-Joachim Mollenkopf, TBornot TB Network, Torsten Bauer, Antje Prasse, Joachim Müller-Quernheim, and Stefan H. E. Kaufmann. 2012. "Common Patterns and Disease-Related Signatures in Tuberculosis and Sarcoidosis." Proceedings of the National Academy of Sciences of the United States of America 109 (20): 7853-58. <a href='http://dx.doi.org/10.1073/pnas.1121072109'>10.1073/pnas.1121072109</a></p></li>
-<li><p><strong>Rajan_HIV_5</strong>: Rajan, Jayant V., Semitala, Fred C., Kamya, Moses R., Yoon, Christina., Mehta, Tejas., Cattamanchi, Adithya., Seielstad, Mark., Montalvo, Lani., Andama, Alfred., Katende, Jane., Asege, Lucy., Nakaye, Martha., Mwebe, Sandra. 2018 "A Novel, 5-Transcript, Whole-blood Gene-expression Signature for Tuberculosis Screening Among People Living With Human Immunodeficiency Virus" Clinical Infectious Diseases: 1-7. <a href='https://doi.org/10.1093/cid/ciy835'>10.1093/cid/ciy835</a></p></li>
-<li><p><strong>Roe_3</strong>: Roe, Jennifer, Venturini, Cristina, Gupta, Rishi K., Gurry, Celine, Chain, Benjamin M., Sun, Yuxin, Southern, Jo, Jackson, Charlotte, Lipman, Marc, C., Miller, Robert F., Martineau, Adrian R., Abubakar, Ibrahim, Noursadeghi, Mahdad. 2019 "T1 Blood transcriptomic stratification of short-term risk in contacts of tuberculosis": . <a href='https://doi.org/10.1093/cid/ciz252'>10.1093/cid/ciz252</a></p></li>
-<li><p><strong>Roe_OD_4</strong>: Roe, Jennifer K., Niclas Thomas, Eliza Gil, Katharine Best, Evdokia Tsaliki, Stephen Morris-Jones, Sian Stafford, et al. 2016. "Blood Transcriptomic Diagnosis of Pulmonary and Extrapulmonary Tuberculosis." JCI Insight 1 (16): e87238. <a href='http://dx.doi.org/10.1172/jci.insight.87238'>10.1172/jci.insight.87238</a></p></li>
-<li><p><strong>Sambarey_HIV_10</strong>: Sambarey, Awanti, Abhinandan Devaprasad, Abhilash Mohan, Asma Ahmed, Soumya Nayak, Soumya Swaminathan, George D'Souza, et al. 2017. "Unbiased Identification of Blood-Based Biomarkers for Pulmonary Tuberculosis by Modeling and Mining Molecular Interaction Networks." EBioMedicine 15 (February): 112-26. <a href='http://dx.doi.org/10.1016/j.ebiom.2016.12.009'>10.1016/j.ebiom.2016.12.009</a></p></li>
-<li><p><strong>Singhania_OD_20</strong>: Singhania, Akul, Raman Verma, Christine M. Graham, Jo Lee, Trang Tran, Matthew Richardson, Patrick Lecine, et al. 2018. "A Modular Transcriptional Signature Identifies Phenotypic Heterogeneity of Human Tuberculosis Infection." Nature Communications 9 (1): 2308. <a href='http://dx.doi.org/10.1038/s41467-018-04579-w'>10.1038/s41467-018-04579-w</a></p></li>
-<li><p><strong>Sloot_HIV_2</strong>: Sloot, Rosa, Maarten F. Schim van der Loeff, Erik W. van Zwet, Mariëlle C. Haks, Sytze T. Keizer, Maarten Scholing, Tom H. M. Ottenhoff, Martien W. Borgdorff, and Simone A. Joosten. 2015. "Biomarkers Can Identify Pulmonary Tuberculosis in HIV-Infected Drug Users Months Prior to Clinical Diagnosis." EBioMedicine 2 (2): 172-79. <a href='http://dx.doi.org/10.1016/j.ebiom.2014.12.001'>10.1016/j.ebiom.2014.12.001</a></p></li>
-<li><p><strong>Suliman_4</strong>: Suliman, Sara, Ethan Thompson, Jayne Sutherland, January Weiner Rd, Martin O. C. Ota, Smitha Shankar, Adam Penn-Nicholson, et al. 2018. "Four-Gene Pan-African Blood Signature Predicts Progression to Tuberculosis." American Journal of Respiratory and Critical Care Medicine, April. https://doi.org/10.1164/rccm.201711-2340OC. <a href='http://dx.doi.org/10.1164/rccm.201711-2340OC'>10.1164/rccm.201711-2340OC</a></p></li>
-<li><p><strong>RISK4</strong>: Suliman, Sara, Ethan Thompson, Jayne Sutherland, January Weiner Rd, Martin O. C. Ota, Smitha Shankar, Adam Penn-Nicholson, et al. 2018. "Four-Gene Pan-African Blood Signature Predicts Progression to Tuberculosis." American Journal of Respiratory and Critical Care Medicine, April. https://doi.org/10.1164/rccm.201711-2340OC. <a href='http://dx.doi.org/10.1164/rccm.201711-2340OC'>10.1164/rccm.201711-2340OC</a></p></li>
-<li><p><strong>DIAG3</strong>: Sweeney, Timothy E., Lindsay Braviak, Cristina M. Tato, and Purvesh Khatri. 2016. "Genome-Wide Expression for Diagnosis of Pulmonary Tuberculosis: A Multicohort Analysis." The Lancet. Respiratory Medicine 4 (3): 213-24. <a href='http://dx.doi.org/10.1016/S2213-2600(16)00048-5'>10.1016/S2213-2600(16)00048-5</a></p></li>
-<li><p><strong>DISEASE</strong>: Thompson, Ethan G., Ying Du, Stephanus T. Malherbe, Smitha Shankar, Jackie Braun, Joe Valvo, Katharina Ronacher, et al. 2017. "Host Blood RNA Signatures Predict the Outcome of Tuberculosis Treatment." Tuberculosis  107 (December): 48-58. <a href='http://dx.doi.org/10.1016/j.tube.2017.08.004'>10.1016/j.tube.2017.08.004</a></p></li>
-<li><p><strong>FAILURE</strong>: Thompson, Ethan G., Ying Du, Stephanus T. Malherbe, Smitha Shankar, Jackie Braun, Joe Valvo, Katharina Ronacher, et al. 2017. "Host Blood RNA Signatures Predict the Outcome of Tuberculosis Treatment." Tuberculosis  107 (December): 48-58. <a href='http://dx.doi.org/10.1016/j.tube.2017.08.004'>10.1016/j.tube.2017.08.004</a></p></li>
-<li><p><strong>RESPONSE5</strong>: Thompson, Ethan G., Ying Du, Stephanus T. Malherbe, Smitha Shankar, Jackie Braun, Joe Valvo, Katharina Ronacher, et al. 2017. "Host Blood RNA Signatures Predict the Outcome of Tuberculosis Treatment." Tuberculosis  107 (December): 48-58. <a href='http://dx.doi.org/10.1016/j.tube.2017.08.004'>10.1016/j.tube.2017.08.004</a></p></li>
-<li><p><strong>Walter_51</strong>: Walter, Nicholas D., Mikaela A. Miller, Joshua Vasquez, Marc Weiner, Adam Chapman, Melissa Engle, Michael Higgins, et al. 2016. "Blood Transcriptional Biomarkers for Active Tuberculosis among Patients in the United States: A Case-Control Study with Systematic Cross-Classifier Evaluation." Journal of Clinical Microbiology 54 (2): 274-82. <a href='http://dx.doi.org/10.1128/JCM.01990-15'>10.1128/JCM.01990-15</a></p></li>
-<li><p><strong>Walter_PNA_47</strong>: Walter, Nicholas D., Mikaela A. Miller, Joshua Vasquez, Marc Weiner, Adam Chapman, Melissa Engle, Michael Higgins, et al. 2016. "Blood Transcriptional Biomarkers for Active Tuberculosis among Patients in the United States: A Case-Control Study with Systematic Cross-Classifier Evaluation." Journal of Clinical Microbiology 54 (2): 274-82. <a href='http://dx.doi.org/10.1128/JCM.01990-15'>10.1128/JCM.01990-15</a></p></li>
-<li><p><strong>Walter_PNA_119</strong>: Walter, Nicholas D., Mikaela A. Miller, Joshua Vasquez, Marc Weiner, Adam Chapman, Melissa Engle, Michael Higgins, et al. 2016. "Blood Transcriptional Biomarkers for Active Tuberculosis among Patients in the United States: A Case-Control Study with Systematic Cross-Classifier Evaluation." Journal of Clinical Microbiology 54 (2): 274-82. <a href='http://dx.doi.org/10.1128/JCM.01990-15'>10.1128/JCM.01990-15</a></p></li>
-<li><p><strong>ACS_COR</strong>: Zak, Daniel E., Adam Penn-Nicholson, Thomas J. Scriba, Ethan Thompson, Sara Suliman, Lynn M. Amon, Hassan Mahomed, et al. 2016. "A Blood RNA Signature for Tuberculosis Disease Risk: A Prospective Cohort Study." The Lancet 387 (10035): 231222. <a href='http://dx.doi.org/10.1016/S0140-6736(15)01316-1'>10.1016/S0140-6736(15)01316-1</a></p></li>
-</ul>
-
+    <p>See <code><a href='TBcommon.html'>?TBcommon</a></code> for reference information.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>disease</code> variable indicates whether the signature was developed
@@ -192,7 +156,8 @@ cells (PBMCs). Due to the manipulation of cells inherently required to obtain
 PBMCs, many scientists prefer to use only whole blood samples for analysis.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"common_sigAnnotData"</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"common_sigAnnotData"</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -204,11 +169,11 @@ PBMCs, many scientists prefer to use only whole blood samples for analysis.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

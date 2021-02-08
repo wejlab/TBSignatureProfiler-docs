@@ -74,7 +74,7 @@ R interface, or as a data.frame." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -87,7 +87,10 @@ R interface, or as a data.frame." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -96,7 +99,7 @@ R interface, or as a data.frame." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -124,14 +127,14 @@ gene expression dataset and presents them using a JavaScript table with an
 R interface, or as a <code>data.frame</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tableAUC</span>(
-  <span class='no'>SE_scored</span>,
-  <span class='no'>annotationColName</span>,
-  <span class='no'>signatureColNames</span>,
-  <span class='kw'>num.boot</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>pb.show</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"DataTable"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>tableAUC</span><span class='op'>(</span>
+  <span class='va'>SE_scored</span>,
+  <span class='va'>annotationColName</span>,
+  <span class='va'>signatureColNames</span>,
+  num.boot <span class='op'>=</span> <span class='fl'>100</span>,
+  pb.show <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  output <span class='op'>=</span> <span class='st'>"DataTable"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,23 +179,25 @@ values are <code>DataTable</code> and <code>data.frame</code>. The default is
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Run signature profiling</span>
- <span class='no'>choose_sigs</span> <span class='kw'>&lt;-</span> <span class='no'>TBsignatures</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)]
- <span class='no'>prof_indian</span> <span class='kw'>&lt;-</span> <span class='fu'>runTBsigProfiler</span>(<span class='no'>TB_indian</span>, <span class='kw'>useAssay</span> <span class='kw'>=</span> <span class='st'>"logcounts"</span>,
-                                 <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='st'>"ssGSEA"</span>,
-                                 <span class='kw'>signatures</span> <span class='kw'>=</span> <span class='no'>choose_sigs</span>,
-                                 <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 2 gene sets.
+ <span class='va'>choose_sigs</span> <span class='op'>&lt;-</span> <span class='va'>TBsignatures</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span>
+ <span class='va'>prof_indian</span> <span class='op'>&lt;-</span> <span class='fu'><a href='runTBsigProfiler.html'>runTBsigProfiler</a></span><span class='op'>(</span><span class='va'>TB_indian</span>, useAssay <span class='op'>=</span> <span class='st'>"logcounts"</span>,
+                                 algorithm <span class='op'>=</span> <span class='st'>"ssGSEA"</span>,
+                                 signatures <span class='op'>=</span> <span class='va'>choose_sigs</span>,
+                                 parallel.sz <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 2 gene sets.
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==                                                                    |   2%  |                                                                              |===                                                                   |   5%  |                                                                              |=====                                                                 |   7%  |                                                                              |======                                                                |   9%  |                                                                              |========                                                              |  11%  |                                                                              |==========                                                            |  14%  |                                                                              |===========                                                           |  16%  |                                                                              |=============                                                         |  18%  |                                                                              |==============                                                        |  20%  |                                                                              |================                                                      |  23%  |                                                                              |==================                                                    |  25%  |                                                                              |===================                                                   |  27%  |                                                                              |=====================                                                 |  30%  |                                                                              |======================                                                |  32%  |                                                                              |========================                                              |  34%  |                                                                              |=========================                                             |  36%  |                                                                              |===========================                                           |  39%  |                                                                              |=============================                                         |  41%  |                                                                              |==============================                                        |  43%  |                                                                              |================================                                      |  45%  |                                                                              |=================================                                     |  48%  |                                                                              |===================================                                   |  50%  |                                                                              |=====================================                                 |  52%  |                                                                              |======================================                                |  55%  |                                                                              |========================================                              |  57%  |                                                                              |=========================================                             |  59%  |                                                                              |===========================================                           |  61%  |                                                                              |=============================================                         |  64%  |                                                                              |==============================================                        |  66%  |                                                                              |================================================                      |  68%  |                                                                              |=================================================                     |  70%  |                                                                              |===================================================                   |  73%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================                |  77%  |                                                                              |========================================================              |  80%  |                                                                              |=========================================================             |  82%  |                                                                              |===========================================================           |  84%  |                                                                              |============================================================          |  86%  |                                                                              |==============================================================        |  89%  |                                                                              |================================================================      |  91%  |                                                                              |=================================================================     |  93%  |                                                                              |===================================================================   |  95%  |                                                                              |====================================================================  |  98%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='input'> <span class='co'># Create table</span>
- <span class='fu'>tableAUC</span>(<span class='kw'>SE_scored</span> <span class='kw'>=</span> <span class='no'>prof_indian</span>, <span class='kw'>annotationColName</span> <span class='kw'>=</span> <span class='st'>"label"</span>,
-          <span class='kw'>signatureColNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>choose_sigs</span>))</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='input'>
+ <span class='fu'>tableAUC</span><span class='op'>(</span>SE_scored <span class='op'>=</span> <span class='va'>prof_indian</span>, annotationColName <span class='op'>=</span> <span class='st'>"label"</span>,
+          signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>choose_sigs</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='input'>
  <span class='co'># Create data.frame object</span>
-<span class='no'>h</span> <span class='kw'>&lt;-</span>  <span class='fu'>tableAUC</span>(<span class='kw'>SE_scored</span> <span class='kw'>=</span> <span class='no'>prof_indian</span>, <span class='kw'>annotationColName</span> <span class='kw'>=</span> <span class='st'>"label"</span>,
-          <span class='kw'>signatureColNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>choose_sigs</span>), <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>,
-          <span class='kw'>num.boot</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>h</span>)</div><div class='output co'>#&gt;        Signature P.value neg10xLog.P.value. LowerAUC    AUC UpperAUC
-#&gt; 1    Anderson_42   0e+00                Inf   0.8750 0.0000   0.8750
-#&gt; 2 Anderson_OD_51   0e+00                Inf   0.9727 0.0000   0.9727
-#&gt; 3    Anderson_42   2e-04            87.4837   0.8750 0.8105   0.8750
-#&gt; 4 Anderson_OD_51   0e+00           259.5843   0.9727 0.9832   0.9727</div><div class='input'>
+<span class='va'>h</span> <span class='op'>&lt;-</span>  <span class='fu'>tableAUC</span><span class='op'>(</span>SE_scored <span class='op'>=</span> <span class='va'>prof_indian</span>, annotationColName <span class='op'>=</span> <span class='st'>"label"</span>,
+          signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>choose_sigs</span><span class='op'>)</span>, output <span class='op'>=</span> <span class='st'>"data.frame"</span>,
+          num.boot <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;        Signature P.value neg10xLog.P.value. LowerAUC    AUC UpperAUC
+#&gt; 1    Anderson_42   2e-04            87.4837   0.7933 0.8105   0.8743
+#&gt; 2 Anderson_OD_51   0e+00           259.5843   0.9747 0.9832   0.9990</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -205,11 +210,11 @@ values are <code>DataTable</code> and <code>data.frame</code>. The default is
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

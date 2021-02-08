@@ -42,7 +42,8 @@
 <meta property="og:title" content="Plot a heatmap of signature scores. — signatureHeatmap" />
 <meta property="og:description" content="This function takes a dataset of scored gene expression data as an input
 and returns a ComplexHeatmap plot for for visual comparison of
-signature performance." />
+signature performance. The function takes arguments listed here as well
+as any others to be passed on to ComplexHeatmap::Heatmap()." />
 
 
 
@@ -74,7 +75,7 @@ signature performance." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -87,7 +88,10 @@ signature performance." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -96,7 +100,7 @@ signature performance." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -120,27 +124,29 @@ signature performance." />
 
     <div class="ref-description">
     <p>This function takes a dataset of scored gene expression data as an input
-and returns a ComplexHeatmap plot for for visual comparison of
-signature performance.</p>
+and returns a <code>ComplexHeatmap</code> plot for for visual comparison of
+signature performance. The function takes arguments listed here as well
+as any others to be passed on to <code><a href='https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html'>ComplexHeatmap::Heatmap()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>signatureHeatmap</span>(
-  <span class='no'>inputData</span>,
-  <span class='kw'>annotationData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Signatures"</span>,
-  <span class='no'>signatureColNames</span>,
-  <span class='kw'>annotationColNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>colList</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showColumnNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showRowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>colorSets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Set1"</span>, <span class='st'>"Set2"</span>, <span class='st'>"Set3"</span>, <span class='st'>"Pastel1"</span>, <span class='st'>"Pastel2"</span>, <span class='st'>"Accent"</span>, <span class='st'>"Dark2"</span>,
-    <span class='st'>"Paired"</span>),
-  <span class='kw'>choose_color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"blue"</span>, <span class='st'>"gray95"</span>, <span class='st'>"red"</span>),
-  <span class='kw'>split_heatmap</span> <span class='kw'>=</span> <span class='st'>"disease"</span>,
-  <span class='kw'>annotationSignature</span> <span class='kw'>=</span> <span class='no'>sigAnnotData</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>signatureHeatmap</span><span class='op'>(</span>
+  <span class='va'>inputData</span>,
+  annotationData <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name <span class='op'>=</span> <span class='st'>"Signatures"</span>,
+  <span class='va'>signatureColNames</span>,
+  annotationColNames <span class='op'>=</span> <span class='cn'>NULL</span>,
+  colList <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  scale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showColumnNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showRowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  colorSets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Set1"</span>, <span class='st'>"Set2"</span>, <span class='st'>"Set3"</span>, <span class='st'>"Pastel1"</span>, <span class='st'>"Pastel2"</span>, <span class='st'>"Accent"</span>, <span class='st'>"Dark2"</span>,
+    <span class='st'>"Paired"</span><span class='op'>)</span>,
+  choose_color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"gray95"</span>, <span class='st'>"red"</span><span class='op'>)</span>,
+  split_heatmap <span class='op'>=</span> <span class='st'>"none"</span>,
+  annotationSignature <span class='op'>=</span> <span class='va'>sigAnnotData</span>,
+  column_order <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,7 +235,8 @@ heatmap gradient, or a <code>colorRamp</code> function produced by
       <td><p>a character string either giving the column title of
 <code>annotationSignature</code> containing annotation data for which to split
 the heatmap rows (i.e., signatures), or <code>"none"</code> if no split is desired.
-The default is <code>"disease"</code>.</p></td>
+To split based on the type of signature, set <code>split_heatmap = "disease"</code>.
+The default is <code>"none"</code>.</p></td>
     </tr>
     <tr>
       <th>annotationSignature</th>
@@ -238,6 +245,12 @@ to be used
 in splitting the heatmap. The first column should signature names. The
 column of annotation information should be specified in <code>split_heatmap.</code>
 Other columns will be ignored. The default is <code>sigAnnotData</code>.</p></td>
+    </tr>
+    <tr>
+      <th>column_order</th>
+      <td><p>a vector of character strings indicating the order in
+which to manually arrange the heatmap columns. Default is <code>NULL</code>,
+such that column order is automatically determined via clustering.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -255,40 +268,43 @@ Other columns will be ignored. The default is <code>sigAnnotData</code>.</p></td
 no annotation bar will be drawn on the heatmap.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>SummarizedExperiment</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>SummarizedExperiment</span><span class='op'>)</span>
 <span class='co'># Generate some artificial data that shows a difference in Zak_RISK_16</span>
-<span class='no'>mat_testdata</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>80</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>80</span>) + <span class='fl'>5</span>), <span class='fl'>16</span>, <span class='fl'>10</span>,
-                             <span class='kw'>dimnames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>TBsignatures</span>$<span class='no'>Zak_RISK_16</span>,
-                                             <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"sample"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>10</span>)))),
-                      <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1000</span>), <span class='fl'>100</span>, <span class='fl'>10</span>,
-                             <span class='kw'>dimnames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"gene"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>100</span>)),
-                                             <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"sample"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>10</span>)))))
+<span class='va'>mat_testdata</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>80</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>80</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>5</span><span class='op'>)</span>, <span class='fl'>16</span>, <span class='fl'>10</span>,
+                             dimnames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>TBsignatures</span><span class='op'>$</span><span class='va'>Zak_RISK_16</span>,
+                                             <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"sample"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>,
+                      <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span>, <span class='fl'>100</span>, <span class='fl'>10</span>,
+                             dimnames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"gene"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>,
+                                             <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"sample"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># Create a SummarizedExperiment object that contains the data</span>
-<span class='no'>testdataSE</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html'>SummarizedExperiment</a></span>(<span class='kw'>assays</span> <span class='kw'>=</span> <span class='fu'>SimpleList</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mat_testdata</span>),
-                                     <span class='kw'>colData</span> <span class='kw'>=</span> <span class='fu'>DataFrame</span>(<span class='kw'>sample</span> <span class='kw'>=</span>
-                                                           <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"down"</span>, <span class='fl'>5</span>),
-                                                                <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"up"</span>, <span class='fl'>5</span>))))
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>runTBsigProfiler</span>(<span class='no'>testdataSE</span>, <span class='kw'>useAssay</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-                        <span class='kw'>signatures</span> <span class='kw'>=</span> <span class='no'>TBsignatures</span>[<span class='st'>"Zak_RISK_16"</span>],
-                        <span class='kw'>algorithm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span>), <span class='kw'>parallel.sz</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-                        <span class='kw'>combineSigAndAlgorithm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
+<span class='va'>testdataSE</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html'>SummarizedExperiment</a></span><span class='op'>(</span>assays <span class='op'>=</span> <span class='fu'>SimpleList</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>mat_testdata</span><span class='op'>)</span>,
+                                     colData <span class='op'>=</span> <span class='fu'>DataFrame</span><span class='op'>(</span>sample <span class='op'>=</span>
+                                                           <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='fl'>5</span><span class='op'>)</span>,
+                                                                <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"up"</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='runTBsigProfiler.html'>runTBsigProfiler</a></span><span class='op'>(</span><span class='va'>testdataSE</span>, useAssay <span class='op'>=</span> <span class='st'>"data"</span>,
+                        signatures <span class='op'>=</span> <span class='va'>TBsignatures</span><span class='op'>[</span><span class='st'>"Zak_RISK_16"</span><span class='op'>]</span>,
+                        algorithm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span><span class='op'>)</span>, parallel.sz <span class='op'>=</span> <span class='fl'>1</span>,
+                        combineSigAndAlgorithm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
 #&gt; Estimating ECDFs with Gaussian kernels
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 1 gene sets.
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%
-#&gt; </div><div class='input'><span class='fu'>signatureHeatmap</span>(<span class='no'>res</span>, <span class='kw'>signatureColNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA_Zak_RISK_16"</span>,
-                                            <span class='st'>"ssGSEA_Zak_RISK_16"</span>),
-                 <span class='kw'>annotationColNames</span> <span class='kw'>=</span> <span class='st'>"sample"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                 <span class='kw'>showColumnNames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>split_heatmap</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='img'><img src='signatureHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='fu'>signatureHeatmap</span><span class='op'>(</span><span class='va'>res</span>, signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA_Zak_RISK_16"</span>,
+                                            <span class='st'>"ssGSEA_Zak_RISK_16"</span><span class='op'>)</span>,
+                 annotationColNames <span class='op'>=</span> <span class='st'>"sample"</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                 showColumnNames <span class='op'>=</span> <span class='cn'>FALSE</span>, split_heatmap <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
+</div><div class='img'><img src='signatureHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example using custom colors for the annotation information</span>
-<span class='no'>color2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"purple"</span>, <span class='st'>"black"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"up"</span>))
-<span class='no'>color.list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"sample"</span> <span class='kw'>=</span> <span class='no'>color2</span>)
+<span class='va'>color2</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"purple"</span>, <span class='st'>"black"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='st'>"up"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>color.list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"sample"</span> <span class='op'>=</span> <span class='va'>color2</span><span class='op'>)</span>
 
-<span class='fu'>signatureHeatmap</span>(<span class='no'>res</span>, <span class='kw'>signatureColNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"GSVA_Zak_RISK_16"</span>,
-                                            <span class='st'>"ssGSEA_Zak_RISK_16"</span>),
-                 <span class='kw'>annotationColNames</span> <span class='kw'>=</span> <span class='st'>"sample"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                 <span class='kw'>showColumnNames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-                 <span class='kw'>colList</span> <span class='kw'>=</span> <span class='no'>color.list</span>, <span class='kw'>split_heatmap</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='img'><img src='signatureHeatmap-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>signatureHeatmap</span><span class='op'>(</span><span class='va'>res</span>, signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA_Zak_RISK_16"</span>,
+                                            <span class='st'>"ssGSEA_Zak_RISK_16"</span><span class='op'>)</span>,
+                 annotationColNames <span class='op'>=</span> <span class='st'>"sample"</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                 showColumnNames <span class='op'>=</span> <span class='cn'>FALSE</span>,
+                 colList <span class='op'>=</span> <span class='va'>color.list</span>, split_heatmap <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
+</div><div class='img'><img src='signatureHeatmap-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -301,11 +317,11 @@ no annotation bar will be drawn on the heatmap.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

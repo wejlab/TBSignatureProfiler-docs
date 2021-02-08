@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -44,7 +44,10 @@
   <a href="../../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../../articles/rmd/temp.html">Interactive Shiny Analysis</a>
+  <a href="../../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+</li>
+<li>
+  <a href="../../articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
 </li>
 <li>
   <a href="../../reference/index.html">Reference</a>
@@ -53,7 +56,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -67,11 +70,11 @@
 
       
 
-      </header><script src="TBSig_Vignette_files/htmlwidgets-1.5.1/htmlwidgets.js"></script><script src="TBSig_Vignette_files/jquery-1.12.4/jquery.min.js"></script><link href="TBSig_Vignette_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="TBSig_Vignette_files/datatables-binding-0.13/datatables.js"></script><link href="TBSig_Vignette_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+      </header><script src="TBSig_Vignette_files/header-attrs-2.6/header-attrs.js"></script><script src="TBSig_Vignette_files/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="TBSig_Vignette_files/jquery-3.5.1/jquery.min.js"></script><link href="TBSig_Vignette_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="TBSig_Vignette_files/datatables-binding-0.17/datatables.js"></script><link href="TBSig_Vignette_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="TBSig_Vignette_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="TBSig_Vignette_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="TBSig_Vignette_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet">
-<script src="TBSig_Vignette_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script><div class="row">
+<script src="TBSig_Vignette_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="TBSig_Vignette_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="TBSig_Vignette_files/crosstalk-1.1.1/js/crosstalk.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to the TBSignatureProfiler</h1>
@@ -102,51 +105,57 @@
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
 <p>In order to install the TBSignatureProfiler from Bioconductor, run the following code:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="kw">quietly</span><span class="kw">=</span><span class="fl">TRUE</span>))
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)
-<span class="kw pkg">BiocManager</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"TBSignatureProfiler"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"TBSignatureProfiler"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="compatibility-with-summarizedexperiment-objects" class="section level1">
 <h1 class="hasAnchor">
 <a href="#compatibility-with-summarizedexperiment-objects" class="anchor"></a>Compatibility with SummarizedExperiment objects</h1>
 <p>While the TBSignatureProfiler often allows for the form of a <code>data.frame</code> or <code>matrix</code> as input data, the most ideal form of input for this package is that of the <code>SummarizedExperiment</code> object. This is an amazing data structure that is being developed by the  as part of the <em><a href="https://bioconductor.org/packages/3.11/SummarizedExperiment">SummarizedExperiment</a></em> package. It is able to store data matrices along with annotation information, metadata, and reduced dimensionality data (PCA, t-SNE, etc.). To learn more about proper usage and context of the <code>SummarizedExperiment</code> object, you may want to take a look at the <a href="https://bioconductor.org/packages/release/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html">package vignette</a>. A basic understanding of the <code>assay</code> and <code>colData</code> properties of a <code>SummarizedExperiment</code> will be useful for the purposes of this vignette.</p>
 <p>To install the <code>SummarizedExperiment</code> package, run the following code:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)
-<span class="kw pkg">BiocManager</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"SummarizedExperiment"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"SummarizedExperiment"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="a-tutorial-for-the-tbsignature-profiler" class="section level1">
+<div id="a-tutorial-for-the-tbsignatureprofiler" class="section level1">
 <h1 class="hasAnchor">
-<a href="#a-tutorial-for-the-tbsignature-profiler" class="anchor"></a>A Tutorial for the TBSignature Profiler</h1>
+<a href="#a-tutorial-for-the-tbsignatureprofiler" class="anchor"></a>A Tutorial for the TBSignatureProfiler</h1>
 <div id="load-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load packages</h2>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>({
-  <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">SummarizedExperiment</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TBSignatureProfiler</span>)
-})</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/compbiomed/TBSignatureProfiler">TBSignatureProfiler</a></span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="load-dataset-from-a-summarizedexperiment-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-dataset-from-a-summarizedexperiment-object" class="anchor"></a>Load dataset from a SummarizedExperiment object</h2>
 <p>In this tutorial, we will work with HIV and Tuberculosis (TB) gene expression data in a <code>SummarizedExperiment</code> format. This dataset is included in the TBSignatureProfiler package and can be loaded into the global environment with <code><a href="https://rdrr.io/r/utils/data.html">data("TB_hiv")</a></code>. The 31 samples in the dataset are marked as either having both TB and HIV infection, or HIV infection only.</p>
 <p>We begin by examining the dataset, which contains a matrix of counts information (an “assay” in SummarizedExperiment terms) and another matrix of meta data information on our samples (the “colData”). We will also generate a few additional assays; these are the log(counts), the counts per million (CPM) reads mapped, and the log(CPM) assays.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co">## HIV/TB gene expression data, included in the package</span>
-<span class="no">hivtb_data</span> <span class="kw">&lt;-</span> <span class="no">TB_hiv</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## HIV/TB gene expression data, included in the package</span>
+<span class="va">hivtb_data</span> <span class="op">&lt;-</span> <span class="va">TB_hiv</span>
 
 <span class="co">### Note that we have 25,369 genes, 33 samples, and 1 assay of counts</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">hivtb_data</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">hivtb_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 25369    31</code></pre>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># We start with only one assay</span>
-<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assays</a></span>(<span class="no">hivtb_data</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># We start with only one assay</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assays</a></span><span class="op">(</span><span class="va">hivtb_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## List of length 1
 ## names(1): counts</code></pre>
 <p>We now make a log counts, CPM and log CPM assay.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co">## Make a log counts, CPM and log CPM assay</span>
-<span class="no">hivtb_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/mkAssay.html">mkAssay</a></span>(<span class="no">hivtb_data</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">counts_to_CPM</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Make a log counts, CPM and log CPM assay</span>
+<span class="va">hivtb_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/mkAssay.html">mkAssay</a></span><span class="op">(</span><span class="va">hivtb_data</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, counts_to_CPM <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co">### Check to see that we now have 4 assays</span>
-<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assays</a></span>(<span class="no">hivtb_data</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assays</a></span><span class="op">(</span><span class="va">hivtb_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## List of length 4
 ## names(4): counts cpm log_counts log_cpm</code></pre>
 </div>
@@ -154,44 +163,55 @@
 <h2 class="hasAnchor">
 <a href="#profile-the-data" class="anchor"></a>Profile the data</h2>
 <p>The TBSignatureProfiler enables comparison of multiple Tuberculosis gene signatures. The package currently contains information on 34 signatures for comparison. The default signature list object for most functions here is <code>TBsignatures</code>, although a list with publication-given signature names is also available as <code>TBcommon</code>. Data frames of annotation information for these signatures, including information on associated disease and tissue type, can be accessed as <code>sigAnnotData</code> and <code>common_sigAnnotData</code> respectively.</p>
-<p>With the <code>runTBSigProfiler</code> function, we are able to score these signatures with a selection of algorithms, including <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">gene set variation analysis</a> (GSVA) (Hänzelmann et al, 2013), <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">single-sample GSEA</a> (ssGSEA) (Barbie et al, 2009), and the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">ASSIGN</a> pathway profiling toolkit (Shen et al, 2015). For a complete list of included scoring methods, run <code><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/runTBsigProfiler.html">?runTBsigProfiler</a></code> in the terminal.</p>
+<p>With the <code>runTBSigProfiler</code> function, we are able to score these signatures with a selection of algorithms, including <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">gene set variation analysis</a> (GSVA) (Hänzelmann et al, 2013), <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">single-sample GSEA</a> (ssGSEA) (Barbie et al, 2009), and the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-7">ASSIGN</a> pathway profiling toolkit (Shen et al, 2015). For a complete list of included scoring methods, run <code><a href="../../reference/runTBsigProfiler.html">?runTBsigProfiler</a></code> in the terminal.</p>
 <p>Here, we evaluate all signatures included in the package with ssGSEA. Paraphrasing from the <a href="http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/ssGSEAProjection/4">ssGSEA documentation</a>, for each pairing of one of the 31 samples and its gene set, ssGSEA calculates a separate enrichment score independent of the phenotypic labeling (in this case, whether a sample has HIV/TB, or HIV only). The single sample’s gene expression profile is then transformed to a gene set enrichment profile. A score from the set profile represents the activity level of the biological process in which the gene set’s members are coordinately up- or down-regulated.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co">## List all signatures in the profiler</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"TBsignatures"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## List all signatures in the profiler</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"TBsignatures"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "Anderson_42"       "Anderson_OD_51"    "Berry_393"        
-##  [4] "Berry_OD_86"       "Blankley_5"        "Blankley_380"     
-##  [7] "Bloom_OD_144"      "Esmail_82"         "Esmail_203"       
-## [10] "Esmail_OD_893"     "Gliddon_OD_3"      "Gliddon_OD_4"     
-## [13] "Jacobsen_3"        "Kaforou_27"        "Kaforou_OD_44"    
-## [16] "Kaforou_OD_53"     "Lee_4"             "Leong_RISK_29"    
-## [19] "Maertzdorf_4"      "Maertzdorf_OD_100" "Rajan_HIV_5"      
-## [22] "Roe_3"             "Roe_OD_4"          "Sambarey_HIV_10"  
-## [25] "Singhania_OD_20"   "Sloot_HIV_2"       "Suliman_4"        
-## [28] "Suliman_RISK_4"    "Sweeney_OD_3"      "Thompson_9"       
-## [31] "Thompson_FAIL_13"  "Thompson_RES_5"    "Walter_51"        
-## [34] "Walter_PNA_47"     "Walter_PNA_119"    "Zak_RISK_16"</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co">## We can use all of these signatures for further analysis</span>
-<span class="no">siglist_hivtb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co">## Run the TBSignatureProfiler to score the signatures in the data</span>
-<span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span>(<span class="no">ssgsea_result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/runTBsigProfiler.html">runTBsigProfiler</a></span>(<span class="kw">input</span> <span class="kw">=</span> <span class="no">hivtb_data</span>,
-                                                 <span class="kw">useAssay</span> <span class="kw">=</span> <span class="st">"log_cpm"</span>,
-                                                 <span class="kw">signatures</span> <span class="kw">=</span> <span class="no">TBsignatures</span>,
-                                                 <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"ssGSEA"</span>,
-                                                 <span class="kw">combineSigAndAlgorithm</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                                                 <span class="kw">parallel.sz</span> <span class="kw">=</span> <span class="fl">1</span>))</pre></body></html></div>
+##  [4] "Berry_OD_86"       "Blankley_380"      "Blankley_5"       
+##  [7] "Bloom_OD_144"      "Darboe_RISK_11"    "Dawany_HIV_251"   
+## [10] "Esmail_203"        "Esmail_82"         "Esmail_OD_893"    
+## [13] "Estevez_133"       "Estevez_259"       "Gjoen_10"         
+## [16] "Gjoen_7"           "Gliddon_OD_3"      "Gliddon_OD_4"     
+## [19] "Hoang_OD_13"       "Hoang_OD_20"       "Hoang_OD_3"       
+## [22] "Huang_OD_13"       "Jacobsen_3"        "Jenum_8"          
+## [25] "Kaforou_27"        "Kaforou_OD_44"     "Kaforou_OD_53"    
+## [28] "LauxdaCosta_OD_3"  "Lee_4"             "Leong_24"         
+## [31] "Leong_RISK_29"     "Maertzdorf_15"     "Maertzdorf_4"     
+## [34] "Maertzdorf_OD_100" "PennNich_RISK_6"   "Qian_OD_17"       
+## [37] "Rajan_HIV_5"       "Roe_3"             "Roe_OD_4"         
+## [40] "Sambarey_HIV_10"   "Singhania_OD_20"   "Sloot_HIV_2"      
+## [43] "Suliman_4"         "Suliman_RISK_2"    "Suliman_RISK_4"   
+## [46] "Sweeney_OD_3"      "Thompson_9"        "Thompson_FAIL_13" 
+## [49] "Thompson_RES_5"    "Tornheim_71"       "Tornheim_RES_25"  
+## [52] "Verhagen_10"       "Walter_51"         "Walter_PNA_119"   
+## [55] "Walter_PNA_47"     "Zak_RISK_16"</code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## We can use all of these signatures for further analysis</span>
+<span class="va">siglist_hivtb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Run the TBSignatureProfiler to score the signatures in the data</span>
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span><span class="op">(</span><span class="va">ssgsea_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/runTBsigProfiler.html">runTBsigProfiler</a></span><span class="op">(</span>input <span class="op">=</span> <span class="va">hivtb_data</span>,
+                                                 useAssay <span class="op">=</span> <span class="st">"log_cpm"</span>,
+                                                 signatures <span class="op">=</span> <span class="va">TBsignatures</span>,
+                                                 algorithm <span class="op">=</span> <span class="st">"ssGSEA"</span>,
+                                                 combineSigAndAlgorithm <span class="op">=</span> <span class="cn">TRUE</span>,
+                                                 parallel.sz <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Running ssGSEA</code></pre>
 <p>When a <code>SummarizedExperiment</code> is the format of the input data for <code>runTBsigprofiler</code>, the returned object is also of the <code>SummarizedExperiment</code>. The scores will be returned as a part of the colData.</p>
 <p>Below, we subset the data to compare the enrichment scores for the Anderson_42, Anderson_OD_51, and Berry_393 signatures.</p>
 <p>Signature Scores</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co">## New colData entries from the Profiler</span>
-<span class="no">sigs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Anderson_42"</span>, <span class="st">"Anderson_OD_51"</span>, <span class="st">"Berry_393"</span>)
-<span class="no">ssgsea_print_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span>(<span class="no">ssgsea_result</span>))[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Disease"</span>, <span class="no">sigs</span>)]
-<span class="no">ssgsea_print_results</span>[,<span class="fl">2</span>:<span class="fl">4</span>] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">ssgsea_print_results</span>[, <span class="fl">2</span>:<span class="fl">4</span>], <span class="fl">4</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## New colData entries from the Profiler</span>
+<span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Anderson_42"</span>, <span class="st">"Anderson_OD_51"</span>, <span class="st">"Berry_393"</span><span class="op">)</span>
+<span class="va">ssgsea_print_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">ssgsea_result</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Disease"</span>, <span class="va">sigs</span><span class="op">)</span><span class="op">]</span>
+<span class="va">ssgsea_print_results</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ssgsea_print_results</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span>
 
-<span class="kw pkg">DT</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(<span class="no">ssgsea_print_results</span>)</pre></body></html></div>
-<div id="htmlwidget-dc6f20cc9de08720384d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dc6f20cc9de08720384d">{"x":{"filter":"none","data":[["R01_1","R01_10","R01_11","R01_12","R01_13","R01_14","R01_15","R01_16","R01_2","R01_3","R01_4","R01_5","R01_6","R01_7","R01_8","R01_9","R02_17","R02_18","R02_19","R02_20","R02_21","R02_22","R02_23","R02_24","R02_25","R02_26","R02_27","R02_28","R02_29","R02_30","R02_31"],["tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only"],[0.2273,0.2073,0.1862,0.2076,0.1945,0.2011,0.2286,0.2228,0.2204,0.1932,0.1773,0.2054,0.2092,0.2038,0.1937,0.2138,0.2139,0.2259,0.2258,0.2166,0.2428,0.1993,0.2233,0.2239,0.2094,0.2293,0.205,0.2063,0.2152,0.2081,0.1898],[0.2326,0.2866,0.2509,0.2522,0.267,0.2837,0.2913,0.2397,0.2674,0.2827,0.2695,0.2467,0.2506,0.2428,0.2556,0.2648,0.251,0.2065,0.2368,0.2419,0.2429,0.2626,0.2508,0.2496,0.2464,0.2419,0.2321,0.2635,0.2755,0.2548,0.2472],[0.382,0.4057,0.3886,0.4038,0.3929,0.4025,0.4036,0.3473,0.3853,0.3985,0.3902,0.3845,0.3897,0.3956,0.4007,0.4021,0.3728,0.3539,0.3656,0.3702,0.3483,0.3906,0.3546,0.3761,0.356,0.3607,0.3677,0.3993,0.3976,0.3914,0.3758]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Disease<\/th>\n      <th>Anderson_42<\/th>\n      <th>Anderson_OD_51<\/th>\n      <th>Berry_393<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">ssgsea_print_results</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-b4994e410fbc99e31c87" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b4994e410fbc99e31c87">{"x":{"filter":"none","data":[["R01_1","R01_10","R01_11","R01_12","R01_13","R01_14","R01_15","R01_16","R01_2","R01_3","R01_4","R01_5","R01_6","R01_7","R01_8","R01_9","R02_17","R02_18","R02_19","R02_20","R02_21","R02_22","R02_23","R02_24","R02_25","R02_26","R02_27","R02_28","R02_29","R02_30","R02_31"],["tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","tb_hiv","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only","hiv_only"],[0.225,0.2051,0.1842,0.2055,0.1925,0.199,0.2263,0.2206,0.2182,0.1912,0.1755,0.2032,0.207,0.2017,0.1917,0.2116,0.2117,0.2236,0.2235,0.2144,0.2403,0.1972,0.221,0.2216,0.2073,0.2269,0.2029,0.2042,0.213,0.206,0.1879],[0.2302,0.2837,0.2483,0.2496,0.2642,0.2808,0.2883,0.2372,0.2647,0.2798,0.2667,0.2441,0.248,0.2403,0.253,0.262,0.2484,0.2044,0.2343,0.2394,0.2404,0.2599,0.2482,0.247,0.2439,0.2394,0.2297,0.2608,0.2727,0.2522,0.2446],[0.3781,0.4015,0.3846,0.3996,0.3889,0.3984,0.3994,0.3437,0.3813,0.3944,0.3861,0.3805,0.3857,0.3916,0.3966,0.3979,0.369,0.3503,0.3618,0.3664,0.3448,0.3866,0.351,0.3722,0.3523,0.357,0.3639,0.3952,0.3935,0.3874,0.3719]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Disease<\/th>\n      <th>Anderson_42<\/th>\n      <th>Anderson_OD_51<\/th>\n      <th>Berry_393<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="visualization-with-tbsignatureprofiler-plots" class="section level2 tabset">
 <h2 class="hasAnchor">
@@ -201,43 +221,46 @@
 <a href="#heatmap-with-all-signatures" class="anchor"></a>Heatmap with all Signatures</h3>
 <p>Commonly, enrichment scores are compared across signatures by means of a heatmap combined with clustering methods to group samples and/or scores. The <code>signatureHeatmap</code> function uses the information from the score data to visualize changes in gene expression across samples and signatures (or genes, if only one signature is selected).</p>
 <p>Here, the columns of the heatmap represent samples, and rows represent signatures. Rows are split according to annotation data with associated signature disease type. As we move across the columns, we see different patterns of gene expression as indicated by the varying color and intensity of individual rectangles. In the top bar, the solid red represents a sample is HIV infected only, and solid blue indicates that the sample is both HIV and TB infected. In the gradient area of the heatmap, the scaled scores are associated with either up-regulated or down-regulated genes. A cluster of samples near the bottom of the heatmap reveals that some signatures are inversely associated with TB/HIV identification, as their phenotypic mapping for lower/higher scores is nearly the opposite of most of the other signatures.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Colors for gradient</span>
-<span class="no">colors</span> <span class="kw">&lt;-</span> <span class="kw pkg">RColorBrewer</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fl">6</span>, <span class="st">"Spectral"</span>)
-<span class="no">col.me</span> <span class="kw">&lt;-</span> <span class="kw pkg">circlize</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html">colorRamp2</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="kw">from</span> <span class="kw">=</span> -<span class="fl">2</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="fl">2</span>,
-                                   <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">6</span>), <span class="no">colors</span>)
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Colors for gradient</span>
+<span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">6</span>, <span class="st">"Spectral"</span><span class="op">)</span>
+<span class="va">col.me</span> <span class="op">&lt;-</span> <span class="fu">circlize</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html">colorRamp2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, to <span class="op">=</span> <span class="fl">2</span>,
+                                   length.out <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>, <span class="va">colors</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/signatureHeatmap.html">signatureHeatmap</a></span>(<span class="no">ssgsea_result</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Heatmap of Signatures, 
+<span class="fu"><a href="../../reference/signatureHeatmap.html">signatureHeatmap</a></span><span class="op">(</span><span class="va">ssgsea_result</span>, name <span class="op">=</span> <span class="st">"Heatmap of Signatures,
                  ssGSEA Algorithm"</span>,
-                 <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>),
-                 <span class="kw">annotationColNames</span> <span class="kw">=</span> <span class="st">"Disease"</span>,
-                 <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                 <span class="kw">showColumnNames</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                 <span class="kw">choose_color</span> <span class="kw">=</span> <span class="no">col.me</span>)</pre></body></html></div>
+                 signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span>,
+                 annotationColNames <span class="op">=</span> <span class="st">"Disease"</span>,
+                 scale <span class="op">=</span> <span class="cn">TRUE</span>,
+                 showColumnNames <span class="op">=</span> <span class="cn">TRUE</span>,
+                 choose_color <span class="op">=</span> <span class="va">col.me</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/all%20sigs%20heatmap-1.png" width="700"></p>
 </div>
 <div id="boxplots-of-scores-all-signatures" class="section level3">
 <h3 class="hasAnchor">
 <a href="#boxplots-of-scores-all-signatures" class="anchor"></a>Boxplots of Scores, All Signatures</h3>
 <p>Another method of visualization for scores is that of boxplots. When multiple signatures in the input data are to be compared, the <code>signatureBoxplot</code> function takes the scores for each signature and produces an individual boxplot, with jittered points representing individual sample scores. For this specific example, it is clear that some signatures do a better job at differentiating the TB/HIV and HIV only samples than others, as seen by overlapping or separate spreads of the adjacent boxplots.</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/signatureBoxplot.html">signatureBoxplot</a></span>(<span class="kw">inputData</span> <span class="kw">=</span> <span class="no">ssgsea_result</span>,
-                 <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Boxplots of Signatures, ssGSEA"</span>,
-                 <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>),
-                 <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>, <span class="kw">rotateLabels</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/signatureBoxplot.html">signatureBoxplot</a></span><span class="op">(</span>inputData <span class="op">=</span> <span class="va">ssgsea_result</span>,
+                 name <span class="op">=</span> <span class="st">"Boxplots of Signatures, ssGSEA"</span>,
+                 signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span>,
+                 annotationColName <span class="op">=</span> <span class="st">"Disease"</span>, rotateLabels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/Boxplots%20all-1.png" width="1440"></p>
 </div>
 <div id="boxplots-of-scores-individual-signatures" class="section level3 tabset">
 <h3 class="hasAnchor">
 <a href="#boxplots-of-scores-individual-signatures" class="anchor"></a>Boxplots of Scores, Individual Signatures</h3>
 <p>If only one boxplot of a signature is desired, then that signature alone should be specified in <code>signatureColNames</code>. Otherwise, an array of plots for all signatures will be produced. Here we use the signatures Anderson_42, Anderson_OD_51, and Berry_393.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="no">sigs</span>){
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">sigs</span><span class="op">)</span><span class="op">{</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"####"</span>, <span class="no">i</span>, <span class="st">"\n"</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"####"</span>, <span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/signatureBoxplot.html">signatureBoxplot</a></span>(<span class="no">ssgsea_result</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="no">i</span>, <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="no">i</span>,
-                 <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Disease"</span>)))
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../../reference/signatureBoxplot.html">signatureBoxplot</a></span><span class="op">(</span><span class="va">ssgsea_result</span>, name <span class="op">=</span> <span class="va">i</span>, signatureColNames <span class="op">=</span> <span class="va">i</span>,
+                 annotationColName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n\n"</span>)
-}</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n\n"</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <div id="anderson_42" class="section level4">
 <h4 class="hasAnchor">
 <a href="#anderson_42" class="anchor"></a>Anderson_42</h4>
@@ -258,19 +281,20 @@
 <h3 class="hasAnchor">
 <a href="#heatmaps-for-individual-signatures" class="anchor"></a>Heatmaps for Individual Signatures</h3>
 <p>The <code>signatureGeneHeatmap</code> function produces heatmaps that highlight a single selected signature. The resulting plots feature samples on the columns, and the genes in the signature on the rows. The annotation rows at the top are related to both the disease phenotype and to the signature score itself. The gradient of the heatmap is created using the gene expression values in the assay specified by the <code>useAssay</code> parameter. Here, we observe how the log(CPM) values for specific genes relate to the signature score for each sample using the signatures Anderson_42, Anderson_OD_51, and Berry_393.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="no">sigs</span>){
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">sigs</span><span class="op">)</span><span class="op">{</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"####"</span>, <span class="no">i</span>, <span class="st">"\n"</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"####"</span>, <span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span>
 
-  <span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/signatureGeneHeatmap.html">signatureGeneHeatmap</a></span>(<span class="kw">inputData</span> <span class="kw">=</span> <span class="no">ssgsea_result</span>, <span class="kw">useAssay</span> <span class="kw">=</span> <span class="st">"log_cpm"</span>,
-                       <span class="no">TBsignatures</span>[<span class="no">sigs</span>]<span class="kw">[[</span><span class="no">i</span>]],
-                       <span class="kw">name</span> <span class="kw">=</span> <span class="no">i</span>, <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="no">i</span>,
-                       <span class="kw">annotationColNames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Disease"</span>),
-                       <span class="kw">showColumnNames</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                       <span class="kw">choose_color</span> <span class="kw">=</span> <span class="no">col.me</span>)
+  <span class="fu"><a href="../../reference/signatureGeneHeatmap.html">signatureGeneHeatmap</a></span><span class="op">(</span>inputData <span class="op">=</span> <span class="va">ssgsea_result</span>, useAssay <span class="op">=</span> <span class="st">"log_cpm"</span>,
+                       <span class="va">TBsignatures</span><span class="op">[</span><span class="va">sigs</span><span class="op">]</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>,
+                       name <span class="op">=</span> <span class="va">i</span>, signatureColNames <span class="op">=</span> <span class="va">i</span>,
+                       annotationColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span>,
+                       showColumnNames <span class="op">=</span> <span class="cn">TRUE</span>,
+                       choose_color <span class="op">=</span> <span class="va">col.me</span><span class="op">)</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n\n"</span>)
-}</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n\n"</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <div id="anderson_42-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#anderson_42-1" class="anchor"></a>Anderson_42</h4>
@@ -292,25 +316,27 @@
 <a href="#compare-scoring-methods-for-a-single-signature" class="anchor"></a>Compare scoring methods for a single signature</h3>
 <p>The <code>compareAlgs</code> function allows multiple scoring methods to be compared via a heatmap or boxplot with samples on the columns and methods on the rows. Here, we compare scoring methods for the “Anderson_42” signature. It seems that singscore may be the best method here, as its sample scores most closely align with the information provided by the annotation data.</p>
 <p>An examination of the boxplot and heatmap together determine that PLAGE and the comparing Z-score methods are least helpful in correctly identifying TB from LTBI subjects - AUC scores are little more than 0.5 and subjects in different groups are falsely assigned similar scores. According to the boxplot, we see that ssGSEA has the highest predictive AUC.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># Heatmap</span>
-<span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/compareAlgs.html">compareAlgs</a></span>(<span class="no">hivtb_data</span>, <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>,
-            <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-            <span class="kw">algorithm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GSVA"</span>, <span class="st">"ssGSEA"</span>,
-                          <span class="st">"singscore"</span>, <span class="st">"PLAGE"</span>, <span class="st">"Zscore"</span>),
-            <span class="kw">useAssay</span> <span class="kw">=</span> <span class="st">"log_counts"</span>,
-            <span class="kw">signatures</span> <span class="kw">=</span> <span class="no">TBsignatures</span>[<span class="st">"Anderson_42"</span>],
-            <span class="kw">choose_color</span> <span class="kw">=</span> <span class="no">col.me</span>, <span class="kw">show.pb</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-            <span class="kw">parallel.sz</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Heatmap</span>
+<span class="fu"><a href="../../reference/compareAlgs.html">compareAlgs</a></span><span class="op">(</span><span class="va">hivtb_data</span>, annotationColName <span class="op">=</span> <span class="st">"Disease"</span>,
+            scale <span class="op">=</span> <span class="cn">TRUE</span>,
+            algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GSVA"</span>, <span class="st">"ssGSEA"</span>,
+                          <span class="st">"singscore"</span>, <span class="st">"PLAGE"</span>, <span class="st">"Zscore"</span><span class="op">)</span>,
+            useAssay <span class="op">=</span> <span class="st">"log_counts"</span>,
+            signatures <span class="op">=</span> <span class="va">TBsignatures</span><span class="op">[</span><span class="st">"Anderson_42"</span><span class="op">]</span>,
+            choose_color <span class="op">=</span> <span class="va">col.me</span>, show.pb <span class="op">=</span> <span class="cn">FALSE</span>,
+            parallel.sz <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/compareAlgs%20ex-1.png" width="700"></p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co"># Boxplot</span>
-<span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/compareAlgs.html">compareAlgs</a></span>(<span class="no">hivtb_data</span>, <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>,
-            <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-            <span class="kw">algorithm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GSVA"</span>, <span class="st">"ssGSEA"</span>,
-                          <span class="st">"singscore"</span>, <span class="st">"PLAGE"</span>, <span class="st">"Zscore"</span>),
-            <span class="kw">useAssay</span> <span class="kw">=</span> <span class="st">"log_counts"</span>,
-            <span class="kw">signatures</span> <span class="kw">=</span> <span class="no">TBsignatures</span>[<span class="st">"Anderson_42"</span>],
-            <span class="kw">choose_color</span> <span class="kw">=</span> <span class="no">col.me</span>, <span class="kw">show.pb</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-            <span class="kw">parallel.sz</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">output</span> <span class="kw">=</span> <span class="st">"boxplot"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Boxplot</span>
+<span class="fu"><a href="../../reference/compareAlgs.html">compareAlgs</a></span><span class="op">(</span><span class="va">hivtb_data</span>, annotationColName <span class="op">=</span> <span class="st">"Disease"</span>,
+            scale <span class="op">=</span> <span class="cn">TRUE</span>,
+            algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GSVA"</span>, <span class="st">"ssGSEA"</span>,
+                          <span class="st">"singscore"</span>, <span class="st">"PLAGE"</span>, <span class="st">"Zscore"</span><span class="op">)</span>,
+            useAssay <span class="op">=</span> <span class="st">"log_counts"</span>,
+            signatures <span class="op">=</span> <span class="va">TBsignatures</span><span class="op">[</span><span class="st">"Anderson_42"</span><span class="op">]</span>,
+            choose_color <span class="op">=</span> <span class="va">col.me</span>, show.pb <span class="op">=</span> <span class="cn">FALSE</span>,
+            parallel.sz <span class="op">=</span> <span class="fl">1</span>, output <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/compareAlgs%20ex-2.png" width="700"></p>
 </div>
 </div>
@@ -322,21 +348,23 @@
 <a href="#table-with-t-tests-auc" class="anchor"></a>Table with T-tests &amp; AUC</h3>
 <p>The <code>TableAUC</code> function creates a table of useful information regarding the scored signatures. First, a 2-sample t-test is conducted on the scores with the TB/HIV status as the response variable. This is intended to give one metric of whether the signature is a valuable identifier of the disease phenotype. The log-scaled p-values are provided for easier means of comparison.</p>
 <p>The table also gives the AUC values for the signature scores, along with confidence intervals derived from bootstrapping. Most AUC estimates are fairly high.</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/tableAUC.html">tableAUC</a></span>(<span class="no">ssgsea_result</span>,
-         <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>,
-         <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>),
-         <span class="kw">num.boot</span> <span class="kw">=</span> <span class="fl">100</span>,
-         <span class="kw">pb.show</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div id="htmlwidget-a605ba0a507bd11eee10" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a605ba0a507bd11eee10">{"x":{"filter":"none","data":[["Thompson_9","Blankley_5","Blankley_380","Bloom_OD_144","Kaforou_27","Sweeney_OD_3","Rajan_HIV_5","Walter_51","Zak_RISK_16","Gliddon_OD_4","Roe_3","Berry_393","Esmail_OD_893","Suliman_4","Sambarey_HIV_10","Kaforou_OD_53","Gliddon_OD_3","Esmail_203","Roe_OD_4","Maertzdorf_OD_100","Thompson_FAIL_13","Walter_PNA_47","Kaforou_OD_44","Anderson_OD_51","Jacobsen_3","Walter_PNA_119","Esmail_82","Leong_RISK_29","Anderson_42","Thompson_RES_5","Sloot_HIV_2","Maertzdorf_4","Berry_OD_86","Singhania_OD_20","Suliman_RISK_4","Lee_4","Anderson_42","Anderson_OD_51","Berry_393","Berry_OD_86","Blankley_5","Blankley_380","Bloom_OD_144","Esmail_82","Esmail_203","Esmail_OD_893","Gliddon_OD_3","Gliddon_OD_4","Jacobsen_3","Kaforou_27","Kaforou_OD_44","Kaforou_OD_53","Lee_4","Leong_RISK_29","Maertzdorf_4","Maertzdorf_OD_100","Rajan_HIV_5","Roe_3","Roe_OD_4","Sambarey_HIV_10","Singhania_OD_20","Sloot_HIV_2","Suliman_4","Suliman_RISK_4","Sweeney_OD_3","Thompson_9","Thompson_FAIL_13","Thompson_RES_5","Walter_51","Walter_PNA_47","Walter_PNA_119","Zak_RISK_16"],[0,0,0,0,0,0,0,0,0,0.0003,0,0,0.0002,0.0001,0.0001,0.0012,0.0001,0.0029,0.0005,0.0017,0.0009,0.0028,0.0106,0.0096,0.0072,0.0054,0.0207,0.0164,0.0278,0.0571,0.0796,0.136,0.2392,0.1568,0.2538,0.5818,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[148.0662,142.9362,120.0574,117.3455,119.7161,101.7419,115.8811,112.2158,114.8476,81.48,101.7238,102.3001,87.9775,90.7221,91.1867,67.051,92.9589,58.5309,75.6901,63.5168,70.177,58.9577,45.4278,46.4517,49.288,52.2314,38.7825,41.1099,35.8293,28.6366,25.3075,19.9503,14.3044,18.5306,13.7115,5.416,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[0.975,1,0.886,0.8846,0.9274,0.9079,0.9591,0.8292,0.886,0.8421,0.8319,0.8667,0.8818,0.953,0.9545,0.7917,0.8875,0.7792,0.8208,0.7675,0.7094,0.925,0.8429,0.7731,0.819,0.8,0.7042,0.688,0.5042,0.8151,0.6316,0.6623,0.7227,0.5667,0.5167,0.6417,0.5042,0.7731,0.8667,0.7227,1,0.886,0.8846,0.7042,0.7792,0.8818,0.8875,0.8421,0.819,0.9274,0.8429,0.7917,0.6417,0.688,0.6623,0.7675,0.9591,0.8319,0.8208,0.9545,0.5667,0.6316,0.953,0.5167,0.9079,0.975,0.7094,0.8151,0.8292,0.925,0.8,0.886],[0.95,0.9375,0.9208,0.9208,0.9083,0.9083,0.9,0.9,0.9,0.8875,0.8875,0.8792,0.8708,0.8708,0.8667,0.8417,0.825,0.8208,0.8167,0.8125,0.8083,0.7875,0.7833,0.775,0.775,0.75,0.7458,0.7292,0.725,0.7083,0.7083,0.6625,0.65,0.6417,0.5958,0.5042,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0.975,1,0.886,0.8846,0.9274,0.9079,0.9591,0.8292,0.886,0.8421,0.8319,0.8667,0.8818,0.953,0.9545,0.7917,0.8875,0.7792,0.8208,0.7675,0.7094,0.925,0.8429,0.7731,0.819,0.8,0.7042,0.688,0.5042,0.8151,0.6316,0.6623,0.7227,0.5667,0.5167,0.6417,0.5042,0.7731,0.8667,0.7227,1,0.886,0.8846,0.7042,0.7792,0.8818,0.8875,0.8421,0.819,0.9274,0.8429,0.7917,0.6417,0.688,0.6623,0.7675,0.9591,0.8319,0.8208,0.9545,0.5667,0.6316,0.953,0.5167,0.9079,0.975,0.7094,0.8151,0.8292,0.925,0.8,0.886]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Signature<\/th>\n      <th>P.value<\/th>\n      <th>neg10xLog.P.value.<\/th>\n      <th>LowerAUC<\/th>\n      <th>AUC<\/th>\n      <th>UpperAUC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/tableAUC.html">tableAUC</a></span><span class="op">(</span><span class="va">ssgsea_result</span>,
+         annotationColName <span class="op">=</span> <span class="st">"Disease"</span>,
+         signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span>,
+         num.boot <span class="op">=</span> <span class="fl">100</span>,
+         pb.show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-81a64d1d456e83333429" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-81a64d1d456e83333429">{"x":{"filter":"none","data":[["Thompson_9","Hoang_OD_3","Blankley_5","Hoang_OD_13","Blankley_380","Bloom_OD_144","Kaforou_27","Sweeney_OD_3","Darboe_RISK_11","Rajan_HIV_5","Walter_51","Zak_RISK_16","Hoang_OD_20","Tornheim_RES_25","Gliddon_OD_4","Maertzdorf_15","Roe_3","Berry_393","Esmail_OD_893","Suliman_4","Sambarey_HIV_10","Estevez_259","Tornheim_71","Kaforou_OD_53","Estevez_133","LauxdaCosta_OD_3","Gliddon_OD_3","Esmail_203","Roe_OD_4","Maertzdorf_OD_100","Thompson_FAIL_13","Qian_OD_17","Suliman_RISK_2","Walter_PNA_47","Gjoen_7","Kaforou_OD_44","Anderson_OD_51","Jacobsen_3","Huang_OD_13","Walter_PNA_119","Esmail_82","Leong_RISK_29","Anderson_42","Thompson_RES_5","Sloot_HIV_2","Verhagen_10","Leong_24","Dawany_HIV_251","Maertzdorf_4","PennNich_RISK_6","Berry_OD_86","Singhania_OD_20","Gjoen_10","Suliman_RISK_4","Jenum_8","Lee_4"],[0,0,0,0,0,0,0,0,0,0,0,0,0,0.0001,0.0003,0,0,0,0.0002,0.0001,0.0001,0.0002,0.0001,0.0012,0.0005,0.001,0.0001,0.0029,0.0005,0.0017,0.0009,0.0061,0.0068,0.0028,0.0028,0.0106,0.0096,0.0072,0.0118,0.0054,0.0207,0.0164,0.0278,0.0571,0.0796,0.0646,0.0586,0.0625,0.136,0.1372,0.2392,0.1568,0.2231,0.2538,0.6886,0.5818],[148.0662,178.9241,142.9362,122.5744,120.0574,117.3455,119.7161,101.7419,115.2059,115.8811,112.2158,114.8476,112.9667,97.1836,81.48,125.3667,101.7238,102.3001,87.9775,90.7221,91.1867,87.9072,90.3759,67.051,76.58,69.4077,92.9589,58.5309,75.6901,63.5168,70.177,50.922,49.8912,58.9577,58.9179,45.4278,46.4517,49.288,44.4319,52.2314,38.7825,41.1099,35.8293,28.6366,25.3075,27.3968,28.3698,27.7295,19.9503,19.8657,14.3044,18.5306,15.0028,13.7115,3.7304,5.416],[0.8945,0.862,0.8908,0.8498,0.8263,0.8397,0.8331,0.8083,0.806,0.782,0.8105,0.7951,0.7603,0.7908,0.7413,0.754,0.7763,0.7523,0.731,0.7813,0.7441,0.7747,0.7263,0.6835,0.6933,0.6718,0.6833,0.6575,0.6908,0.6498,0.6844,0.6207,0.6615,0.6332,0.6237,0.6456,0.6092,0.6276,0.5957,0.615,0.5712,0.545,0.5599,0.5404,0.5456,0.521,0.5212,0.5427,0.521,0.5207,0.5167,0.5085,0.5167,0.534,0.5091,0.5131],[0.95,0.9458,0.9375,0.925,0.9208,0.9208,0.9083,0.9083,0.9042,0.9,0.9,0.9,0.8958,0.8958,0.8875,0.8875,0.8875,0.8792,0.8708,0.8708,0.8667,0.8625,0.8583,0.8417,0.8375,0.8333,0.825,0.8208,0.8167,0.8125,0.8083,0.7917,0.7875,0.7875,0.7833,0.7833,0.775,0.775,0.75,0.75,0.7458,0.7292,0.725,0.7083,0.7083,0.6958,0.6833,0.6708,0.6625,0.6542,0.65,0.6417,0.6042,0.5958,0.5542,0.5042],[0.9912,1,0.9912,1,0.9912,0.9703,0.9728,0.9875,0.9877,1,0.9693,0.9912,0.9854,0.9738,0.9877,0.9835,0.9916,0.9455,0.9873,0.9576,0.971,0.9572,0.9455,0.9583,0.9498,0.936,0.9245,0.9456,0.9286,0.937,0.9372,0.9084,0.9108,0.934,0.9002,0.9121,0.9194,0.892,0.9177,0.8753,0.8876,0.8414,0.8457,0.8532,0.8502,0.8436,0.8575,0.8275,0.8298,0.7917,0.782,0.8083,0.8232,0.7713,0.7383,0.6888]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Signature<\/th>\n      <th>P.value<\/th>\n      <th>neg10xLog.P.value.<\/th>\n      <th>LowerAUC<\/th>\n      <th>AUC<\/th>\n      <th>UpperAUC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="boxplots-for-the-bootstrapped-aucs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#boxplots-for-the-bootstrapped-aucs" class="anchor"></a>Boxplots for the bootstrapped AUCs</h3>
 <p>We can visualize the bootstrapped AUCs for the scored signatures by creating a collection of boxplots.</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/compareBoxplots.html">compareBoxplots</a></span>(<span class="no">ssgsea_result</span>, <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>,
-                <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>),
-                <span class="kw">pb.show</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">rotateLabels</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/compareBoxplots.html">compareBoxplots</a></span><span class="op">(</span><span class="va">ssgsea_result</span>, annotationColName <span class="op">=</span> <span class="st">"Disease"</span>,
+                signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span>,
+                pb.show <span class="op">=</span> <span class="cn">FALSE</span>, rotateLabels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/BS%20Boxplots-1.png" width="700"></p>
 </div>
 <div id="roc-plots-for-all-signatures-with-95-ci-bands" class="section level3">
@@ -344,25 +372,26 @@
 <a href="#roc-plots-for-all-signatures-with-95-ci-bands" class="anchor"></a>ROC plots for all signatures with 95% CI bands</h3>
 <p>The <code>signatureROCplot_CI</code> function plots the ROC curves for signature scores in separate plots, along with CI bands for the specified level of confidence. The <code>signatureROCplot</code> function is similar, but does not include confidence interval bands.</p>
 <p>Note that, in some cases, signatures will be positive identifiers of TB whereas others are negative identifiers, hence some ROC curves will be below the chance line.</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/signatureROCplot_CI.html">signatureROCplot_CI</a></span>(<span class="kw">inputData</span> <span class="kw">=</span> <span class="no">ssgsea_result</span>,
-                   <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">TBsignatures</span>),
-                   <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>, <span class="kw">pb.show</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/signatureROCplot_CI.html">signatureROCplot_CI</a></span><span class="op">(</span>inputData <span class="op">=</span> <span class="va">ssgsea_result</span>,
+                   signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">TBsignatures</span><span class="op">)</span>,
+                   annotationColName <span class="op">=</span> <span class="st">"Disease"</span>, pb.show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/ROC%20all-1.png" width="1152"></p>
 </div>
 <div id="separate-roc-plots-95-ci-bands" class="section level3 tabset">
 <h3 class="hasAnchor">
 <a href="#separate-roc-plots-95-ci-bands" class="anchor"></a>Separate ROC plots, 95% CI bands</h3>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="no">sigs</span>){
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">sigs</span><span class="op">)</span><span class="op">{</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"####"</span>, <span class="no">i</span>, <span class="st">"\n"</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"####"</span>, <span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/signatureROCplot_CI.html">signatureROCplot_CI</a></span>(<span class="kw">inputData</span> <span class="kw">=</span> <span class="no">ssgsea_result</span>,
-                   <span class="kw">signatureColNames</span> <span class="kw">=</span> <span class="no">i</span>,
-                   <span class="kw">annotationColName</span> <span class="kw">=</span> <span class="st">"Disease"</span>,
-                   <span class="kw">name</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"ROC plot,"</span>, <span class="no">i</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">" "</span>), <span class="kw">pb.show</span> <span class="kw">=</span> <span class="fl">FALSE</span>))
-
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n\n"</span>)
-}</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../../reference/signatureROCplot_CI.html">signatureROCplot_CI</a></span><span class="op">(</span>inputData <span class="op">=</span> <span class="va">ssgsea_result</span>,
+                   signatureColNames <span class="op">=</span> <span class="va">i</span>,
+                   annotationColName <span class="op">=</span> <span class="st">"Disease"</span>,
+                   name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"ROC plot,"</span>, <span class="va">i</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span>, pb.show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n\n"</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <div id="anderson_42-2" class="section level4">
 <h4 class="hasAnchor">
 <a href="#anderson_42-2" class="anchor"></a>Anderson_42</h4>
@@ -385,53 +414,59 @@
 <a href="#signature-evaluation-with-logistic-regression" class="anchor"></a>Signature Evaluation with Logistic Regression</h2>
 <p>Another method of signature evaluation featured in the TBSignatureProfiler package is available with the <code>SignatureQuantitative</code> function.</p>
 <p>During the training process, we bootstrap the samples, cross-validate the logistic regression prediction of the TB HIV status of each sample, and calculate the validation set AUCs from each cross-validation iteration. In theory, if a signature is a useful predictor of status, it should have a higher average AUC from these logistic regression bootstraps.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="co">### Make an additional binary indicator for signature evaluation</span>
-<span class="no">hivtb_data</span>$<span class="no">BinaryTB</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">hivtb_data</span>$<span class="no">Disease</span>)-<span class="fl">1</span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">### Make an additional binary indicator for signature evaluation</span>
+<span class="va">hivtb_data</span><span class="op">$</span><span class="va">BinaryTB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">hivtb_data</span><span class="op">$</span><span class="va">Disease</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>
 
 <span class="co">## We can normalize the data and evaluate the signatures</span>
-<span class="no">hivtb_norm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/deseq2_norm_rle.html">deseq2_norm_rle</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span>(<span class="no">hivtb_data</span>, <span class="st">"counts"</span>))
+<span class="va">hivtb_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/deseq2_norm_rle.html">deseq2_norm_rle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">hivtb_data</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">quantitative.result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/SignatureQuantitative.html">SignatureQuantitative</a></span>(<span class="no">hivtb_norm</span>,
-                       <span class="kw">targetVec.num</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span>(<span class="no">hivtb_data</span>)$<span class="no">BinaryTB</span>,
-                       <span class="kw">signature.list</span> <span class="kw">=</span> <span class="no">TBsignatures</span>[<span class="no">sigs</span>],
-                       <span class="kw">signature.name.vec</span> <span class="kw">=</span> <span class="no">sigs</span>,
-                       <span class="kw">num.boot</span> <span class="kw">=</span> <span class="fl">3</span>,
-                       <span class="kw">pb.show</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<span class="va">quantitative.result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/SignatureQuantitative.html">SignatureQuantitative</a></span><span class="op">(</span><span class="va">hivtb_norm</span>,
+                       targetVec.num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">hivtb_data</span><span class="op">)</span><span class="op">$</span><span class="va">BinaryTB</span>,
+                       signature.list <span class="op">=</span> <span class="va">TBsignatures</span><span class="op">[</span><span class="va">sigs</span><span class="op">]</span>,
+                       signature.name.vec <span class="op">=</span> <span class="va">sigs</span>,
+                       num.boot <span class="op">=</span> <span class="fl">3</span>,
+                       pb.show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>We also create a boxplot of AUC for each signature, which provides a clear comparison between the signatures.</p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/TBSignatureProfiler/man/plotQuantitative.html">plotQuantitative</a></span>(<span class="no">hivtb_norm</span>, <span class="kw">targetVec.num</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span>(<span class="no">hivtb_data</span>)$<span class="no">BinaryTB</span>,
-                       <span class="kw">signature.list</span> <span class="kw">=</span> <span class="no">TBsignatures</span>[<span class="no">sigs</span>],
-                       <span class="kw">signature.name.vec</span> <span class="kw">=</span> <span class="no">sigs</span>,
-                       <span class="kw">num.boot</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">pb.show</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">rotateLabels</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/plotQuantitative.html">plotQuantitative</a></span><span class="op">(</span><span class="va">hivtb_norm</span>, targetVec.num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">hivtb_data</span><span class="op">)</span><span class="op">$</span><span class="va">BinaryTB</span>,
+                       signature.list <span class="op">=</span> <span class="va">TBsignatures</span><span class="op">[</span><span class="va">sigs</span><span class="op">]</span>,
+                       signature.name.vec <span class="op">=</span> <span class="va">sigs</span>,
+                       num.boot <span class="op">=</span> <span class="fl">3</span>, pb.show <span class="op">=</span> <span class="cn">FALSE</span>, rotateLabels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="TBSig_Vignette_files/figure-html/sigeval%20plot-1.png" width="700"></p>
 <div id="table-of-auc-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#table-of-auc-results" class="anchor"></a>Table of AUC Results</h3>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="kw pkg">DT</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">quantitative.result</span>$<span class="no">df.auc.ci</span>, <span class="fl">4</span>),
-              <span class="kw">options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scrollX</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">pageLength</span> <span class="kw">=</span> <span class="fl">10</span>),
-              <span class="kw">rownames</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div id="htmlwidget-2af4f992a47f7e4655b5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2af4f992a47f7e4655b5">{"x":{"filter":"none","data":[[0.7625,0.8458,0.8458],[0.9044,0.7587,0.8784],[0.9645,0.9988,0.9855],[-0,-0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">quantitative.result</span><span class="op">$</span><span class="va">df.auc.ci</span>, <span class="fl">4</span><span class="op">)</span>,
+              options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX <span class="op">=</span> <span class="cn">TRUE</span>, pageLength <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,
+              rownames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-8e6e55ae70957ec4b879" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8e6e55ae70957ec4b879">{"x":{"filter":"none","data":[[0.7625,0.8458,0.8458],[0.8383,0.882,0.8995],[0.9844,0.9388,0.9831],[0,-0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="table-of-sensitivity-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#table-of-sensitivity-results" class="anchor"></a>Table of Sensitivity Results</h3>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="kw pkg">DT</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">quantitative.result</span>$<span class="no">df.sensitivity.ci</span>, <span class="fl">4</span>),
-              <span class="kw">options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scrollX</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">pageLength</span> <span class="kw">=</span> <span class="fl">10</span>),
-              <span class="kw">rownames</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div id="htmlwidget-31fc5de38ad55eeb4082" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-31fc5de38ad55eeb4082">{"x":{"filter":"none","data":[[0.625,0.875,0.875],[0.9033,0.939,0.9182],[0.9524,0.9952,1],[0,-0,-0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Sensitivity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">quantitative.result</span><span class="op">$</span><span class="va">df.sensitivity.ci</span>, <span class="fl">4</span><span class="op">)</span>,
+              options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX <span class="op">=</span> <span class="cn">TRUE</span>, pageLength <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,
+              rownames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-127294dc72ddaf41402a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-127294dc72ddaf41402a">{"x":{"filter":"none","data":[[0.625,0.875,0.875],[0.7009,0.7988,0.8117],[0.8719,0.9274,0.9917],[0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Sensitivity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="table-of-specificity-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#table-of-specificity-results" class="anchor"></a>Table of Specificity Results</h3>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="kw pkg">DT</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">quantitative.result</span>$<span class="no">df.specificity.ci</span>, <span class="fl">4</span>),
-              <span class="kw">options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scrollX</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">pageLength</span> <span class="kw">=</span> <span class="fl">10</span>),
-              <span class="kw">rownames</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div id="htmlwidget-71a5380ac04c1ed8f260" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-71a5380ac04c1ed8f260">{"x":{"filter":"none","data":[[0.8,0.8,0.7333],[0.6812,0.7233,0.685],[0.9384,0.9933,0.9207],[-0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Specificity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
-<pre><code>## R version 4.0.0 (2020-04-24)
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">quantitative.result</span><span class="op">$</span><span class="va">df.specificity.ci</span>, <span class="fl">4</span><span class="op">)</span>,
+              options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX <span class="op">=</span> <span class="cn">TRUE</span>, pageLength <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,
+              rownames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-16cb08651670a3738dd5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-16cb08651670a3738dd5">{"x":{"filter":"none","data":[[0.8,0.8,0.7333],[0.7317,0.9412,0.8695],[0.9889,0.9941,0.9466],[0,-0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Estimate.Specificity<\/th>\n      <th>CI lower.5%<\/th>\n      <th>CI upper.95%<\/th>\n      <th>Std. Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## R version 4.0.3 (2020-10-10)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 18362)
+## Running under: Windows 10 x64 (build 18363)
 ## 
 ## Matrix products: default
 ## 
@@ -447,58 +482,57 @@
 ## [8] methods   base     
 ## 
 ## other attached packages:
-##  [1] TBSignatureProfiler_1.0.0   SummarizedExperiment_1.18.1
-##  [3] DelayedArray_0.14.0         matrixStats_0.56.0         
+##  [1] TBSignatureProfiler_1.3.2   SummarizedExperiment_1.18.2
+##  [3] DelayedArray_0.14.1         matrixStats_0.57.0         
 ##  [5] Biobase_2.48.0              GenomicRanges_1.40.0       
-##  [7] GenomeInfoDb_1.24.0         IRanges_2.22.1             
-##  [9] S4Vectors_0.26.0            BiocGenerics_0.34.0        
-## [11] BiocStyle_2.16.0           
+##  [7] GenomeInfoDb_1.24.2         IRanges_2.22.2             
+##  [9] S4Vectors_0.26.1            BiocGenerics_0.34.0        
+## [11] BiocStyle_2.16.1           
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] backports_1.1.6        circlize_0.4.9         fastmatch_1.1-0       
-##   [4] plyr_1.8.6             GSEABase_1.50.0        splines_4.0.0         
-##   [7] BiocParallel_1.22.0    crosstalk_1.1.0.1      ggplot2_3.3.0         
-##  [10] digest_0.6.25          foreach_1.5.0          htmltools_0.4.0       
-##  [13] gdata_2.18.0           ggfortify_0.4.10       magrittr_1.5          
-##  [16] memoise_1.1.0          cluster_2.1.0          limma_3.44.1          
-##  [19] recipes_0.1.12         ComplexHeatmap_2.4.2   readr_1.3.1           
-##  [22] annotate_1.66.0        gower_0.2.1            pkgdown_1.5.1         
-##  [25] colorspace_1.4-1       blob_1.2.1             xfun_0.13             
-##  [28] dplyr_0.8.5            crayon_1.3.4           RCurl_1.98-1.2        
-##  [31] jsonlite_1.6.1         graph_1.66.0           genefilter_1.70.0     
-##  [34] survival_3.1-12        iterators_1.0.12       glue_1.4.0            
-##  [37] gtable_0.3.0           ipred_0.9-9            zlibbioc_1.34.0       
-##  [40] XVector_0.28.0         GetoptLong_0.1.8       shape_1.4.4           
-##  [43] scales_1.1.0           DBI_1.1.0              edgeR_3.30.0          
-##  [46] Rcpp_1.0.4.6           xtable_1.8-4           clue_0.3-57           
-##  [49] bit_1.1-15.2           lava_1.6.7             prodlim_2019.11.13    
-##  [52] GSVA_1.36.0            DT_0.13                glmnet_3.0-2          
-##  [55] htmlwidgets_1.5.1      RColorBrewer_1.1-2     ellipsis_0.3.0        
-##  [58] pkgconfig_2.0.3        XML_3.99-0.3           farver_2.0.3          
-##  [61] nnet_7.3-14            locfit_1.5-9.4         caret_6.0-86          
-##  [64] tidyselect_1.0.0       labeling_0.3           rlang_0.4.6           
-##  [67] reshape2_1.4.4         later_1.0.0            AnnotationDbi_1.50.0  
-##  [70] munsell_0.5.0          tools_4.0.0            generics_0.0.2        
-##  [73] RSQLite_2.2.0          evaluate_0.14          stringr_1.4.0         
-##  [76] fastmap_1.0.1          yaml_2.2.1             bioDist_1.60.0        
-##  [79] ModelMetrics_1.2.2.2   knitr_1.28             bit64_0.9-7           
-##  [82] fs_1.4.1               purrr_0.3.4            nlme_3.1-147          
-##  [85] mime_0.9               compiler_4.0.0         shinythemes_1.1.2     
-##  [88] rstudioapi_0.11        png_0.1-7              e1071_1.7-3           
-##  [91] tibble_3.0.1           geneplotter_1.66.0     stringi_1.4.6         
-##  [94] desc_1.2.0             lattice_0.20-41        Matrix_1.2-18         
-##  [97] vctrs_0.2.4            pillar_1.4.4           lifecycle_0.2.0       
-## [100] BiocManager_1.30.10    ROCit_1.1.1            GlobalOptions_0.1.1   
-## [103] data.table_1.12.8      bitops_1.0-6           httpuv_1.5.2          
-## [106] R6_2.4.1               bookdown_0.18          promises_1.1.0        
-## [109] gridExtra_2.3          codetools_0.2-16       boot_1.3-25           
-## [112] MASS_7.3-51.6          gtools_3.8.2           assertthat_0.2.1      
-## [115] DESeq2_1.28.0          rprojroot_1.3-2        rjson_0.2.20          
-## [118] withr_2.2.0            GenomeInfoDbData_1.2.3 hms_0.5.3             
-## [121] rpart_4.1-15           grid_4.0.0             timeDate_3043.102     
-## [124] tidyr_1.0.3            class_7.3-17           rmarkdown_2.1         
-## [127] singscore_1.8.0        pROC_1.16.2            lubridate_1.7.8       
-## [130] shiny_1.4.0.2</code></pre>
+##   [1] circlize_0.4.12        fastmatch_1.1-0        systemfonts_0.3.2     
+##   [4] plyr_1.8.6             GSEABase_1.50.1        splines_4.0.3         
+##   [7] BiocParallel_1.22.0    crosstalk_1.1.1        ggplot2_3.3.3         
+##  [10] digest_0.6.27          foreach_1.5.1          htmltools_0.5.1.1     
+##  [13] gdata_2.18.0           magrittr_2.0.1         memoise_2.0.0         
+##  [16] cluster_2.1.0          limma_3.44.3           recipes_0.1.15        
+##  [19] ComplexHeatmap_2.4.3   annotate_1.66.0        gower_0.2.2           
+##  [22] pkgdown_1.6.1          colorspace_2.0-0       blob_1.2.1            
+##  [25] textshaping_0.2.1      xfun_0.20              dplyr_1.0.3           
+##  [28] crayon_1.3.4           RCurl_1.98-1.2         jsonlite_1.7.2        
+##  [31] graph_1.66.0           genefilter_1.70.0      survival_3.2-7        
+##  [34] iterators_1.0.13       glue_1.4.2             gtable_0.3.0          
+##  [37] ipred_0.9-9            zlibbioc_1.34.0        XVector_0.28.0        
+##  [40] GetoptLong_1.0.5       shape_1.4.5            scales_1.1.1          
+##  [43] DBI_1.1.1              edgeR_3.30.3           Rcpp_1.0.6            
+##  [46] xtable_1.8-4           clue_0.3-58            bit_4.0.4             
+##  [49] lava_1.6.8.1           prodlim_2019.11.13     GSVA_1.36.3           
+##  [52] DT_0.17                glmnet_4.1             htmlwidgets_1.5.3     
+##  [55] RColorBrewer_1.1-2     ellipsis_0.3.1         pkgconfig_2.0.3       
+##  [58] XML_3.99-0.5           farver_2.0.3           nnet_7.3-14           
+##  [61] locfit_1.5-9.4         caret_6.0-86           tidyselect_1.1.0      
+##  [64] labeling_0.4.2         rlang_0.4.10           reshape2_1.4.4        
+##  [67] later_1.1.0.1          AnnotationDbi_1.50.3   munsell_0.5.0         
+##  [70] tools_4.0.3            cachem_1.0.1           generics_0.1.0        
+##  [73] RSQLite_2.2.2          evaluate_0.14          stringr_1.4.0         
+##  [76] fastmap_1.0.1          yaml_2.2.1             ragg_0.4.1            
+##  [79] ModelMetrics_1.2.2.2   knitr_1.31             bit64_4.0.5           
+##  [82] fs_1.5.0               purrr_0.3.4            nlme_3.1-149          
+##  [85] mime_0.9               compiler_4.0.3         shinythemes_1.2.0     
+##  [88] rstudioapi_0.13        png_0.1-7              e1071_1.7-4           
+##  [91] tibble_3.0.5           geneplotter_1.66.0     stringi_1.5.3         
+##  [94] highr_0.8              desc_1.2.0             lattice_0.20-41       
+##  [97] Matrix_1.2-18          vctrs_0.3.6            pillar_1.4.7          
+## [100] lifecycle_0.2.0        BiocManager_1.30.10    ROCit_2.1.1           
+## [103] GlobalOptions_0.1.2    data.table_1.13.6      bitops_1.0-6          
+## [106] httpuv_1.5.5           R6_2.5.0               bookdown_0.21         
+## [109] promises_1.1.1         codetools_0.2-18       MASS_7.3-53           
+## [112] gtools_3.8.2           assertthat_0.2.1       DESeq2_1.28.1         
+## [115] rprojroot_2.0.2        rjson_0.2.20           withr_2.4.1           
+## [118] GenomeInfoDbData_1.2.3 grid_4.0.3             rpart_4.1-15          
+## [121] timeDate_3043.102      tidyr_1.1.2            class_7.3-17          
+## [124] rmarkdown_2.6          singscore_1.8.0        pROC_1.17.0.1         
+## [127] lubridate_1.7.9.2      shiny_1.6.0</code></pre>
 </div>
 </div>
 </div>
@@ -515,11 +549,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by David Jenkins, Yue Zhao, W. Evan Johnson, Aubrey Odom, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -2,9 +2,10 @@ pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  rmd/OriginalModelTutorial: OriginalModelTutorial.html
   rmd/shinytutorial: shinytutorial.html
   rmd/SignatureAddition: SignatureAddition.html
   rmd/TBSig_Vignette: TBSig_Vignette.html
   tbspVignette: tbspVignette.html
-last_built: 2021-02-08T03:51Z
+last_built: 2021-07-26T20:43Z
 

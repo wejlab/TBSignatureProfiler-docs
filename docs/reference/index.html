@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -84,6 +84,9 @@
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
+  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+</li>
+<li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
 </li>
 <li>
@@ -92,11 +95,14 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -169,21 +175,39 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sigAnnotData.html">sigAnnotData</a></code> </p>
-        </td>
-        <td><p>Annotation information for published TB signatures.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="TBcommon.html">TBcommon</a></code> </p>
         </td>
         <td><p>A list of published TB signatures, using author-given names.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="sigAnnotData.html">sigAnnotData</a></code> </p>
+        </td>
+        <td><p>Annotation information for published TB signatures.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="common_sigAnnotData.html">common_sigAnnotData</a></code> </p>
         </td>
         <td><p>Annotation information for published TB signatures.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="COVIDsignatures.html">COVIDsignatures</a></code> </p>
+        </td>
+        <td><p>A list of published/pre-print COVID-19 signatures.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="addTBsignature.html">addTBsignature()</a></code> </p>
+        </td>
+        <td><p>Introduce a new signature into the TBSignatureProfiler</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="TBsignaturesSplit.html">TBsignaturesSplit</a></code> </p>
+        </td>
+        <td><p>Up/Down-regulated genes information for selected TB signatures</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -332,6 +356,105 @@
           <p><code><a href="TB_indian.html">TB_indian</a></code> </p>
         </td>
         <td><p>An example TB dataset with Indian population data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="OriginalTrainingData.html">OriginalTrainingData</a></code> </p>
+        </td>
+        <td><p>Discovery datasets for correpsonding gene signatures</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-original-models" class="hasAnchor"><a href="#section-original-models" class="anchor"></a>Original Models</h2>
+          <p class="section-desc"><p>A collection of functions for the use of evaluating certain signatures’ performance using their original models.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="dot-OriginalModel_NoRetraining.html">.OriginalModel_NoRetraining()</a></code> </p>
+        </td>
+        <td><p>TB gene signatures do not require retraining
+A function to obtain predicted score for TB gene signatures that do not need to be retrained.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-OriginalModel_Retraining.html">.OriginalModel_Retraining()</a></code> </p>
+        </td>
+        <td><p>TB gene signatures require retraining</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ObtainSampleScore_OriginalModel.html">ObtainSampleScore_OriginalModel()</a></code> </p>
+        </td>
+        <td><p>Obtain training data, testing data, and train signature's original model.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="evaluateOriginalModel.html">evaluateOriginalModel()</a></code> </p>
+        </td>
+        <td><p>A function that implements the original models for various TB signatures.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="BerryOriginalModel.html">BerryOriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model for gene signatures: Berry_393 and Berry_OD_86</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ZhaoOriginalModel.html">ZhaoOriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model for Zhao_NANO_6</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="SulimanOriginalModel.html">SulimanOriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model gene signature Suliman_RISK_4</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LeongOriginalModel.html">LeongOriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model for gene signatures: Leong_24 and Leong_RISK_29</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Bloom_Zak_OriginalModel.html">Bloom_Zak_OriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model for gene signatures Bloom_OD_144 and Zak_RISK_16</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Jacobsen_Sambarey_OriginalModel.html">Jacobsen_Sambarey_OriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model for gene signatrues: Jacobsen_3 and Sambarey_HIV_10</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Maertzdorf_Verhagen_daCosta_OriginalModel.html">Maertzdorf_Verhagen_daCosta_OriginalModel()</a></code> </p>
+        </td>
+        <td><p>Train original model for gene signatures: Maertzdorf_4, Maertzdorf_15, Verhagen_10,
+and LauxdaCosta_OD_3</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="subsetGeneSet.html">subsetGeneSet()</a></code> </p>
+        </td>
+        <td><p>Filter gene expression value matrix based on certatin gene sets.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ref_combat_impute.html">ref_combat_impute()</a></code> </p>
+        </td>
+        <td><p>A function for reference batch correction and imputation</p></td>
       </tr>
     </tbody>
     </table>
@@ -347,7 +470,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">

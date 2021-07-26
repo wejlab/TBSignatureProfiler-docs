@@ -74,7 +74,7 @@ R interface, or as a data.frame." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -87,6 +87,9 @@ R interface, or as a data.frame." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
+  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+</li>
+<li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
 </li>
 <li>
@@ -95,11 +98,14 @@ R interface, or as a data.frame." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -133,7 +139,8 @@ R interface, or as a <code>data.frame</code>.</p>
   <span class='va'>signatureColNames</span>,
   num.boot <span class='op'>=</span> <span class='fl'>100</span>,
   pb.show <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  output <span class='op'>=</span> <span class='st'>"DataTable"</span>
+  output <span class='op'>=</span> <span class='st'>"DataTable"</span>,
+  pROC <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -171,6 +178,11 @@ The default is <code>TRUE</code>.</p></td>
 values are <code>DataTable</code> and <code>data.frame</code>. The default is
 <code>DataTable</code>.</p></td>
     </tr>
+    <tr>
+      <th>pROC</th>
+      <td><p>logical. Should pROC AUC confidence intervals be used? Default
+is <code>TRUE</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -192,12 +204,13 @@ values are <code>DataTable</code> and <code>data.frame</code>. The default is
 </div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='input'>
  <span class='co'># Create data.frame object</span>
 <span class='va'>h</span> <span class='op'>&lt;-</span>  <span class='fu'>tableAUC</span><span class='op'>(</span>SE_scored <span class='op'>=</span> <span class='va'>prof_indian</span>, annotationColName <span class='op'>=</span> <span class='st'>"label"</span>,
-          signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>choose_sigs</span><span class='op'>)</span>, output <span class='op'>=</span> <span class='st'>"data.frame"</span>,
-          num.boot <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+               signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>choose_sigs</span><span class='op'>)</span>,
+               output <span class='op'>=</span> <span class='st'>"data.frame"</span>,
+               num.boot <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;        Signature P.value neg10xLog.P.value. LowerAUC    AUC UpperAUC
-#&gt; 1    Anderson_42   2e-04            87.4837   0.7933 0.8105   0.8743
-#&gt; 2 Anderson_OD_51   0e+00           259.5843   0.9747 0.9832   0.9990</div><div class='input'>
+#&gt; 1    Anderson_42   2e-04            87.4837   0.6839 0.8105   0.8105
+#&gt; 2 Anderson_OD_51   0e+00           259.5843   0.9571 0.9832   0.9832</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -210,7 +223,7 @@ values are <code>DataTable</code> and <code>data.frame</code>. The default is
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -44,6 +44,9 @@
   <a href="../../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
+  <a href="../../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+</li>
+<li>
   <a href="../../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
 </li>
 <li>
@@ -52,11 +55,14 @@
 <li>
   <a href="../../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../../news/index.html">News</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -70,7 +76,7 @@
 
       
 
-      </header><script src="SignatureAddition_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="SignatureAddition_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Submitting Signatures to the TBSP Package</h1>
@@ -116,7 +122,7 @@
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/load_all.html">load_all</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## Loading TBSignatureProfiler</code></pre>
+<pre><code>## i Loading TBSignatureProfiler</code></pre>
 </div>
 <div id="gathering-information" class="section level1">
 <h1 class="hasAnchor">
@@ -210,7 +216,7 @@
 <div id="updating-the-data-objects" class="section level1">
 <h1 class="hasAnchor">
 <a href="#updating-the-data-objects" class="anchor"></a>Updating the data objects</h1>
-<p>To streamline the process of adding signatures, we have introduced the addTBsignature() function to the package. To use the function, users must access the function by calling the unexported function, <code>TbSignatureProfiler:::addTBsignature()</code>. This function will take as input the various pieces of information listed previously, as well as a few other parameters. It will easily update the package’s <code>TBsignatures</code> and <code>TBcommon</code> signature lists, as well as the <code>sigAnnotData</code> and <code>commonAnnotData</code> annotation data tables. After doing so, we will just need to update the documentation for the signature objects and pull in the updates to the repository, and the addition of the signature will be complete. But first, we need to ensure that the data objects can be updated correctly.</p>
+<p>To streamline the process of adding signatures, we have introduced the addTBsignature() function to the package. To use the function, users must access the function by calling the unexported function, <code>TBSignatureProfiler:::addTBsignature()</code>. This function will take as input the various pieces of information listed previously, as well as a few other parameters. It will easily update the package’s <code>TBsignatures</code> and <code>TBcommon</code> signature lists, as well as the <code>sigAnnotData</code> and <code>commonAnnotData</code> annotation data tables. After doing so, we will just need to update the documentation for the signature objects and pull in the updates to the repository, and the addition of the signature will be complete. But first, we need to ensure that the data objects can be updated correctly.</p>
 <p>From the code below, you should be able to pretty clearly see what needs to be inputted based on the table created above, but if this is unclear, please run <code>?TBSignatureProfiler:::addTBsignature</code> for more details on the paramaters.</p>
 <p>The one parameter that we will point out, however, is very important - <code>savobjs</code>. This takes a logical and denotes essentially whether this is a ‘test run’ or the real thing (i.e., saving all the objects with the new signature). Here, we will first run the function with <code>saveobjs = FALSE</code>. Doing so will not save or overwrite any new object files to the data directory - it will only produce error messages and other progress messages, and (if <code>views = TRUE</code>) invoke a data viewer with <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> on each of the objects so we can see what the final objects will look like. Note that the function will never return anything in its output to be saved to the working environment, regardless of what <code>saveobjs</code> is set to, and this is why we produce the data views if nothing is actually being saved to the RDS files in the data directory.</p>
 <div id="test-run" class="section level2">
@@ -218,14 +224,16 @@
 <a href="#test-run" class="anchor"></a>Test run</h2>
 <p>We will run the function using the information gathered from the Laux da Costa publication (note that spaces should be omitted from the author name):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/addTBsignature.html">addTBsignature</a></span><span class="op">(</span>sigsymbols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GBP5"</span>, <span class="st">"CD64"</span>, <span class="st">"GZMA"</span><span class="op">)</span>,
-             authname <span class="op">=</span> <span class="st">"LauxdaCosta"</span>,
+<code class="sourceCode R"><span class="co"># Append a 2 since the signature is already in the package</span>
+<span class="co"># This is merely for testing</span>
+<span class="fu"><a href="../../reference/addTBsignature.html">addTBsignature</a></span><span class="op">(</span>sigsymbols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GBP5"</span>, <span class="st">"CD64"</span>, <span class="st">"GZMA"</span><span class="op">)</span>,
+             authname <span class="op">=</span> <span class="st">"LauxdaCosta2"</span>, 
              sigtype <span class="op">=</span> <span class="st">"Disease/Other Diseases"</span>,
              tissuetype <span class="op">=</span> <span class="st">"whole blood"</span>,
              signame_common <span class="op">=</span> <span class="cn">NULL</span>,
              saveobjs <span class="op">=</span> <span class="cn">FALSE</span>,
              views <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<pre><code>## The assigned signature name is LauxdaCosta_OD_3</code></pre>
+<pre><code>## The assigned signature name is LauxdaCosta2_OD_3</code></pre>
 <pre><code>## No alternative signature name was provided</code></pre>
 <pre><code>## TBsignatures object updated</code></pre>
 <pre><code>## TBcommon object updated</code></pre>
@@ -239,14 +247,14 @@
 <p>Assuming there are no glaring errors and everything looks correct, we can run the function again to save and overwrite the currently existing data objects by setting <code>saveobjs = TRUE</code>. Here, we will refrain from running the code as this is merely a vignette, but the same messages will be output, along with a message confirming that the objects were written to the data folder.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/addTBsignature.html">addTBsignature</a></span><span class="op">(</span>sigsymbols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GBP5"</span>, <span class="st">"CD64"</span>, <span class="st">"GZMA"</span><span class="op">)</span>,
-             authname <span class="op">=</span> <span class="st">"LauxdaCosta"</span>,
+             authname <span class="op">=</span> <span class="st">"LauxdaCosta2"</span>,
              signame_common <span class="op">=</span> <span class="cn">NULL</span>,
              sigtype <span class="op">=</span> <span class="st">"Disease/Other Diseases"</span>,
              tissuetype <span class="op">=</span> <span class="st">"whole blood"</span>,
              saveobjs <span class="op">=</span> <span class="cn">TRUE</span>,
              views <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>With that, the data objects themselves should be successfully updated. You can take a look at them by running <code><a href="https://devtools.r-lib.org//reference/load_all.html">devtools::load_all()</a></code> to update your local repository and then loading the data objects as <code>data("TBsignatures)</code> or <code><a href="https://rdrr.io/r/utils/data.html">data(common_sigAnnotObject)</a></code>.</p>
-<p>In the case that you wrote to the RDS files by accident and need to fix them, redownload the appropriate files from the <a href="www.github.com/compbiomed/tbsignatureprofiler">GitHub repository</a> and try again.</p>
+<p>In the case that you wrote to the RDS files by accident and need to fix them, redownload the appropriate files from the <a href="www.github.com/compbiomed/tbsignatureprofiler">GitHub repository</a> and try again. Be sure to rerun the <code><a href="https://devtools.r-lib.org//reference/load_all.html">devtools::load_all()</a></code> command.</p>
 </div>
 </div>
 <div id="documentation" class="section level1">
@@ -261,26 +269,27 @@
       <span class="st">" \\href{http://dx.doi.org/"</span>, <span class="va">DOInum</span>, <span class="st">"}{"</span>, <span class="va">DOInum</span>, <span class="st">"}}"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
 <span class="op">}</span>
 
-<span class="fu">mkTBreference</span><span class="op">(</span>TBsigname <span class="op">=</span> <span class="st">"LauxdaCosta_OD_3"</span>, <span class="co"># The name output in a message from addTBsignature()</span>
+<span class="fu">mkTBreference</span><span class="op">(</span>TBsigname <span class="op">=</span> <span class="st">"LauxdaCosta2_OD_3"</span>, <span class="co"># The name output in a message from addTBsignature()</span>
               ref <span class="op">=</span> <span class="st">"Laux da Costa L, Delcroix M, Dalla Costa ER, et al. A real-time PCR signature to discriminate between tuberculosis and other pulmonary diseases. Tuberculosis (Edinb). 2015;95(4):421-425."</span>,
               DOInum <span class="op">=</span> <span class="st">"10.1016/j.tube.2015.04.008"</span><span class="op">)</span></code></pre></div>
-<pre><code>## \item{\strong{LauxdaCosta_OD_3}}{: Laux da Costa L, Delcroix M, Dalla Costa ER, et al. A real-time PCR signature to discriminate between tuberculosis and other pulmonary diseases. Tuberculosis (Edinb). 2015;95(4):421-425. \href{http://dx.doi.org/10.1016/j.tube.2015.04.008}{10.1016/j.tube.2015.04.008}}</code></pre>
+<pre><code>## \item{\strong{LauxdaCosta2_OD_3}}{: Laux da Costa L, Delcroix M, Dalla Costa ER, et al. A real-time PCR signature to discriminate between tuberculosis and other pulmonary diseases. Tuberculosis (Edinb). 2015;95(4):421-425. \href{http://dx.doi.org/10.1016/j.tube.2015.04.008}{10.1016/j.tube.2015.04.008}}</code></pre>
 <p>In the case that an alternative publication signature name exists, <code>mkTBreference</code> will need to be rerun with the alternative name as the <code>TBsigname</code> argument, for use with the <code>TBcommon</code> documentation table. Otherwise, the package assigned signature name can be used for both <code>TBcommon</code> and <code>TBsignatures</code> entries.</p>
 <p>Once you have you have the requisite entries, open up data/data.R. First, find the table for <code>TBsignatures</code>, and insert the entry (with the #’ at the beginning like all other entries) at the appropriate position. All signatures should have the same position in the table as they do when you look at ordering of the names of the TBsignatures object (<code><a href="https://rdrr.io/r/base/names.html">names(TBsignatures)</a></code>). Once this is complete, do the same to the <code>TBcommon</code> table, which should be a little further down on the page.</p>
+<p>Please make sure to compile the documentation by running <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document()</a></code> upon completion of your documentation edits.</p>
 </div>
 <div id="pull-in-your-changes-to-the-repository" class="section level1">
 <h1 class="hasAnchor">
 <a href="#pull-in-your-changes-to-the-repository" class="anchor"></a>Pull in your changes to the repository</h1>
 <p>The very last step of this process will be to submit a pull request to the GitHub repository. If you have never submitted a pull request to another repo before, instructions can be found <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request">here</a>. When you are submitting your request, please note which signature(s) you added by name and what publications they can be found in, so that we can check that the update was completed successfully. We will try to approve pull requests as soon as possible. After the request is approved, your signature will be part of the package. Thank you for your contribution!</p>
 </div>
-<div id="add-session-info" class="section level1">
+<div id="session-information" class="section level1">
 <h1 class="hasAnchor">
-<a href="#add-session-info" class="anchor"></a>Add session info</h1>
+<a href="#session-information" class="anchor"></a>Session Information</h1>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## R version 4.0.3 (2020-10-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 18363)
+## Running under: Windows 10 x64 (build 19042)
 ## 
 ## Matrix products: default
 ## 
@@ -295,73 +304,83 @@
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] TBSignatureProfiler_1.3.2 testthat_3.0.1           
-## [3] knitr_1.31                BiocStyle_2.16.1         
+## [1] TBSignatureProfiler_1.5.0 testthat_3.0.3           
+## [3] knitr_1.33                BiocStyle_2.20.2         
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] colorspace_2.0-0            rjson_0.2.20               
-##   [3] ellipsis_0.3.1              ROCit_2.1.1                
-##   [5] rprojroot_2.0.2             circlize_0.4.12            
-##   [7] XVector_0.28.0              GenomicRanges_1.40.0       
-##   [9] GlobalOptions_0.1.2         fs_1.5.0                   
-##  [11] clue_0.3-58                 rstudioapi_0.13            
-##  [13] remotes_2.2.0               DT_0.17                    
-##  [15] bit64_4.0.5                 AnnotationDbi_1.50.3       
-##  [17] fansi_0.4.2                 splines_4.0.3              
-##  [19] cachem_1.0.1                geneplotter_1.66.0         
-##  [21] shinythemes_1.2.0           pkgload_1.1.0              
-##  [23] annotate_1.66.0             cluster_2.1.0              
-##  [25] png_0.1-7                   graph_1.66.0               
-##  [27] shiny_1.6.0                 BiocManager_1.30.10        
-##  [29] compiler_4.0.3              assertthat_0.2.1           
-##  [31] Matrix_1.2-18               fastmap_1.0.1              
-##  [33] limma_3.44.3                cli_2.2.0                  
-##  [35] later_1.1.0.1               htmltools_0.5.1.1          
-##  [37] prettyunits_1.1.1           tools_4.0.3                
-##  [39] gtable_0.3.0                glue_1.4.2                 
-##  [41] GenomeInfoDbData_1.2.3      reshape2_1.4.4             
-##  [43] dplyr_1.0.3                 Rcpp_1.0.6                 
-##  [45] Biobase_2.48.0              pkgdown_1.6.1              
-##  [47] vctrs_0.3.6                 gdata_2.18.0               
-##  [49] xfun_0.20                   stringr_1.4.0              
-##  [51] ps_1.5.0                    mime_0.9                   
-##  [53] lifecycle_0.2.0             gtools_3.8.2               
-##  [55] devtools_2.3.2              XML_3.99-0.5               
-##  [57] edgeR_3.30.3                zlibbioc_1.34.0            
-##  [59] scales_1.1.1                ragg_0.4.1                 
-##  [61] promises_1.1.1              parallel_4.0.3             
-##  [63] SummarizedExperiment_1.18.2 RColorBrewer_1.1-2         
-##  [65] ComplexHeatmap_2.4.3        yaml_2.2.1                 
-##  [67] memoise_2.0.0               ggplot2_3.3.3              
-##  [69] ASSIGN_1.24.0               stringi_1.5.3              
-##  [71] RSQLite_2.2.2               GSVA_1.36.3                
-##  [73] highr_0.8                   genefilter_1.70.0          
-##  [75] S4Vectors_0.26.1            desc_1.2.0                 
-##  [77] BiocGenerics_0.34.0         pkgbuild_1.2.0             
-##  [79] BiocParallel_1.22.0         shape_1.4.5                
-##  [81] GenomeInfoDb_1.24.2         rlang_0.4.10               
-##  [83] pkgconfig_2.0.3             systemfonts_0.3.2          
-##  [85] matrixStats_0.57.0          bitops_1.0-6               
-##  [87] evaluate_0.14               lattice_0.20-41            
-##  [89] purrr_0.3.4                 htmlwidgets_1.5.3          
-##  [91] bit_4.0.4                   processx_3.4.5             
-##  [93] tidyselect_1.1.0            GSEABase_1.50.1            
-##  [95] DESeq2_1.28.1               plyr_1.8.6                 
-##  [97] magrittr_2.0.1              bookdown_0.21              
-##  [99] R6_2.5.0                    IRanges_2.22.2             
-## [101] generics_0.1.0              DelayedArray_0.14.1        
-## [103] DBI_1.1.1                   pillar_1.4.7               
-## [105] withr_2.4.1                 survival_3.2-7             
-## [107] RCurl_1.98-1.2              tibble_3.0.5               
-## [109] crayon_1.3.4                rmarkdown_2.6              
-## [111] GetoptLong_1.0.5            usethis_2.0.0              
-## [113] locfit_1.5-9.4              grid_4.0.3                 
-## [115] blob_1.2.1                  callr_3.5.1                
-## [117] digest_0.6.27               singscore_1.8.0            
-## [119] xtable_1.8-4                tidyr_1.1.2                
-## [121] httpuv_1.5.5                textshaping_0.2.1          
-## [123] stats4_4.0.3                munsell_0.5.0              
-## [125] sessioninfo_1.1.1</code></pre>
+##   [1] circlize_0.4.13             systemfonts_1.0.2          
+##   [3] plyr_1.8.6                  splines_4.1.0              
+##   [5] GSEABase_1.54.0             BiocParallel_1.26.0        
+##   [7] usethis_2.0.1               GenomeInfoDb_1.28.0        
+##   [9] ggplot2_3.3.4               digest_0.6.27              
+##  [11] foreach_1.5.1               htmltools_0.5.1.1          
+##  [13] gdata_2.18.0                fansi_0.5.0                
+##  [15] magrittr_2.0.1              memoise_2.0.0              
+##  [17] ScaledMatrix_1.0.0          cluster_2.1.2              
+##  [19] doParallel_1.0.16           limma_3.48.0               
+##  [21] remotes_2.4.0               ComplexHeatmap_2.8.0       
+##  [23] Biostrings_2.60.1           annotate_1.70.0            
+##  [25] matrixStats_0.59.0          pkgdown_1.6.1              
+##  [27] prettyunits_1.1.1           colorspace_2.0-1           
+##  [29] blob_1.2.1                  textshaping_0.3.5          
+##  [31] xfun_0.24                   dplyr_1.0.7                
+##  [33] callr_3.7.0                 crayon_1.4.1               
+##  [35] RCurl_1.98-1.3              jsonlite_1.7.2             
+##  [37] graph_1.70.0                genefilter_1.74.0          
+##  [39] survival_3.2-11             iterators_1.0.13           
+##  [41] glue_1.4.2                  gtable_0.3.0               
+##  [43] zlibbioc_1.38.0             XVector_0.32.0             
+##  [45] ASSIGN_1.28.1               GetoptLong_1.0.5           
+##  [47] DelayedArray_0.18.0         pkgbuild_1.2.0             
+##  [49] BiocSingular_1.8.1          Rhdf5lib_1.14.1            
+##  [51] shape_1.4.6                 SingleCellExperiment_1.14.1
+##  [53] BiocGenerics_0.38.0         HDF5Array_1.20.0           
+##  [55] scales_1.1.1                DBI_1.1.1                  
+##  [57] edgeR_3.34.0                Rcpp_1.0.6                 
+##  [59] xtable_1.8-4                clue_0.3-59                
+##  [61] bit_4.0.4                   rsvd_1.0.5                 
+##  [63] DT_0.18                     stats4_4.1.0               
+##  [65] GSVA_1.40.1                 htmlwidgets_1.5.3          
+##  [67] httr_1.4.2                  RColorBrewer_1.1-2         
+##  [69] ellipsis_0.3.2              pkgconfig_2.0.3            
+##  [71] XML_3.99-0.6                sass_0.4.0                 
+##  [73] locfit_1.5-9.4              utf8_1.2.1                 
+##  [75] tidyselect_1.1.1            rlang_0.4.11               
+##  [77] reshape2_1.4.4              AnnotationDbi_1.54.1       
+##  [79] munsell_0.5.0               tools_4.1.0                
+##  [81] cachem_1.0.5                cli_3.0.0                  
+##  [83] generics_0.1.0              RSQLite_2.2.7              
+##  [85] devtools_2.4.2              evaluate_0.14              
+##  [87] stringr_1.4.0               fastmap_1.1.0              
+##  [89] yaml_2.2.1                  ragg_1.1.3                 
+##  [91] processx_3.5.2              bit64_4.0.5                
+##  [93] fs_1.5.0                    purrr_0.3.4                
+##  [95] KEGGREST_1.32.0             sparseMatrixStats_1.4.0    
+##  [97] compiler_4.1.0              rstudioapi_0.13            
+##  [99] png_0.1-7                   geneplotter_1.70.0         
+## [101] tibble_3.1.2                bslib_0.2.5.1              
+## [103] stringi_1.6.2               highr_0.9                  
+## [105] ps_1.6.0                    desc_1.3.0                 
+## [107] lattice_0.20-44             Matrix_1.3-4               
+## [109] vctrs_0.3.8                 pillar_1.6.1               
+## [111] lifecycle_1.0.0             rhdf5filters_1.4.0         
+## [113] ROCit_2.1.1                 BiocManager_1.30.16        
+## [115] jquerylib_0.1.4             GlobalOptions_0.1.2        
+## [117] bitops_1.0-7                irlba_2.3.3                
+## [119] GenomicRanges_1.44.0        R6_2.5.0                   
+## [121] bookdown_0.22               IRanges_2.26.0             
+## [123] sessioninfo_1.1.1           codetools_0.2-18           
+## [125] gtools_3.9.2                assertthat_0.2.1           
+## [127] pkgload_1.2.1               rhdf5_2.36.0               
+## [129] SummarizedExperiment_1.22.0 DESeq2_1.32.0              
+## [131] rprojroot_2.0.2             rjson_0.2.20               
+## [133] withr_2.4.2                 S4Vectors_0.30.0           
+## [135] GenomeInfoDbData_1.2.6      parallel_4.1.0             
+## [137] grid_4.1.0                  beachmat_2.8.0             
+## [139] tidyr_1.1.3                 rmarkdown_2.9              
+## [141] DelayedMatrixStats_1.14.0   MatrixGenerics_1.4.0       
+## [143] Cairo_1.5-12.2              singscore_1.12.0           
+## [145] Biobase_2.52.0</code></pre>
 </div>
   </div>
 
@@ -376,7 +395,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
+  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+</li>
+<li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
 </li>
 <li>
@@ -93,11 +96,14 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -222,8 +228,25 @@ The default is <code>fill_colors = NULL</code>.</p></td>
 annotation information.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>SummarizedExperiment</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: GenomicRanges</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: stats4</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: BiocGenerics</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'></span>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://bioconductor.org/packages/SummarizedExperiment'>SummarizedExperiment</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: MatrixGenerics</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: matrixStats</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'MatrixGenerics'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:matrixStats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,</span>
+#&gt; <span class='message'>    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,</span>
+#&gt; <span class='message'>    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,</span>
+#&gt; <span class='message'>    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,</span>
+#&gt; <span class='message'>    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,</span>
+#&gt; <span class='message'>    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,</span>
+#&gt; <span class='message'>    colWeightedMeans, colWeightedMedians, colWeightedSds,</span>
+#&gt; <span class='message'>    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,</span>
+#&gt; <span class='message'>    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,</span>
+#&gt; <span class='message'>    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,</span>
+#&gt; <span class='message'>    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,</span>
+#&gt; <span class='message'>    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,</span>
+#&gt; <span class='message'>    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,</span>
+#&gt; <span class='message'>    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span>
+#&gt; <span class='message'>    rowWeightedSds, rowWeightedVars</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: GenomicRanges</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: stats4</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: BiocGenerics</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'BiocGenerics'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:parallel':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,</span>
@@ -237,25 +260,22 @@ annotation information.</p>
 #&gt; <span class='message'>    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span>
 #&gt; <span class='message'>    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span>
 #&gt; <span class='message'>    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span>
-#&gt; <span class='message'>    union, unique, unsplit, which, which.max, which.min</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: S4Vectors</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'S4Vectors'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:base':</span>
+#&gt; <span class='message'>    union, unique, unsplit, which.max, which.min</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: S4Vectors</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'S4Vectors'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    expand.grid</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: IRanges</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>    expand.grid, I, unname</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: IRanges</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'IRanges'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:grDevices':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    windows</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: GenomeInfoDb</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Biobase</span></div><div class='output co'>#&gt; <span class='message'>Welcome to Bioconductor</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    Vignettes contain introductory material; view with</span>
 #&gt; <span class='message'>    'browseVignettes()'. To cite Bioconductor, see</span>
-#&gt; <span class='message'>    'citation("Biobase")', and for packages 'citation("pkgname")'.</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: DelayedArray</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: matrixStats</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'matrixStats'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:Biobase':</span>
+#&gt; <span class='message'>    'citation("Biobase")', and for packages 'citation("pkgname")'.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'Biobase'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:MatrixGenerics':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    anyMissing, rowMedians</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'DelayedArray'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:matrixStats':</span>
+#&gt; <span class='message'>    rowMedians</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:matrixStats':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    aperm, apply, rowsum</span></div><div class='input'>
+#&gt; <span class='message'>    anyMissing, rowMedians</span></div><div class='input'>
 <span class='co'># Generate some artificial data that shows a difference in Zak_RISK_16</span>
 <span class='va'>mat_testdata</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>80</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>80</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>5</span><span class='op'>)</span>, <span class='fl'>16</span>, <span class='fl'>10</span>,
                              dimnames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>TBsignatures</span><span class='op'>$</span><span class='va'>Zak_RISK_16</span>,
@@ -296,7 +316,7 @@ annotation information.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">

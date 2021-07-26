@@ -76,7 +76,7 @@ provided in the TBSignatureProfiler package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -89,6 +89,9 @@ provided in the TBSignatureProfiler package." />
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
+  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+</li>
+<li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
 </li>
 <li>
@@ -97,11 +100,14 @@ provided in the TBSignatureProfiler package." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -289,15 +295,15 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
 #&gt; </div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 1 gene sets.
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>res</span><span class='op'>$</span><span class='va'>pathway</span> <span class='op'>==</span> <span class='st'>"Zak_RISK_16"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       pathway algorithm            sample1             sample2
-#&gt; 1 Zak_RISK_16      GSVA  -0.65044642857143  -0.667768595041323
-#&gt; 2 Zak_RISK_16    ssGSEA 0.0423645852048042 -0.0493191377024657
-#&gt;              sample3           sample4           sample5           sample6
-#&gt; 1 -0.460281690140846 -0.52076023391813 -0.47972972972973 0.677938144329897
-#&gt; 2  0.074302818900328 0.163651346109162 0.140792583387962 0.950680862297534
-#&gt;             sample7           sample8           sample9          sample10
-#&gt; 1 0.486230366492146 0.559082969432314   0.5673474801061 0.522020202020202
-#&gt; 2 0.949532718784631 0.950680862297534 0.950680862297534 0.950680862297534</div><div class='input'>
+</div><div class='output co'>#&gt;       pathway algorithm             sample1            sample2
+#&gt; 1 Zak_RISK_16      GSVA  -0.622017937219732 -0.638316831683169
+#&gt; 2 Zak_RISK_16    ssGSEA 0.00501266160301172 0.0684446585509184
+#&gt;              sample3           sample4           sample5          sample6
+#&gt; 1 -0.558674698795182 -0.57175879396985 -0.52448087431694 0.58448087431694
+#&gt; 2 0.0798403501767621 0.181882089357499  0.12705867457988 1.00501266160301
+#&gt;            sample7           sample8           sample9         sample10
+#&gt; 1             0.54 0.600704845814978 0.615294117647059             0.72
+#&gt; 2 1.00501266160301  1.00257941370691  1.00501266160301 1.00501266160301</div><div class='input'>
 <span class='co'>## Using a SummarizedExperiment input/output</span>
  <span class='co'># The TB_indian SummarizedExperiment data is included in the package.</span>
 <span class='va'>GSVA_res</span> <span class='op'>&lt;-</span> <span class='fu'>runTBsigProfiler</span><span class='op'>(</span>input <span class='op'>=</span> <span class='va'>TB_indian</span>,
@@ -329,7 +335,7 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">

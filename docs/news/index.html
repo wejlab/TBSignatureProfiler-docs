@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -84,6 +84,9 @@
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
+  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+</li>
+<li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
 </li>
 <li>
@@ -92,11 +95,14 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/compbiomed/TBSignatureProfiler">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -120,12 +126,43 @@
     <div id="tbsignatureprofiler-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
 <a href="#tbsignatureprofiler-development-version" class="anchor"></a>TBSignatureProfiler (development version)</h1>
+</div>
+    <div id="tbsignatureprofiler-150" class="section level1">
+<h1 class="page-header" data-toc-text="1.5.0">
+<a href="#tbsignatureprofiler-150" class="anchor"></a>TBSignatureProfiler 1.5.0</h1>
 <ul>
-<li>Currently have 49 signatures available</li>
-<li>Added <code><a href="../reference/addTBsignature.html">addTBsignature()</a></code> to more easily facilitate updating signatures in package</li>
-<li>Fixed incorrect names of signatures in <code>Tbcommon</code> and <code>common_sigAnnotData</code> objects</li>
-<li>Added Estevez_133, Estevez_259, LauxdaCosta_OD_3, and Maertzdorf_15 signatures to the package</li>
+<li>68 signatures currently available</li>
 </ul>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>Fixed incorrect names of signatures in <code>Tbcommon</code> and <code>common_sigAnnotData</code> objects</li>
+</ul>
+</div>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major Changes</h2>
+<ul>
+<li>Added Zimmer_RES_3, Gong_OD_4, Bloom_RES_268, and Bloom_RES_558</li>
+<li>Added Sivakumaran_11 and Mendelsoh_RISK_11 signatures</li>
+<li>Added Estevez_133, Estevez_259, LauxdaCosta_OD_3, and Maertzdorf_15 signatures to the package</li>
+<li>Added Chen_HIV_4, Gliddon_HIV_3, Gliddon_2_OD_4, Kulkarni_HIV_2, and Heycken_FAIL_22 signatures</li>
+<li>Added a COVIDsignatures object to the package that can be used to profile COVID-19 gene transcript signatures, thanks to collaborator Dylan Sheerin (WEHI)</li>
+<li>Added functions to evaluate some signatures using their original models from Johnson lab member Xutao Wang</li>
+</ul>
+</div>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor Changes</h2>
+<ul>
+<li>Added mention of COVIDsignatures object to main vignette and website</li>
+<li>Included the OG models tutorial on website (Xutao Wang)</li>
+<li>Added <code><a href="../reference/addTBsignature.html">addTBsignature()</a></code> to more easily facilitate updating signatures in package</li>
+<li>Added pROC option to obtain confidence intervals on AUC values as part of \code{tableAUC()}</li>
+<li>Added citation for newly published paper</li>
+</ul>
+</div>
 </div>
     <div id="tbsignatureprofiler-0009000" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.0.9000">
@@ -147,7 +184,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
 </div>
 
 <div class="pkgdown">

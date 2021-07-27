@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TB gene signatures do not require retraining
-A function to obtain predicted score for TB gene signatures that do not need to be retrained. — .OriginalModel_NoRetraining • TBSignatureProfiler</title>
+<title>TB gene signatures that do not require retraining. — .OriginalModel_NoRetraining • TBSignatureProfiler</title>
 
 
 <!-- jquery -->
@@ -40,15 +39,8 @@ A function to obtain predicted score for TB gene signatures that do not need to 
 
 
 
-<meta property="og:title" content="TB gene signatures do not require retraining
-A function to obtain predicted score for TB gene signatures that do not need to be retrained. — .OriginalModel_NoRetraining" />
-<meta property="og:description" content="Anderson_42 and Anderson_OD_51 used difference of sums to calculate
-prediction scores. Difference of sums is obtained by subtracting the sum of
-the expression of genes within signatures that are down-regulated from the
-sum of the expression of genes that are up-regulated within signatures.
-Kaforou_27, Kaforou_OD_44, and Kaforou_OD_53 used difference of arithmetic
-means to calculate prediction scores.
-Sweeney_OD_3 used difference of geometric mean to calculate prediction score." />
+<meta property="og:title" content="TB gene signatures that do not require retraining. — .OriginalModel_NoRetraining" />
+<meta property="og:description" content="A function to obtain predicted score for TB gene signatures that do not need to be retrained." />
 
 
 
@@ -93,7 +85,7 @@ Sweeney_OD_3 used difference of geometric mean to calculate prediction score." /
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+  <a href="../articles/rmd/OriginalModelTutorial.html">Original Models</a>
 </li>
 <li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
@@ -128,20 +120,13 @@ Sweeney_OD_3 used difference of geometric mean to calculate prediction score." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>TB gene signatures do not require retraining
-A function to obtain predicted score for TB gene signatures that do not need to be retrained.</h1>
+    <h1>TB gene signatures that do not require retraining.</h1>
     <small class="dont-index">Source: <a href='https://github.com/compbiomed/TBSignatureProfiler/blob/master/R/OriginalModel.R'><code>R/OriginalModel.R</code></a></small>
     <div class="hidden name"><code>dot-OriginalModel_NoRetraining.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Anderson_42 and Anderson_OD_51 used difference of sums to calculate
-prediction scores. Difference of sums is obtained by subtracting the sum of
-the expression of genes within signatures that are down-regulated from the
-sum of the expression of genes that are up-regulated within signatures.
-Kaforou_27, Kaforou_OD_44, and Kaforou_OD_53 used difference of arithmetic
-means to calculate prediction scores.
-Sweeney_OD_3 used difference of geometric mean to calculate prediction score.</p>
+    <p>A function to obtain predicted score for TB gene signatures that do not need to be retrained.</p>
     </div>
 
     <pre class="usage"><span class='fu'>.OriginalModel_NoRetraining</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>useAssay</span>, <span class='va'>geneSignaturesName</span>, <span class='va'>BPPARAM</span><span class='op'>)</span></pre>
@@ -179,6 +164,15 @@ See <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply<
 
     <p>A SummarizedExperiment object with predicted scores for each sample
 obtained from the signature's original model.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Anderson_42 and Anderson_OD_51 used difference of sums to calculate
+prediction scores. Difference of sums is obtained by subtracting the sum of
+the expression of genes within signatures that are down-regulated from the
+sum of the expression of genes that are up-regulated within signatures.
+Kaforou_27, Kaforou_OD_44, and Kaforou_OD_53 used difference of arithmetic
+means to calculate prediction scores.
+Sweeney_OD_3 used difference of geometric mean to calculate prediction score.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

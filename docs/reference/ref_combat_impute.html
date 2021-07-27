@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for reference batch correction and imputation — ref_combat_impute • TBSignatureProfiler</title>
+<title>A function for reference batch correction and imputation. — ref_combat_impute • TBSignatureProfiler</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,17 @@
 
 
 
-<meta property="og:title" content="A function for reference batch correction and imputation — ref_combat_impute" />
-<meta property="og:description" content="A function for reference batch correction and imputation." />
+<meta property="og:title" content="A function for reference batch correction and imputation. — ref_combat_impute" />
+<meta property="og:description" content="A function used to perform reference batch correction and imputation in the
+testing data for gene signatures that require retraining of the model.
+We used the k-nearest neighbors to impute the expression values for missing gene(s).
+The imputation operation is achieved using impute.knn.
+Since the computational time for the imputation step can be excessive for large
+number of missing genes. We made some constrains to prevent the overflow of imputation
+operation. The evaluation will not run if more than geneMax*100% percent
+of the genes are not found for the corresponding gene signature in the input study.
+By default geneMax = 0.8, so the evaluation will not run if more than 80%
+of the genes are missing when matching the input study to the reference data." />
 
 
 
@@ -85,7 +94,7 @@
   <a href="../articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
 </li>
 <li>
-  <a href="../articles/rmd/OriginalModelTutorial.RMD">Original Models</a>
+  <a href="../articles/rmd/OriginalModelTutorial.html">Original Models</a>
 </li>
 <li>
   <a href="../articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
@@ -120,13 +129,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for reference batch correction and imputation</h1>
+    <h1>A function for reference batch correction and imputation.</h1>
     <small class="dont-index">Source: <a href='https://github.com/compbiomed/TBSignatureProfiler/blob/master/R/OriginalModel.R'><code>R/OriginalModel.R</code></a></small>
     <div class="hidden name"><code>ref_combat_impute.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A function for reference batch correction and imputation.</p>
+    <p>A function used to perform reference batch correction and imputation in the
+testing data for gene signatures that require retraining of the model.
+We used the k-nearest neighbors to impute the expression values for missing gene(s).
+The imputation operation is achieved using <code><a href='https://rdrr.io/pkg/impute/man/impute.knn.html'>impute.knn</a></code>.
+Since the computational time for the imputation step can be excessive for large
+number of missing genes. We made some constrains to prevent the overflow of imputation
+operation. The evaluation will not run if more than <code>geneMax</code>*100% percent
+of the genes are not found for the corresponding gene signature in the input study.
+By default <code>geneMax</code> = 0.8, so the evaluation will not run if more than 80%
+of the genes are missing when matching the input study to the reference data.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ref_combat_impute</span><span class='op'>(</span>
@@ -183,18 +201,6 @@ See <code><a href='https://rdrr.io/pkg/impute/man/impute.knn.html'>impute.knn</a
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Gene set subset</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A function used to perform reference batch correction and imputation in the
-testing data for gene signatures that require retraining of the model.
-We used the k-nearest neighbors to impute the expression values for missing gene(s).
-The imputation operation is achieved using <code><a href='https://rdrr.io/pkg/impute/man/impute.knn.html'>impute.knn</a></code>.
-Since the computational time for the imputation step can be excessive for large
-number of missing genes. We made some constrains to prevent the overflow of imputation
-operation. The evaluation will not run if more than <code>geneMax</code>*100% percent
-of the genes are not found for the corresponding gene signature in the input study.
-By default <code>geneMax</code> = 0.8, so the evaluation will not run if more than 80%
-of the genes are missing when matching the input study to the reference data.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

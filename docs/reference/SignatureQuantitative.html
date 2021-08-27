@@ -75,7 +75,7 @@ across any number of genetic signatures." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
       </span>
     </div>
 
@@ -207,7 +207,21 @@ Signatures via Bootstrapped AUCs"</code>.</p></td>
                       signature.list <span class='op'>=</span> <span class='va'>signature.list</span>,
                       signature.name.vec <span class='op'>=</span> <span class='va'>signature.name.vec</span>,
                       num.boot <span class='op'>=</span> <span class='va'>num.boot</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%</div><div class='output co'>#&gt; <span class='error'>Error in lognet(xd, is.sparse, ix, jx, y, weights, offset, alpha, nobs,     nvars, jd, vp, cl, ne, nx, nlam, flmin, ulam, thresh, isd,     intr, vnames, maxit, kopt, family): one multinomial or binomial class has 1 or 0 observations; not allowed</span></div><div class='input'>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; $df.auc.ci
+#&gt;      Estimate CI lower.5% CI upper.95%    Std. Error
+#&gt; sig1   0.4835     0.40078      0.73486  1.387779e-17
+#&gt; sig2   0.4176     0.37266      0.83298 -2.775558e-17
+#&gt; 
+#&gt; $df.sensitivity.ci
+#&gt;      Estimate.Sensitivity CI lower.5% CI upper.95%    Std. Error
+#&gt; sig1            0.1428571    0.352381    0.8412698 -2.775558e-17
+#&gt; sig2            0.2857143    0.075000    0.8045455  0.000000e+00
+#&gt; 
+#&gt; $df.specificity.ci
+#&gt;      Estimate.Specificity CI lower.5% CI upper.95%   Std. Error
+#&gt; sig1            0.7692308   0.2343434    0.9120879 0.000000e+00
+#&gt; sig2            0.7692308   0.6000000    0.8714286 5.551115e-17
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

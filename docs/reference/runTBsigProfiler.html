@@ -76,7 +76,7 @@ provided in the TBSignatureProfiler package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
       </span>
     </div>
 
@@ -148,7 +148,8 @@ provided in the TBSignatureProfiler package.</p>
   parallel.sz <span class='op'>=</span> <span class='fl'>0</span>,
   ASSIGNiter <span class='op'>=</span> <span class='fl'>1e+05</span>,
   ASSIGNburnin <span class='op'>=</span> <span class='fl'>50000</span>,
-  ssgsea_norm <span class='op'>=</span> <span class='cn'>TRUE</span>
+  ssgsea_norm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  update_genes <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -182,13 +183,15 @@ one is desired. The default is <code><a href='https://rdrr.io/r/base/c.html'>c("
     </tr>
     <tr>
       <th>combineSigAndAlgorithm</th>
-      <td><p>logical, not supported if <code>input</code> is a
-SummarizedExperiment object (in which case, the default is <code>TRUE</code>).
-For a matrix or data frame, if <code>TRUE</code>, the row names will be in the form
-&lt;algorithm&gt;_&lt;signature&gt;. If <code>FALSE</code>, there will be a column named
-'algorithm' that lists which algorithm is used, and a column named 'pathway'
-that lists the signature profiled. If <code>NULL</code>, and one algorithm was used,
-the algorithm will not be listed. The default is <code>FALSE</code>.</p></td>
+      <td><p>logical, if <code>TRUE</code>, output row names will
+be of the form &lt;algorithm&gt;_&lt;signature&gt;. It must be set to codeTRUE if the
+<code>ouputFormat</code> will be a SummarizedExperiment and
+<code>length(algorithm) &gt; 1</code>.
+It will always be <code>FALSE</code> if only one algorithm is selected.
+If <code>FALSE</code>, there will be a column named algorithm' that lists which
+algorithm is used, and a column named 'pathway' that lists the signature
+profiled. If <code>NULL</code>, and one algorithm was used, the algorithm will not
+be listed. The default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>assignDir</th>
@@ -229,6 +232,14 @@ Barbie et al. (2009) normalizing the scores by the absolute difference
 between the minimum and the maximum, as described in their paper.
 When <code>ssgsea.norm = FALSE</code>, this last normalization step is skipped.
 The default is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>update_genes</th>
+      <td><p>logical, denotes whether gene names from <code>signatures</code>
+and the rownames of <code>input</code> should be checked for accuracy using 
+<code>HGNChelper::checkGeneSymbols()</code>. The mapping assumes
+genes are from humans and will keep unmapped genes as the original
+input gene name. Default is <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
@@ -295,15 +306,15 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
 #&gt; </div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 1 gene sets.
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>res</span><span class='op'>$</span><span class='va'>pathway</span> <span class='op'>==</span> <span class='st'>"Zak_RISK_16"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       pathway algorithm             sample1            sample2
-#&gt; 1 Zak_RISK_16      GSVA  -0.622017937219732 -0.638316831683169
-#&gt; 2 Zak_RISK_16    ssGSEA 0.00501266160301172 0.0684446585509184
-#&gt;              sample3           sample4           sample5          sample6
-#&gt; 1 -0.558674698795182 -0.57175879396985 -0.52448087431694 0.58448087431694
-#&gt; 2 0.0798403501767621 0.181882089357499  0.12705867457988 1.00501266160301
-#&gt;            sample7           sample8           sample9         sample10
-#&gt; 1             0.54 0.600704845814978 0.615294117647059             0.72
-#&gt; 2 1.00501266160301  1.00257941370691  1.00501266160301 1.00501266160301</div><div class='input'>
+</div><div class='output co'>#&gt;       pathway algorithm            sample1            sample2
+#&gt; 1 Zak_RISK_16      GSVA -0.564962216624686 -0.580280373831777
+#&gt; 2 Zak_RISK_16    ssGSEA  0.189566387127276  0.136690310218991
+#&gt;              sample3            sample4            sample5           sample6
+#&gt; 1 -0.568167539267017 -0.693333333333334 -0.480173410404625 0.538144329896907
+#&gt; 2  0.148629517686587  0.169970605248815  0.189747263828546  1.13669031021899
+#&gt;             sample7          sample8           sample9         sample10
+#&gt; 1 0.642857142857143 0.59459584295612 0.430493827160494 0.52335092348285
+#&gt; 2   1.1353175218758 1.13669031021899  1.13669031021899 1.13669031021899</div><div class='input'>
 <span class='co'>## Using a SummarizedExperiment input/output</span>
  <span class='co'># The TB_indian SummarizedExperiment data is included in the package.</span>
 <span class='va'>GSVA_res</span> <span class='op'>&lt;-</span> <span class='fu'>runTBsigProfiler</span><span class='op'>(</span>input <span class='op'>=</span> <span class='va'>TB_indian</span>,

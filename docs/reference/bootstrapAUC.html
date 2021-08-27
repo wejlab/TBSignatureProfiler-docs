@@ -73,7 +73,7 @@ for all signatures tested on a given dataset." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
       </span>
     </div>
 
@@ -193,24 +193,16 @@ interval using <code><a href='https://rdrr.io/pkg/pROC/man/roc.html'>pROC::roc()
                         signatureColNames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>choose_sigs</span><span class='op'>)</span>, num.boot <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='input'> <span class='va'>booted</span>
 </div><div class='output co'>#&gt; $`P-values`
-#&gt; [1] 0.0001587202
+#&gt;               Anderson_42 
+#&gt; 0.0000000000 0.0001587202 
 #&gt; 
 #&gt; $`Boot AUC Values`
-#&gt;   Anderson_42
-#&gt; 1   0.8261905
-#&gt; 2   0.7940447
-#&gt; 3   0.8281250
-#&gt; 4   0.8654244
-#&gt; 5   0.8627451
+#&gt;              tmp_aucs
+#&gt; Anderson_42 0.8190476
 #&gt; 
 #&gt; $`Non-Boot AUC Values`
-#&gt; [1] 0.8105263
-#&gt; 
-#&gt; $`pROC Lower`
-#&gt; [1] 0.6839
-#&gt; 
-#&gt; $`pROC Upper`
-#&gt; [1] 0.8105
+#&gt;             Anderson_42 
+#&gt;   0.0000000   0.8105263 
 #&gt; </div><div class='input'>
 </div></pre>
   </div>

@@ -78,7 +78,7 @@ section of the input SummarizedExperiment study." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
       </span>
     </div>
 
@@ -191,13 +191,8 @@ obtained from the signature's original model.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"TB_hiv"</span>, package <span class='op'>=</span> <span class='st'>"TBSignatureProfiler"</span><span class='op'>)</span>
 <span class='va'>re</span> <span class='op'>&lt;-</span> <span class='fu'>evaluateOriginalModel</span><span class='op'>(</span>input <span class='op'>=</span> <span class='va'>TB_hiv</span>, useAssay <span class='op'>=</span> <span class='st'>"counts"</span>,
 geneSignaturesName <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Anderson_42"</span>, <span class='st'>"Maertzdorf_15"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%</div><div class='output co'>#&gt; <span class='message'>Now Evaluating: Anderson_42</span></div><div class='output co'>#&gt;   |                                                                              |======================================================================| 100%
-#&gt; 
-#&gt;   |                                                                              |                                                                      |   0%</div><div class='output co'>#&gt; <span class='message'>Now Evaluating: Maertzdorf_15</span></div><div class='output co'>#&gt; <span class='message'>Using batch =GSE_trainas a reference batch (this batch won't change)</span></div><div class='output co'>#&gt; <span class='message'>Found2batches</span></div><div class='output co'>#&gt; <span class='message'>Adjusting for0covariate(s) or covariate level(s)</span></div><div class='output co'>#&gt; <span class='message'>Standardizing Data across genes</span></div><div class='output co'>#&gt; <span class='message'>Fitting L/S model and finding priors</span></div><div class='output co'>#&gt; <span class='message'>Finding parametric adjustments</span></div><div class='output co'>#&gt; <span class='message'>Adjusting the Data</span></div><div class='output co'>#&gt;   |                                                                              |======================================================================| 100%
-#&gt; </div><div class='input'><span class='va'>re</span><span class='op'>$</span><span class='va'>Anderson_42_OriginalModel</span>
-</div><div class='output co'>#&gt;  [1] 33625 71152 -6451 31540 33917 12625 66198  8276 15996 32449 39741 16490
-#&gt; [13] 20508 50502 49206 46410 29825  1620  3799  6588 17014 10863 22908  6514
-#&gt; [25]  7981 15288  3558 75895 31300 24716 24937</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in evaluateOriginalModel(input = TB_hiv, useAssay = "counts", geneSignaturesName = c("Anderson_42",     "Maertzdorf_15")): could not find function "evaluateOriginalModel"</span></div><div class='input'><span class='va'>re</span><span class='op'>$</span><span class='va'>Anderson_42_OriginalModel</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 're' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

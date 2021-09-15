@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -142,21 +142,19 @@ names.</p></td>
     <tr>
       <th>useAssay</th>
       <td><p>A character string or an integer specifying the assay in the
-<code>input</code>.
-Used for the test SummarizedExperiment object. Default is 1, indicating the
+<code>input</code>. Default is the first assay in the assay list.
+Used for the test SummarizedExperiment object. Default is <code>1</code>, indicating the
 first assay in the <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>geneSignaturesName</th>
       <td><p>A character string/vector specifying the signature
-of interest.
-Default is <code>NULL</code>. If geneSignaturesName is <code>NULL</code>, run all
-available gene signatures' original model in the package.</p></td>
+of interest. If <code>any(geneSignaturesName == "") == TRUE</code> run all
+available gene signatures' original models.</p></td>
     </tr>
     <tr>
       <th>BPPARAM</th>
-      <td><p>An instance inherited from <code>bplappy</code>.
-See <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply</a></code> for details.</p></td>
+      <td><p>An instance inherited from <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply</a></code>.</p></td>
     </tr>
     </table>
 
@@ -172,7 +170,7 @@ the expression of genes within signatures that are down-regulated from the
 sum of the expression of genes that are up-regulated within signatures.
 Kaforou_27, Kaforou_OD_44, and Kaforou_OD_53 used difference of arithmetic
 means to calculate prediction scores.
-Sweeney_OD_3 used difference of geometric mean to calculate prediction score.</p>
+Sweeney_OD_3 used difference of arithmetic mean to calculate prediction score.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -185,7 +183,7 @@ Sweeney_OD_3 used difference of geometric mean to calculate prediction score.</p
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

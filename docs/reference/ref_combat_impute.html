@@ -81,7 +81,7 @@ of the genes are missing when matching the input study to the reference data." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -149,10 +149,10 @@ of the genes are missing when matching the input study to the reference data.</p
 
     <pre class="usage"><span class='fu'>ref_combat_impute</span><span class='op'>(</span>
   <span class='va'>theObject_train</span>,
-  useAssay <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>useAssay</span>,
   <span class='va'>gene_set</span>,
   <span class='va'>input</span>,
-  SigName <span class='op'>=</span> <span class='st'>""</span>,
+  <span class='va'>SigName</span>,
   <span class='va'>adj</span>,
   geneMax <span class='op'>=</span> <span class='fl'>0.8</span>
 <span class='op'>)</span></pre>
@@ -183,7 +183,7 @@ in the test SummarizedExperiment object.</p></td>
       <th>SigName</th>
       <td><p>Optional. A character string that indicates the name for <code>gene_set</code>.
 <code>SigName</code> is used to provide information when gene signatures were missing
-in the test data. The default is an empty string.</p></td>
+in the test data.</p></td>
     </tr>
     <tr>
       <th>adj</th>
@@ -213,7 +213,7 @@ See <code><a href='https://rdrr.io/pkg/impute/man/impute.knn.html'>impute.knn</a
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
     <pre class="usage"><span class='fu'>subsetGeneSet</span><span class='op'>(</span>
   <span class='va'>theObject</span>,
   <span class='va'>gene_set</span>,
-  useAssay <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>useAssay</span>,
   obtainDiagnosis <span class='op'>=</span> <span class='cn'>FALSE</span>,
   annotationColName <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
@@ -152,7 +152,7 @@ RData file: OriginalTrainingData.</p></td>
     <tr>
       <th>useAssay</th>
       <td><p>A character string or an integer specifying the assay in the <code>theObject</code>
-that will be selected. Default is 1, indicating the first assay of the SummarizedExperiment object.</p></td>
+that will be selected.</p></td>
     </tr>
     <tr>
       <th>obtainDiagnosis</th>
@@ -167,8 +167,9 @@ Only used when creating training data. Default is NULL.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A matrix with selected gene expression value if <code>obtainDiagnosis</code> is FALSE.
-else, return a list contains the selected gene expression value and diagnosis results for each observation.</p>
+    <p>A <code>matrix</code> with selected gene expression value if <code>obtainDiagnosis == FALSE</code>.
+If <code>obtainDiagnosis == TRUE</code>, return a <code>list</code> contains the selected
+gene expression value and diagnosis results for each sample.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -181,7 +182,7 @@ else, return a list contains the selected gene expression value and diagnosis re
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Train original model for gene signatures Leong_24 and Leong_RISK_29. — LeongOriginalModel • TBSignatureProfiler</title>
+<title>Train original model for gene signatures Berry_393 and Berry_OD_86. — knn_OriginalModel • TBSignatureProfiler</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Train original model for gene signatures Leong_24 and Leong_RISK_29. — LeongOriginalModel" />
-<meta property="og:description" content="Train original model for gene signatures Leong_24 and Leong_RISK_29." />
+<meta property="og:title" content="Train original model for gene signatures Berry_393 and Berry_OD_86. — knn_OriginalModel" />
+<meta property="og:description" content="Train original model for gene signatures Berry_393 and Berry_OD_86." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -120,29 +120,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Train original model for gene signatures Leong_24 and Leong_RISK_29.</h1>
+    <h1>Train original model for gene signatures Berry_393 and Berry_OD_86.</h1>
     <small class="dont-index">Source: <a href='https://github.com/compbiomed/TBSignatureProfiler/blob/master/R/OriginalModel.R'><code>R/OriginalModel.R</code></a></small>
-    <div class="hidden name"><code>LeongOriginalModel.Rd</code></div>
+    <div class="hidden name"><code>knn_OriginalModel.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Train original model for gene signatures Leong_24 and Leong_RISK_29.</p>
+    <p>Train original model for gene signatures Berry_393 and Berry_OD_86.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>LeongOriginalModel</span><span class='op'>(</span><span class='va'>dat_list</span>, <span class='va'>dat_test_sig</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>knn_OriginalModel</span><span class='op'>(</span><span class='va'>dat_list</span>, <span class='va'>dat_test_sig</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat_list</th>
-      <td><p>A list contains training data and disease status outcomes from
+      <td><p>A <code>list</code> contains training data and disease status outcomes from
 the discovery data of corresponding gene signatures.</p></td>
     </tr>
     <tr>
       <th>dat_test_sig</th>
-      <td><p>A data frame contains corresponding biomarker gene features.
-Used to evaluate the performance of biomarker using its original models.</p></td>
+      <td><p>A <code>data frame</code> contains corresponding gene sets from the <code>input</code>.</p></td>
     </tr>
     </table>
 
@@ -161,7 +160,7 @@ Used to evaluate the performance of biomarker using its original models.</p></td
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

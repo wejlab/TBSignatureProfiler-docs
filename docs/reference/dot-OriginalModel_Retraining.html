@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -142,25 +142,24 @@ names.</p></td>
     <tr>
       <th>useAssay</th>
       <td><p>A character string or an integer specifying the assay in the
-<code>input</code>.
-Used for the test SummarizedExperiment object. Default is 1, indicating the
+<code>input</code>. Default is the first assay in the assay list.
+Used for the test SummarizedExperiment object. Default is <code>1</code>, indicating the
 first assay in the <code>input</code>.</p></td>
     </tr>
     <tr>
       <th>geneSignaturesName</th>
       <td><p>A character string/vector specifying the signature
-of interest.
-Default is <code>NULL</code>. If geneSignaturesName is <code>NULL</code>, run all
-available gene signatures' original model in the package.</p></td>
+of interest. If <code>any(geneSignaturesName == "") == TRUE</code> run all
+available gene signatures' original models.</p></td>
     </tr>
     <tr>
       <th>adj</th>
-      <td><p>A small real number used in combat to solve for genes with 0 counts in rare cases.</p></td>
+      <td><p>A small positive real number used in <code><a href='https://rdrr.io/pkg/sva/man/ComBat.html'>ComBat</a></code> to solve
+for genes with 0 counts(rare cases). Default is <code>1e-3</code>.</p></td>
     </tr>
     <tr>
       <th>BPPARAM</th>
-      <td><p>An instance inherited from <code>bplappy</code>.
-See <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply</a></code> for details.</p></td>
+      <td><p>An instance inherited from <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply</a></code>.</p></td>
     </tr>
     </table>
 
@@ -171,7 +170,7 @@ obtained from the signature's original model.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Maertzdorf_4 and Maertzdorf_15 were trained using random forest to distinguish
-samples with active TB from healthy controls.
+patients with active TB from healthy controls.
 Verhagen_10 was also trained using random forest to distinguish samples with active TB
 from either latent infection or healthy controls.
 The random forest model was build using <code><a href='https://rdrr.io/pkg/randomForest/man/randomForest.html'>randomForest</a></code>.<br />
@@ -185,7 +184,7 @@ differentiate samples with active TB from latent infection status.
 The KNN model was build using <code><a href='https://rdrr.io/pkg/class/man/knn.html'>knn</a></code>.<br />
 Suliman_RISK_4 and Zak_RISK_16 were trained using support vector machines (SVM)
 to distinguish TB progressor from non-progressors. The input gene expression features
-for Suliman_RISK_4 used the paired ratio of GAS6/CD1C, SEPT4/BLK, SEPT4/CD1C, GAS6/BLK.
+for Suliman_RISK_4 used the paired ratio of GAS6/CD1C, SEPTIN4/BLK, SEPTIN4/CD1C, GAS6/BLK.
 The SVM model was build using <code><a href='https://rdrr.io/pkg/e1071/man/svm.html'>svm</a></code>.</p>
 
   </div>
@@ -199,7 +198,7 @@ The SVM model was build using <code><a href='https://rdrr.io/pkg/e1071/man/svm.h
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

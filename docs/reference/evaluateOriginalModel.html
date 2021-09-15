@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function that implements the original models for various TB signatures. — evaluateOriginalModel • TBSignatureProfiler</title>
+<title>A function that implements the original methods for multiple TB signatures. — evaluateOriginalModel • TBSignatureProfiler</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,11 @@
 
 
 
-<meta property="og:title" content="A function that implements the original models for various TB signatures. — evaluateOriginalModel" />
-<meta property="og:description" content="TB signatures with available original models are: Anderson_42,
+<meta property="og:title" content="A function that implements the original methods for multiple TB signatures. — evaluateOriginalModel" />
+<meta property="og:description" content="This function computes prediction foot multiple TB signatures based on their training
+models/methods. To avoid naming issues, the gene names for both training data and
+input gene sets have been updated using the checkGeneSymbols.
+TB signatures with available original models are: Anderson_42,
 Anderson_OD_51, Kaforou_27, Kaforou_OD_44, Kaforou_OD_53, Sweeney_OD_3,
 Maertzdorf_4, Verhagen_10, Jacobsen_3, Sambarey_HIV_10, Leong_24,
 Berry_OD_86, Berry_393, Bloom_OD_144, Suliman_RISK_4, Zak_RISK_16,
@@ -78,7 +81,7 @@ section of the input SummarizedExperiment study." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -126,13 +129,16 @@ section of the input SummarizedExperiment study." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function that implements the original models for various TB signatures.</h1>
+    <h1>A function that implements the original methods for multiple TB signatures.</h1>
     <small class="dont-index">Source: <a href='https://github.com/compbiomed/TBSignatureProfiler/blob/master/R/OriginalModel.R'><code>R/OriginalModel.R</code></a></small>
     <div class="hidden name"><code>evaluateOriginalModel.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>TB signatures with available original models are: Anderson_42,
+    <p>This function computes prediction foot multiple TB signatures based on their training
+models/methods. To avoid naming issues, the gene names for both training data and
+input gene sets have been updated using the <code><a href='https://rdrr.io/pkg/HGNChelper/man/checkGeneSymbols.html'>checkGeneSymbols</a></code>.
+TB signatures with available original models are: Anderson_42,
 Anderson_OD_51, Kaforou_27, Kaforou_OD_44, Kaforou_OD_53, Sweeney_OD_3,
 Maertzdorf_4, Verhagen_10, Jacobsen_3, Sambarey_HIV_10, Leong_24,
 Berry_OD_86, Berry_393, Bloom_OD_144, Suliman_RISK_4, Zak_RISK_16,
@@ -143,8 +149,8 @@ section of the input SummarizedExperiment study.</p>
 
     <pre class="usage"><span class='fu'>evaluateOriginalModel</span><span class='op'>(</span>
   <span class='va'>input</span>,
+  <span class='va'>geneSignaturesName</span>,
   useAssay <span class='op'>=</span> <span class='fl'>1</span>,
-  geneSignaturesName <span class='op'>=</span> <span class='cn'>NULL</span>,
   adj <span class='op'>=</span> <span class='fl'>0.001</span>,
   BPPARAM <span class='op'>=</span> <span class='fu'>BiocParallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/BiocParallel/man/SerialParam-class.html'>SerialParam</a></span><span class='op'>(</span>progressbar <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
@@ -158,27 +164,26 @@ section of the input SummarizedExperiment study.</p>
 names.</p></td>
     </tr>
     <tr>
+      <th>geneSignaturesName</th>
+      <td><p>A character string/vector specifying the signature
+of interest. If <code>any(geneSignaturesName == "") == TRUE</code> run all
+available gene signatures' original models.</p></td>
+    </tr>
+    <tr>
       <th>useAssay</th>
       <td><p>A character string or an integer specifying the assay in the
-<code>input</code>.
-Used for the test SummarizedExperiment object. Default is 1, indicating the
+<code>input</code>. Default is the first assay in the assay list.
+Used for the test SummarizedExperiment object. Default is <code>1</code>, indicating the
 first assay in the <code>input</code>.</p></td>
     </tr>
     <tr>
-      <th>geneSignaturesName</th>
-      <td><p>A character string/vector specifying the signature
-of interest.
-Default is <code>NULL</code>. If geneSignaturesName is <code>NULL</code>, run all
-available gene signatures' original model in the package.</p></td>
-    </tr>
-    <tr>
       <th>adj</th>
-      <td><p>A small real number used in combat to solve for genes with 0 counts in rare cases.</p></td>
+      <td><p>A small positive real number used in <code><a href='https://rdrr.io/pkg/sva/man/ComBat.html'>ComBat</a></code> to solve
+for genes with 0 counts(rare cases). Default is <code>1e-3</code>.</p></td>
     </tr>
     <tr>
       <th>BPPARAM</th>
-      <td><p>An instance inherited from <code>bplappy</code>.
-See <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply</a></code> for details.</p></td>
+      <td><p>An instance inherited from <code><a href='https://rdrr.io/pkg/BiocParallel/man/bplapply.html'>bplapply</a></code>.</p></td>
     </tr>
     </table>
 
@@ -189,10 +194,15 @@ obtained from the signature's original model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"TB_hiv"</span>, package <span class='op'>=</span> <span class='st'>"TBSignatureProfiler"</span><span class='op'>)</span>
-<span class='va'>re</span> <span class='op'>&lt;-</span> <span class='fu'>evaluateOriginalModel</span><span class='op'>(</span>input <span class='op'>=</span> <span class='va'>TB_hiv</span>, useAssay <span class='op'>=</span> <span class='st'>"counts"</span>,
-geneSignaturesName <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Anderson_42"</span>, <span class='st'>"Maertzdorf_15"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in evaluateOriginalModel(input = TB_hiv, useAssay = "counts", geneSignaturesName = c("Anderson_42",     "Maertzdorf_15")): could not find function "evaluateOriginalModel"</span></div><div class='input'><span class='va'>re</span><span class='op'>$</span><span class='va'>Anderson_42_OriginalModel</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 're' not found</span></div></pre>
+<span class='va'>re</span> <span class='op'>&lt;-</span> <span class='fu'>evaluateOriginalModel</span><span class='op'>(</span>input <span class='op'>=</span> <span class='va'>TB_hiv</span>,
+geneSignaturesName <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Anderson_42"</span>, <span class='st'>"Maertzdorf_15"</span><span class='op'>)</span>, useAssay <span class='op'>=</span> <span class='st'>"counts"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%</div><div class='output co'>#&gt; <span class='message'>Now Evaluating: Anderson_42</span></div><div class='output co'>#&gt;   |                                                                              |======================================================================| 100%
+#&gt; 
+#&gt;   |                                                                              |                                                                      |   0%</div><div class='output co'>#&gt; <span class='message'>Now Evaluating: Maertzdorf_15</span></div><div class='output co'>#&gt; <span class='message'>Using batch =GSE_trainas a reference batch (this batch won't change)</span></div><div class='output co'>#&gt; <span class='message'>Found2batches</span></div><div class='output co'>#&gt; <span class='message'>Adjusting for0covariate(s) or covariate level(s)</span></div><div class='output co'>#&gt; <span class='message'>Standardizing Data across genes</span></div><div class='output co'>#&gt; <span class='message'>Fitting L/S model and finding priors</span></div><div class='output co'>#&gt; <span class='message'>Finding parametric adjustments</span></div><div class='output co'>#&gt; <span class='message'>Adjusting the Data</span></div><div class='output co'>#&gt;   |                                                                              |======================================================================| 100%
+#&gt; </div><div class='input'><span class='va'>re</span><span class='op'>$</span><span class='va'>Anderson_42_OriginalModel</span>
+</div><div class='output co'>#&gt;  [1] 29875 67665 -7104 30050 33128 12041 61535  5876 13917 30240 37941 15100
+#&gt; [13] 19287 49450 46805 43594 25553   941  1041  5566  9393  8363 11765  5411
+#&gt; [25]  4996 12948  1991 73154 29716 22816 21147</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -204,7 +214,7 @@ geneSignaturesName <span class='op'>=</span> <span class='fu'><a href='https://r
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

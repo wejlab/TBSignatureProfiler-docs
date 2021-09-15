@@ -76,7 +76,7 @@ provided in the TBSignatureProfiler package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.12</span>
       </span>
     </div>
 
@@ -236,8 +236,8 @@ The default is <code>TRUE</code>.</p></td>
     <tr>
       <th>update_genes</th>
       <td><p>logical, denotes whether gene names from <code>signatures</code>
-and the rownames of <code>input</code> should be checked for accuracy using 
-<code>HGNChelper::checkGeneSymbols()</code>. The mapping assumes
+and the rownames of <code>input</code> should be checked for accuracy using
+<code><a href='https://rdrr.io/pkg/HGNChelper/man/checkGeneSymbols.html'>HGNChelper::checkGeneSymbols()</a></code>. The mapping assumes
 genes are from humans and will keep unmapped genes as the original
 input gene name. Default is <code>TRUE</code>.</p></td>
     </tr>
@@ -300,21 +300,21 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
                         algorithm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA"</span>, <span class='st'>"ssGSEA"</span><span class='op'>)</span>,
                         combineSigAndAlgorithm <span class='op'>=</span> <span class='cn'>FALSE</span>,
                         parallel.sz <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
+</div><div class='output co'>#&gt; <span class='message'>Parameter update_genes is TRUE. Gene names will be updated.</span></div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
 #&gt; Estimating ECDFs with Gaussian kernels
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='output co'>#&gt; <span class='message'>Running ssGSEA</span></div><div class='output co'>#&gt; Estimating ssGSEA scores for 1 gene sets.
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>res</span><span class='op'>$</span><span class='va'>pathway</span> <span class='op'>==</span> <span class='st'>"Zak_RISK_16"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       pathway algorithm            sample1            sample2
-#&gt; 1 Zak_RISK_16      GSVA -0.564962216624686 -0.580280373831777
-#&gt; 2 Zak_RISK_16    ssGSEA  0.189566387127276  0.136690310218991
-#&gt;              sample3            sample4            sample5           sample6
-#&gt; 1 -0.568167539267017 -0.693333333333334 -0.480173410404625 0.538144329896907
-#&gt; 2  0.148629517686587  0.169970605248815  0.189747263828546  1.13669031021899
-#&gt;             sample7          sample8           sample9         sample10
-#&gt; 1 0.642857142857143 0.59459584295612 0.430493827160494 0.52335092348285
-#&gt; 2   1.1353175218758 1.13669031021899  1.13669031021899 1.13669031021899</div><div class='input'>
+</div><div class='output co'>#&gt;       pathway algorithm            sample1            sample2           sample3
+#&gt; 1 Zak_RISK_16      GSVA -0.696424361493125 -0.621188118811882 -0.35357142857143
+#&gt; 2 Zak_RISK_16    ssGSEA 0.0527834730744937 0.0433081020509083 0.253310544979381
+#&gt;              sample4            sample5           sample6           sample7
+#&gt; 1 -0.549418960244649 -0.690000000000001 0.611176470588235              0.68
+#&gt; 2  0.461319772273108 -0.112447976848108 0.886480120752086 0.887552023151892
+#&gt;             sample8           sample9          sample10
+#&gt; 1 0.662450592885375 0.526363636363636 0.606936936936937
+#&gt; 2 0.887552023151892 0.887552023151892 0.887552023151892</div><div class='input'>
 <span class='co'>## Using a SummarizedExperiment input/output</span>
  <span class='co'># The TB_indian SummarizedExperiment data is included in the package.</span>
 <span class='va'>GSVA_res</span> <span class='op'>&lt;-</span> <span class='fu'>runTBsigProfiler</span><span class='op'>(</span>input <span class='op'>=</span> <span class='va'>TB_indian</span>,
@@ -323,7 +323,7 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
                              algorithm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GSVA"</span><span class='op'>)</span>,
                              combineSigAndAlgorithm <span class='op'>=</span> <span class='cn'>FALSE</span>,
                              parallel.sz <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
+</div><div class='output co'>#&gt; <span class='message'>Parameter update_genes is TRUE. Gene names will be updated.</span></div><div class='output co'>#&gt; <span class='message'>Running GSVA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 1 genes with constant expression values throuhgout the samples.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Since argument method!="ssgsea", genes with constant expression values are discarded.</span></div><div class='output co'>#&gt; Estimating GSVA scores for 1 gene sets.
 #&gt; Estimating ECDFs with Gaussian kernels
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
 #&gt; </div><div class='input'><span class='va'>GSVA_res</span><span class='op'>$</span><span class='va'>Zak_RISK_16</span>
@@ -346,7 +346,7 @@ singular value decomposition. <em>BMC Bioinformatics</em>, 6:225. doi:
 
       <footer>
       <div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, W. Evan Johnson, Christian Love.</p>
+  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
 </div>
 
 <div class="pkgdown">

@@ -4,14 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Gene signatures of TB progression, TB disease, and other TB disease
+    states have been validated and published previously. This package aggregates
+    known signatures and provides computational tools to enlist their usage on
+    other datasets. The TBSignatureProfiler makes it easy to profile RNA-Seq
+    data using these signatures and includes common signature profiling tools
+    including ASSIGN, GSVA, and ssGSEA.">
 <title>Profile RNA-Seq Data Using TB Pathway Signatures • TBSignatureProfiler</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Profile RNA-Seq Data Using TB Pathway Signatures">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Profile RNA-Seq Data Using TB Pathway Signatures">
 <meta property="og:description" content="Gene signatures of TB progression, TB disease, and other TB disease
     states have been validated and published previously. This package aggregates
     known signatures and provides computational tools to enlist their usage on
@@ -23,163 +28,165 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">TBSignatureProfiler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.14</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">Home</a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">TBSignatureProfiler</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.13</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="index.html">Home</a>
 </li>
-<li>
-  <a href="articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <a class="dropdown-item" href="articles/rmd/TBSig_Vignette.html">Command Line Analysis</a>
+    <a class="dropdown-item" href="articles/rmd/OriginalModelTutorial.html">Original Models</a>
+    <a class="dropdown-item" href="articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
+    <a class="dropdown-item" href="articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
+  </div>
 </li>
-<li>
-  <a href="articles/rmd/OriginalModelTutorial.html">Original Models</a>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Function Reference</a>
 </li>
-<li>
-  <a href="articles/rmd/shinytutorial.html">Interactive Shiny Analysis</a>
-</li>
-<li>
-  <a href="articles/rmd/SignatureAddition.html">Adding Signatures to the Profiler</a>
-</li>
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="news/index.html">News</a>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">TBSP News</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/compbiomed/TBSignatureProfiler">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/compbiomed/TBSignatureProfiler">
     <span class="fa fa-github"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-
-<p><img src="https://github.com/compbiomed/TBSignatureProfiler-docs/blob/master/lungs1.png?raw=true" align="right" width="170"></p>
-<p><a href="http://www.bioconductor.org/packages/release/bioc/html/TBSignatureProfiler.html"><img src="https://img.shields.io/badge/bioconductor-3.14-blue"></a> <a href="https://codecov.io/gh/compbiomed/TBSignatureProfiler"><img src="https://codecov.io/gh/compbiomed/TBSignatureProfiler/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue" alt="lifecycle"></a> <a href="http://bioconductor.org/checkResults/release/bioc-LATEST/TBSignatureProfiler/"><img src="http://www.bioconductor.org/shields/build/release/bioc/TBSignatureProfiler.svg" alt="build"></a></p>
-<div id="what-is-the-tbsignatureprofiler" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-is-the-tbsignatureprofiler" class="anchor"></a>What is the TBSignatureProfiler?</h2>
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><p><img src="https://github.com/compbiomed/TBSignatureProfiler-docs/blob/master/lungs1.png?raw=true" align="right" width="170"></p>
+<p><a href="http://www.bioconductor.org/packages/release/bioc/html/TBSignatureProfiler.html" class="external-link"><img src="https://img.shields.io/badge/bioconductor-3.14-blue"></a> <a href="https://codecov.io/gh/compbiomed/TBSignatureProfiler" class="external-link"><img src="https://codecov.io/gh/compbiomed/TBSignatureProfiler/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue" alt="lifecycle"></a> <a href="http://bioconductor.org/checkResults/release/bioc-LATEST/TBSignatureProfiler/" class="external-link"><img src="http://www.bioconductor.org/shields/build/release/bioc/TBSignatureProfiler.svg" alt="build"></a></p>
+<div class="section level2">
+<h2 id="what-is-the-tbsignatureprofiler">What is the TBSignatureProfiler?<a class="anchor" aria-label="anchor" href="#what-is-the-tbsignatureprofiler"></a>
+</h2>
 <p>The TBSignatureProfiler is an R package that allows researchers to easily profile RNA-seq data using signatures for TB progression, TB disease, and other TB disease states, using common signature profiling tools including ASSIGN, GSVA, and ssGSEA.</p>
 <p>Tuberculosis (TB) is the leading cause of infectious disease mortality worldwide, causing, on average, nearly 1.4 million deaths per year. One of the most consistent issues faced in controlling TB stems from difficulty diagnosing the disease. Particular types of TB infections, including pediatric TB, cannot be accurately identified with traditional bacteria tests (e.g., via phlegm/sputum). As an alternative diagnosis mechanism, researchers have identified gene expression signatures in blood as effective disease biomarkers. A gene signature is defined as a set of genes with a characteristic pattern of gene expression which occurs as a result of a biological, cellular or molecular phenotype. To date, more than 30 TB signatures have been published by researchers, though most have relatively low cross-condition validation (e.g., testing TB in samples from diverse geographic and comorbidity backgrounds, where 2 or more chronic diseases are present). Furthermore, these signatures have never been formally collected and made available as a single unified resource.</p>
 <p>The goal of the TBSignatureProfiler is to aggregate these signatures and create an efficient platform for their visual and quantitative comparison via an R package that characterizes gene signatures’ diagnostic ability in multiple comorbidity settings. The package uses computational methods to analyze expression levels in a sample for a given set of genes (that is, a gene expression profile). These profiles may then be scored to quantify gene expression patterns and correlated to TB outcomes, including distinguishing between active TB disease and latent TB infection (LTBI). In addition to profiling, the software enables gene signature accuracy prediction by bootstrapping area under the curve estimates (AUC, a statistical evaluation metric), and logistic regression with leave-one-out cross-validation (LOOCV). Visualization tools include sample-signature score heatmaps, bootstrap AUC and LOOCV boxplots, and results tables. An R shiny app is included that presents a graphical interface with which to use the package.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>The TBSignatureProfiler requires R 4.1 and Bioconductor 3.10.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>The TBSignatureProfiler requires R 4.1 and Bioconductor 3.14.</p>
 <ul>
 <li>Install the development version of the package from Github</li>
 </ul>
-<pre><code>if (!requireNamespace("devtools", quietly = TRUE))
-  install.packages("devtools")
-devtools::install_github("compbiomed/TBSignatureProfiler")</code></pre>
+<pre><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"compbiomed/TBSignatureProfiler"</span><span class="op">)</span></code></pre>
 <ul>
 <li>Install the release version of the package from Bioconductor</li>
 </ul>
-<pre><code>if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install("TBSignatureProfiler")
-</code></pre>
+<pre><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"TBSignatureProfiler"</span><span class="op">)</span></code></pre>
 </div>
-<div id="run-tbsignatureprofiler-shiny-app" class="section level2">
-<h2 class="hasAnchor">
-<a href="#run-tbsignatureprofiler-shiny-app" class="anchor"></a>Run TBSignatureProfiler shiny app</h2>
-<pre><code><a href="https://github.com/compbiomed/TBSignatureProfiler">library(TBSignatureProfiler)
-TBSPapp()</a></code></pre>
+<div class="section level2">
+<h2 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
+</h2>
+<p>Check the “Tutorials” tab at the top of the page for guided walkthroughs of the TBSP’s many functions. “Command Line Analysis” is the best place to begin.</p>
+</div>
+<div class="section level2">
+<h2 id="run-tbsignatureprofiler-shiny-app">Run TBSignatureProfiler shiny app<a class="anchor" aria-label="anchor" href="#run-tbsignatureprofiler-shiny-app"></a>
+</h2>
+<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/compbiomed/TBSignatureProfiler" class="external-link">TBSignatureProfiler</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/TBSPapp.html">TBSPapp</a></span><span class="op">(</span><span class="op">)</span></code></pre>
+<p>The shiny app will be improved and get a tutorial of its own in the near future!</p>
 </div>
 
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from BIOC at <br><a href="https://www.bioconductor.org/packages/TBSignatureProfiler">https://​www.bioconductor.org/​packages/​TBSignatureProfiler</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/compbiomed/TBSignatureProfiler/">https://​github.com/​compbiomed/​TBSignatureProfiler/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/compbiomed/TBSignatureProfiler/issues">https://​github.com/​compbiomed/​TBSignatureProfiler/​issues</a>
-</li>
+<li><a href="https://www.bioconductor.org/packages/TBSignatureProfiler" class="external-link">View on Bioconductor</a></li>
+<li><a href="https://github.com/compbiomed/TBSignatureProfiler/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/compbiomed/TBSignatureProfiler/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing TBSignatureProfiler</a></li>
+<li><a href="authors.html#citation">Citing TBSignatureProfiler</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>David Jenkins <br><small class="roles"> Author </small>  </li>
-<li>Aubrey Odom <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Aubrey Odom-Mabey <br><small class="roles"> Author, maintainer, data manager </small> <a href="https://orcid.org/0000-0001-7113-7598" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>David Jenkins <br><small class="roles"> Author, originator </small> <a href="https://orcid.org/0000-0002-7451-4288" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Xutao Wang <br><small class="roles"> Author </small>  </li>
-<li>Yue Zhao <br><small class="roles"> Author </small>  </li>
-<li>Christian Love <br><small class="roles"> Author </small>  </li>
+<li>Yue Zhao <br><small class="roles"> Contributor </small> <a href="https://orcid.org/0000-0001-5257-5103" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Christian Love <br><small class="roles"> Contributor </small>  </li>
 <li>W. Evan Johnson <br><small class="roles"> Author </small>  </li>
+<li>Thanks all!</li>
 </ul>
 </div>
 
-  </div>
+
+
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p>Developed by David Jenkins, Aubrey Odom, Xutao Wang, Yue Zhao, Christian Love, W. Evan Johnson.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Site created by Aubrey Odom-Mabey.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

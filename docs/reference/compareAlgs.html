@@ -20,7 +20,7 @@ for each signature."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
     
     <a class="navbar-brand me-2" href="../index.html">TBSignatureProfiler</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.90.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -187,21 +187,16 @@ the enumerated algorithms.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Example using the TB_hiv data set, two signatures, and 3 algorithms</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TB_hiv"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">compareAlgs</span><span class="op">(</span><span class="va">TB_hiv</span>, signatures <span class="op">=</span> <span class="va">TBsignatures</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">]</span>,</span>
-<span class="r-in">            annotationColName <span class="op">=</span> <span class="st">"Disease"</span>,</span>
-<span class="r-in">            algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GSVA"</span>, <span class="st">"ssGSEA"</span>, <span class="st">"PLAGE"</span><span class="op">)</span>,</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">compareAlgs</span><span class="op">(</span><span class="va">TB_indian</span>,</span>
+<span class="r-in">            signatures <span class="op">=</span> <span class="va">TBsignatures</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Zimmer_RES_3"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span class="r-in">            annotationColName <span class="op">=</span> <span class="st">"label"</span>,</span>
+<span class="r-in">            algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ssGSEA"</span>, <span class="st">"PLAGE"</span><span class="op">)</span>,</span>
 <span class="r-in">            scale <span class="op">=</span> <span class="cn">TRUE</span>, parallel.sz <span class="op">=</span> <span class="fl">1</span>, output <span class="op">=</span> <span class="st">"heatmap"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Parameter update_genes is TRUE. Gene names will be updated.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Running GSVA</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>2204 genes with constant expression values throuhgout the samples.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Since argument method!="ssgsea", genes with constant expression values are discarded.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running ssGSEA</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>2204 genes with constant expression values throuhgout the samples.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 genes with constant expression values throuhgout the samples.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running PLAGE</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>2204 genes with constant expression values throuhgout the samples.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 genes with constant expression values throuhgout the samples.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Since argument method!="ssgsea", genes with constant expression values are discarded.</span>
 <span class="r-plt img"><img src="compareAlgs-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
@@ -212,7 +207,7 @@ the enumerated algorithms.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Site created by Aubrey Odom-Mabey.</p>
+  <p></p><p>Site created by Aubrey R. Odom-Mabey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

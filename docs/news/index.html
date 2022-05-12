@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">TBSignatureProfiler</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.90.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,25 +57,40 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.7.1" id="tbsignatureprofiler-171">TBSignatureProfiler 1.7.1<a class="anchor" aria-label="anchor" href="#tbsignatureprofiler-171"></a></h2>
+<h2 class="pkg-version" data-toc-text="development version" id="tbsignatureprofiler-development-version">TBSignatureProfiler (development version)<a class="anchor" aria-label="anchor" href="#tbsignatureprofiler-development-version"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-1-7-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-7-1"></a></h3>
+<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+</div>
+<div class="section level3">
+<h3 id="major-changes-development-version">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-development-version"></a></h3>
+</div>
+<div class="section level3">
+<h3 id="minor-changes-development-version">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-development-version"></a></h3>
+<ul><li>Updated the github and website introductions.</li>
+<li>Added Natarajan_7, Kaul_3 signatures</li>
+<li>Shortened some example run times</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.8.0" id="tbsignatureprofiler-180">TBSignatureProfiler 1.8.0<a class="anchor" aria-label="anchor" href="#tbsignatureprofiler-180"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-8-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-8-0"></a></h3>
 <ul><li>Fixed gene in RESPONSE5 (PNN to RP11-295G20.2) in TBsignatures and TBcommon objects. (Stanley M. Kimbung)</li>
-</ul></div>
-<div class="section level3">
-<h3 id="major-changes-1-7-1">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-1-7-1"></a></h3>
-<ul><li>If any signatures in the object used with runTBsigProfiler() have &lt;2 genes present in the given sample, the signatures will not be scored. This may affect existing scripts.</li>
 <li>Fixed a bug in the singscore algorithm called from runTBsigProfiler() that would not allow for the scoring of user-provided signatures.</li>
+<li>Fixed the TB_hiv data to remove unnecessary factor level of Disease metadata.</li>
+<li>Fixed the row numbers of existing sigAnnotData and common_sigAnnotData objects, and added code to update them after new signatures are added.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="minor-changes-1-7-1">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-7-1"></a></h3>
+<h3 id="major-changes-1-8-0">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-1-8-0"></a></h3>
+<ul><li>If any signatures in the object used with runTBsigProfiler() have &lt;2 genes present in the given sample, the signatures will not be scored. This may affect existing scripts.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-1-8-0">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-8-0"></a></h3>
 <ul><li>Reorganized code for OriginalModel.R for clarity.</li>
-<li>Fixed the TB_hiv data to remove unnecessary factor level of Disease metadata.</li>
 <li>Added 4 new signatures (Tabone_OD_11/TB12, Tabone_RES_25/EarlyRESP-TB25, Tabone_RES_27/TREAT-TB27, Long_RES_10)</li>
 <li>Updated the website interface</li>
 <li>Changed HGNChelper installation to be checked during profiling if update_genes = TRUE</li>
 <li>Reorganized code in mkAssay() for clarity. The output_name argument is now appended to all output assays, whereas previously it was only appended to the log of the input assay.</li>
-<li>Fixed the row numbers of existing sigAnnotData and common_sigAnnotData objects, and added code to update them after new signatures are added.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -121,16 +136,12 @@
 <li>Added citation for newly published paper</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.0.9000" id="tbsignatureprofiler-0009000">TBSignatureProfiler 0.0.0.9000<a class="anchor" aria-label="anchor" href="#tbsignatureprofiler-0009000"></a></h2>
-<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Site created by Aubrey Odom-Mabey.</p>
+  <p></p><p>Site created by Aubrey R. Odom-Mabey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

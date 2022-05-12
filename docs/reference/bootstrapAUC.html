@@ -12,7 +12,7 @@ for all signatures tested on a given dataset."><!-- mathjax --><script src="http
     
     <a class="navbar-brand me-2" href="../index.html">TBSignatureProfiler</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.90.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,7 +180,7 @@ interval using <code><a href="https://rdrr.io/pkg/pROC/man/roc.html" class="exte
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"> <span class="co"># Bootstrapping</span></span>
 <span class="r-in"> <span class="va">booted</span> <span class="op">&lt;-</span> <span class="fu">bootstrapAUC</span><span class="op">(</span>SE_scored <span class="op">=</span> <span class="va">prof_indian</span>, annotationColName <span class="op">=</span> <span class="st">"label"</span>,</span>
-<span class="r-in">                        signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">choose_sigs</span><span class="op">)</span>, num.boot <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in">                        signatureColNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">choose_sigs</span><span class="op">)</span>, num.boot <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</span>
 <span class="r-in"> <span class="va">booted</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`P-values`</span>
@@ -188,11 +188,8 @@ interval using <code><a href="https://rdrr.io/pkg/pROC/man/roc.html" class="exte
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Boot AUC Values`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Anderson_42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0.7666667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   0.7190083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   0.8348214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   0.7915789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   0.8119835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    0.845977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    0.707196</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Non-Boot AUC Values`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8105263</span>
@@ -211,7 +208,7 @@ interval using <code><a href="https://rdrr.io/pkg/pROC/man/roc.html" class="exte
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Site created by Aubrey Odom-Mabey.</p>
+  <p></p><p>Site created by Aubrey R. Odom-Mabey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

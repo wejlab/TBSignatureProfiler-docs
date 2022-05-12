@@ -11,9 +11,9 @@
     to enlist their usage on other datasets. The TBSignatureProfiler makes
     it easy to profile RNA-Seq data using these signatures and includes
     common signature profiling tools including ASSIGN, GSVA, and ssGSEA.
-    Original models for some gene signatures are also available.
-    A shiny app provides some functionality alongside for detailed command
-    line accessibility.">
+    Original models for some gene signatures are also available.  A shiny
+    app provides some functionality alongside for detailed command line
+    accessibility.">
 <title>Profile RNA-Seq Data Using TB Pathway Signatures • TBSignatureProfiler</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
@@ -26,9 +26,9 @@
     to enlist their usage on other datasets. The TBSignatureProfiler makes
     it easy to profile RNA-Seq data using these signatures and includes
     common signature profiling tools including ASSIGN, GSVA, and ssGSEA.
-    Original models for some gene signatures are also available.
-    A shiny app provides some functionality alongside for detailed command
-    line accessibility.">
+    Original models for some gene signatures are also available.  A shiny
+    app provides some functionality alongside for detailed command line
+    accessibility.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -42,7 +42,7 @@
     
     <a class="navbar-brand me-2" href="index.html">TBSignatureProfiler</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.90.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,42 +89,50 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><p><img src="https://github.com/compbiomed/TBSignatureProfiler-docs/blob/master/lungs1.png?raw=true" align="right" width="170"></p>
-<p><a href="http://www.bioconductor.org/packages/release/bioc/html/TBSignatureProfiler.html" class="external-link"><img src="https://img.shields.io/badge/bioconductor-3.14-blue"></a> <a href="https://codecov.io/gh/compbiomed/TBSignatureProfiler" class="external-link"><img src="https://codecov.io/gh/compbiomed/TBSignatureProfiler/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue" alt="lifecycle"></a> <a href="http://bioconductor.org/checkResults/release/bioc-LATEST/TBSignatureProfiler/" class="external-link"><img src="http://www.bioconductor.org/shields/build/release/bioc/TBSignatureProfiler.svg" alt="build"></a></p>
+<p><a href="http://www.bioconductor.org/packages/release/bioc/html/TBSignatureProfiler.html" class="external-link"><img src="https://img.shields.io/badge/bioconductor-3.15-blue"></a> <a href="https://codecov.io/gh/compbiomed/TBSignatureProfiler" class="external-link"><img src="https://codecov.io/gh/compbiomed/TBSignatureProfiler/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue" alt="lifecycle"></a> <a href="http://bioconductor.org/checkResults/release/bioc-LATEST/TBSignatureProfiler/" class="external-link"><img src="http://www.bioconductor.org/shields/build/release/bioc/TBSignatureProfiler.svg" alt="build"></a></p>
 <div class="section level2">
 <h2 id="what-is-the-tbsignatureprofiler">What is the TBSignatureProfiler?<a class="anchor" aria-label="anchor" href="#what-is-the-tbsignatureprofiler"></a>
 </h2>
-<p>The TBSignatureProfiler is an R package that allows researchers to easily profile RNA-seq data using signatures for TB progression, TB disease, and other TB disease states, using common signature profiling tools including ASSIGN, GSVA, and ssGSEA.</p>
-<p>Tuberculosis (TB) is the leading cause of infectious disease mortality worldwide, causing, on average, nearly 1.4 million deaths per year. One of the most consistent issues faced in controlling TB stems from difficulty diagnosing the disease. Particular types of TB infections, including pediatric TB, cannot be accurately identified with traditional bacteria tests (e.g., via phlegm/sputum). As an alternative diagnosis mechanism, researchers have identified gene expression signatures in blood as effective disease biomarkers. A gene signature is defined as a set of genes with a characteristic pattern of gene expression which occurs as a result of a biological, cellular or molecular phenotype. To date, more than 30 TB signatures have been published by researchers, though most have relatively low cross-condition validation (e.g., testing TB in samples from diverse geographic and comorbidity backgrounds, where 2 or more chronic diseases are present). Furthermore, these signatures have never been formally collected and made available as a single unified resource.</p>
-<p>The goal of the TBSignatureProfiler is to aggregate these signatures and create an efficient platform for their visual and quantitative comparison via an R package that characterizes gene signatures’ diagnostic ability in multiple comorbidity settings. The package uses computational methods to analyze expression levels in a sample for a given set of genes (that is, a gene expression profile). These profiles may then be scored to quantify gene expression patterns and correlated to TB outcomes, including distinguishing between active TB disease and latent TB infection (LTBI). In addition to profiling, the software enables gene signature accuracy prediction by bootstrapping area under the curve estimates (AUC, a statistical evaluation metric), and logistic regression with leave-one-out cross-validation (LOOCV). Visualization tools include sample-signature score heatmaps, bootstrap AUC and LOOCV boxplots, and results tables. An R shiny app is included that presents a graphical interface with which to use the package.</p>
+<p>The TBSignatureProfiler (TBSP) is an easy-to-use R package for analysis of RNA-seq data using gene signatures for tuberculosis disease presence, risk, progression, treatment failure, and other states. In-package signature profiling is available using common gene set enrichment tools that include GSVA, singscore, and ssGSEA.</p>
+<p>Users can compare RNA-seq data across 70+ published gene signatures to compare signature performance with clear visualizations (e.g., heatmaps and ROC plots), specificity/sensitivity estimates for predicting binary variables, and cross-validated logistic regression.</p>
+<p>The TBSP can be used as a standalone software package. Data exploration is also available with the accompanying interactive R Shiny application. The R Shiny app is currently functional but more limited in its capabilities than the command line form of the package.</p>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>The TBSignatureProfiler requires R 4.1 and Bioconductor 3.14.</p>
-<ul>
-<li>Install the development version of the package from Github</li>
-</ul>
-<pre><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"compbiomed/TBSignatureProfiler"</span><span class="op">)</span></code></pre>
-<ul>
-<li>Install the release version of the package from Bioconductor</li>
-</ul>
-<pre><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"TBSignatureProfiler"</span><span class="op">)</span></code></pre>
+<p>We used the TBSP to compare 45 gene signatures and differentiate active TB from LTBI in malnourished individuals from India. You can read our paper here: <a href="https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-020-05598-z" class="external-link">“Comparing tuberculosis gene signatures in malnourished individuals using the TBSignatureProfiler”</a></p>
+<p>Please cite:</p>
+<p><strong>Johnson, W.E., Odom, A., Cintron, C. et al. Comparing tuberculosis gene signatures in malnourished individuals using the TBSignatureProfiler. BMC Infect Dis 21, 106 (2021).</strong></p>
 </div>
 <div class="section level2">
 <h2 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
 </h2>
-<p>Check the “Tutorials” tab at the top of the page for guided walkthroughs of the TBSP’s many functions. “Command Line Analysis” is the best place to begin.</p>
+<p>Check the “Tutorials” tab at the top of the page for guided walkthroughs of how to run the TBSP and compare gene signatures. “Command Line Analysis” is the best place to begin.</p>
 </div>
 <div class="section level2">
-<h2 id="run-tbsignatureprofiler-shiny-app">Run TBSignatureProfiler shiny app<a class="anchor" aria-label="anchor" href="#run-tbsignatureprofiler-shiny-app"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/compbiomed/TBSignatureProfiler" class="external-link">TBSignatureProfiler</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/TBSPapp.html">TBSPapp</a></span><span class="op">(</span><span class="op">)</span></code></pre>
-<p>Improvements to our shiny app are coming soon.</p>
+<p>The TBSignatureProfiler requires R Version 4.1.</p>
+<ul>
+<li>Install the development version of the package from Github:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"compbiomed/TBSignatureProfiler"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>Install the release version of the package from Bioconductor:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"TBSignatureProfiler"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>Run the TBSP R Shiny app!</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/compbiomed/TBSignatureProfiler" class="external-link">TBSignatureProfiler</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/TBSPapp.html">TBSPapp</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
@@ -161,7 +169,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Aubrey Odom-Mabey <br><small class="roles"> Author, maintainer, data manager </small> <a href="https://orcid.org/0000-0001-7113-7598" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Aubrey R. Odom-Mabey <br><small class="roles"> Author, maintainer, data manager </small> <a href="https://orcid.org/0000-0001-7113-7598" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>David Jenkins <br><small class="roles"> Author, originator </small> <a href="https://orcid.org/0000-0002-7451-4288" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Xutao Wang <br><small class="roles"> Author </small>  </li>
 <li>Yue Zhao <br><small class="roles"> Contributor </small> <a href="https://orcid.org/0000-0001-5257-5103" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
@@ -179,7 +187,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Site created by Aubrey Odom-Mabey.</p>
+<p>Site created by Aubrey R. Odom-Mabey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

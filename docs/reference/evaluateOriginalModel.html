@@ -28,7 +28,7 @@ section of the input SummarizedExperiment study."><!-- mathjax --><script src="h
     
     <a class="navbar-brand me-2" href="../index.html">TBSignatureProfiler</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.90.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,28 +127,20 @@ obtained from the signature's original model.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TB_hiv"</span>, package <span class="op">=</span> <span class="st">"TBSignatureProfiler"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">re</span> <span class="op">&lt;-</span> <span class="fu">evaluateOriginalModel</span><span class="op">(</span>input <span class="op">=</span> <span class="va">TB_hiv</span>,</span>
-<span class="r-in">geneSignaturesName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Anderson_42"</span>, <span class="st">"Maertzdorf_15"</span><span class="op">)</span>, useAssay <span class="op">=</span> <span class="st">"counts"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">re</span> <span class="op">&lt;-</span> <span class="fu">evaluateOriginalModel</span><span class="op">(</span>input <span class="op">=</span> <span class="va">TB_indian</span>,</span>
+<span class="r-in">                            geneSignaturesName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Anderson_42"</span><span class="op">)</span>,</span>
+<span class="r-in">                            useAssay <span class="op">=</span> <span class="st">"counts"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Now Evaluating: Anderson_42</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |======================================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Now Evaluating: Maertzdorf_15</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using batch =GSE_trainas a reference batch (this batch won't change)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Found2batches</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adjusting for0covariate(s) or covariate level(s)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Standardizing Data across genes</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Fitting L/S model and finding priors</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Finding parametric adjustments</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adjusting the Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |======================================================================| 100%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="va">re</span><span class="op">$</span><span class="va">Anderson_42_OriginalModel</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 29875 67665 -7104 30050 33128 12041 61535  5876 13917 30240 37941 15100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 19287 49450 46805 43594 25553   941  1041  5566  9393  8363 11765  5411</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25]  4996 12948  1991 73154 29716 22816 21147</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  65989  34500  39793  74630  10202  44221  84480  18714  79863  38968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  40546  45122 102946   7050  35734  37570  18867  10594  15629  11122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  18156  15965  19055  11531  11702  24595  18539  18132   9670  12729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31]  13905  21581  87043  13028  14255  10970  14128  37756  52082  17902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41]  25673  72461  55514  12556</span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -156,7 +148,7 @@ obtained from the signature's original model.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Site created by Aubrey Odom-Mabey.</p>
+  <p></p><p>Site created by Aubrey R. Odom-Mabey.</p>
 </div>
 
 <div class="pkgdown-footer-right">
